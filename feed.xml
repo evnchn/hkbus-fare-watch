@@ -3,7 +3,13 @@
   <title>hkbus fare divergence watch</title>
   <link href="https://evnchn.github.io/hkbus-fare-watch/feed.xml" rel="self"/>
   <id>tag:evnchn.github.io,2026:hkbus-fare-watch</id>
-  <updated>2026-09-04T15:22:57Z</updated>
+  <updated>2026-09-05T05:08:27Z</updated>
+  <entry>
+    <title>Fare divergence: 1 new</title>
+    <id>tag:evnchn.github.io,2026:hkbus-fare-watch/2026-09-05T05:08:27Z</id>
+    <updated>2026-09-05T05:08:27Z</updated>
+    <content type="html">&lt;h3&gt;Now diverging&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;87B inbound at 獅子山隧道 (ST100): app shows $5.8, KMB publishes $7.8&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;134 stops diverging in total, across 1261 compared route directions.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Fare divergence: 133 new</title>
     <id>tag:evnchn.github.io,2026:hkbus-fare-watch/2026-09-04T15:13:56Z</id>
