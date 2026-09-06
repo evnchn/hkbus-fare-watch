@@ -1,6 +1,6 @@
 # Standing fare divergences
 
-Updated 2026-09-05T05:08:27Z. 134 stops across 1261 compared route directions (18 skipped, 0 failed).
+Updated 2026-09-06T05:22:30Z. 133 stops across 1261 compared route directions (18 skipped, 0 failed).
 
 | route | dir | stop | app | KMB |
 |---|---|---|---:|---:|
@@ -113,7 +113,6 @@ Updated 2026-09-05T05:08:27Z. 134 stops across 1261 compared route directions (1
 | 84M | O | 亞公角 (MA104) | 7.4 | 6.3 |
 | 84M | O | 富安花園 (MA106) | 7.4 | 6.3 |
 | 85 | O | 金城道，香港浸會大學 (KC620) | 7.8 | 7.4 |
-| 87B | I | 獅子山隧道 (ST100) | 5.8 | 7.8 |
 | 87C | O | 獅子山隧道 (ST780) | 7.4 | 10.8 |
 | 88X | I | 麗港公園 (LT421) | 11.6 | 9.4 |
 | 88X | O | 九龍灣站(東九文化中心) (KT317) | 11.6 | 7.4 |
