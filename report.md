@@ -1,6 +1,6 @@
 # Standing fare divergences
 
-Updated 2026-09-07T05:31:51Z. 133 stops across 1263 compared route directions (16 skipped, 0 failed).
+Updated 2026-09-08T05:32:19Z. 132 stops across 1263 compared route directions (16 skipped, 0 failed).
 
 | route | dir | stop | app | KMB |
 |---|---|---|---:|---:|
@@ -94,7 +94,6 @@ Updated 2026-09-07T05:31:51Z. 133 stops across 1263 compared route directions (1
 | 66X | I | 屯門公路轉車站 (TM102) | 14.6 | 9.6 |
 | 67M | I | 屯門公路轉車站 (TM102) | 10.4 | 9.6 |
 | 67X | I | 屯門公路轉車站 (TM101) | 14.6 | 9.6 |
-| 80 | I | 獅子山隧道 (ST100) | 6.7 | 8.4 |
 | 80A | O | 世界花園 (TA606) | 7.4 | 8.4 |
 | 82X | O | 大老山隧道 (ST790) | 6.3 | 6.5 |
 | 84M | O | 黃大仙轉車站-黃大仙廟 (WT206) | 7.5 | 6.5 |
