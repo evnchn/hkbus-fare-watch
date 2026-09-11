@@ -1,14 +1,14 @@
 # Standing fare divergences
 
-Updated 2026-09-10T05:30:17Z. 132 stops across 1263 compared route directions (16 skipped, 0 failed).
+Updated 2026-09-11T05:29:31Z. 132 stops across 1263 compared route directions (16 skipped, 0 failed).
 
 | route | dir | stop | app | KMB |
 |---|---|---|---:|---:|
 | 215X | I | 九龍灣宏通街 (KT101) | 6.7 | 8.6 |
 | 215X | I | 創紀之城 (KT341) | 5.2 | 6.7 |
 | 215X | I | 觀塘游泳池 (KT361) | 4.0 | 5.2 |
-| 23 | O | 利業樓 (KT181) | 5.6 | 5.2 |
-| 23 | O | 利恒樓 (KT182) | 5.6 | 5.2 |
+| 23 | O | 順利邨利業樓 (KT181) | 5.6 | 5.2 |
+| 23 | O | 順利邨利恒樓 (KT182) | 5.6 | 5.2 |
 | 23 | O | 順利消防局 (KT184) | 5.6 | 5.2 |
 | 23 | O | 安頌樓 (KT165) | 5.6 | 5.2 |
 | 23 | O | 聯合醫院 (KT531) | 5.6 | 5.2 |
