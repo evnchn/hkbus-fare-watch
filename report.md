@@ -1,6 +1,6 @@
 # Standing fare divergences
 
-Updated 2026-09-11T05:29:31Z. 132 stops across 1263 compared route directions (16 skipped, 0 failed).
+Updated 2026-09-12T05:20:49Z. 143 stops across 1280 compared route directions (8 skipped, 0 failed).
 
 | route | dir | stop | app | KMB |
 |---|---|---|---:|---:|
@@ -118,6 +118,8 @@ Updated 2026-09-11T05:29:31Z. 132 stops across 1263 compared route directions (1
 | 88X | O | 觀塘道休憩處 (KT329) | 11.6 | 7.4 |
 | 88X | O | 觀塘轉車站 - 創紀之城 (KT344) | 11.6 | 7.4 |
 | 88X | O | 觀塘游泳池 (KT361) | 11.6 | 7.4 |
+| 91B | O | 坑口站 (TK941) | 5.8 | 6.0 |
+| 91B | O | 科大(羅桂祥樓) (SK940) | 5.8 | 6.0 |
 | 93K | O | 寶達邨轉車站 (KT460) | 10.2 | 8.2 |
 | 93K | O | 秀程樓 (KT502) | 10.2 | 8.2 |
 | 93K | O | 秀康樓 (KT503) | 10.2 | 8.2 |
@@ -134,5 +136,14 @@ Updated 2026-09-11T05:29:31Z. 132 stops across 1263 compared route directions (1
 | 98E | I | 安達臣道 (KT192) | 11.3 | 5.8 |
 | 98P | I | 安達臣道 (KT192) | 11.3 | 5.8 |
 | E33P | O | 屯門赤鱲角隧道轉車站 (TM512) | 4.5 | 12.4 |
+| E42P | O | 裕雅苑雅盛閣 (TC239) | 3.8 | 11.2 |
+| E42P | O | 匯東街 | 3.8 | 11.2 |
+| E42P | O | 迎東邨 (TC992) | 3.8 | 11.2 |
+| E42P | O | 昇薈 (TC220) | 3.8 | 11.2 |
+| E42P | O | 映灣園第二期 (TC160) | 3.8 | 11.2 |
+| E42P | O | 怡東路 (TC161) | 3.8 | 11.2 |
+| E42P | O | 怡文中學 (TC162) | 3.8 | 11.2 |
+| E42P | O | 海堤灣畔 (TC170) | 3.8 | 11.2 |
+| E42P | O | 逸東邨美逸樓 (TC440) | 3.8 | 11.2 |
 | N30 | I | 天水圍站 (YL113) | 9.4 | 7.1 |
 | T74 | O | 大老山隧道 (ST791) | 7.4 | 14.9 |
