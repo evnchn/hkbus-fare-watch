@@ -10,6 +10,7 @@ Stdlib only. Writes state.json, feed.xml and report.md next to itself.
 """
 
 import json
+import math
 import os
 import time
 import urllib.request
@@ -66,25 +67,28 @@ def sweep():
         try:
             rows = get(url)["data"]["routeStops"]
         except Exception as e:
-            return ("failed", key, repr(e)[:100])
+            return ("failed", key, repr(e)[:100], set())
 
         stops = route["stops"]["kmb"]
         if len(rows) != len(stops):
-            return ("skipped", "stop count", None)
+            return ("skipped", key, "stop count", set())
         theirs = [stop_code(r["CName"]) for r in rows]
         ours = [stop_code(stop_list[s]["name"]["zh"]) for s in stops]
         if any(a and b and a != b for a, b in zip(theirs, ours)):
-            return ("skipped", "stop codes", None)
+            return ("skipped", key, "stop codes", set())
 
-        found = {}
+        found, seen = {}, set()
         for i in range(min(len(route["fares"]), len(rows) - 1)):
             try:
                 mine = float(route["fares"][i])
                 kmb = float(rows[i]["AirFare"])
             except (TypeError, ValueError):
                 continue
+            if not (math.isfinite(mine) and math.isfinite(kmb)):
+                continue  # float("NaN") parses, and compares false against all
             if kmb == 0:  # KMB publishes no fare for that boarding stop
                 continue
+            seen.add("%s|%d" % (key, i))
             if abs(mine - kmb) > 0.001:
                 found["%s|%d" % (key, i)] = {
                     "route": route["route"], "bound": bound,
@@ -92,20 +96,48 @@ def sweep():
                     "stop": theirs[i], "stopName": stop_list[stops[i]]["name"]["zh"],
                     "app": mine, "kmb": kmb,
                 }
-        return ("ok", found, len(rows))
+        return ("ok", key, found, seen)
 
     divergences, skipped, failed, compared = {}, {}, [], 0
+    seen, unobserved = set(), set()
     with ThreadPoolExecutor(max_workers=WORKERS) as pool:
-        for kind, a, b in pool.map(check, targets):
+        for kind, key, detail, looked_at in pool.map(check, targets):
+            seen |= looked_at
             if kind == "ok":
                 compared += 1
-                divergences.update(a)
-            elif kind == "skipped":
-                skipped[a] = skipped.get(a, 0) + 1
+                divergences.update(detail)
+                continue
+            unobserved.add(key)
+            if kind == "skipped":
+                skipped[detail] = skipped.get(detail, 0) + 1
             else:
-                failed.append((a, b))
-    return divergences, {"targets": len(targets), "compared": compared,
-                         "skipped": skipped, "failed": len(failed)}
+                failed.append((key, detail))
+    coverage = {"targets": len(targets), "compared": compared,
+                "skipped": skipped, "failed": len(failed),
+                "unobserved": sorted(unobserved)}
+    return divergences, coverage, {"seen": seen, "routes": set(route_list)}
+
+
+def carry_forward(old, new, evidence):
+    """Keep findings this run did not actually look at.
+
+    A finding leaves `new` for two very different reasons: the fare was compared
+    and now agrees, or nothing ever looked at it — the request failed, a skip
+    guard fired, the route lost its fares, KMB published 0 for that stop. Only
+    the first is agreement. Without this, the second announces stops that "now
+    agree" on the strength of a comparison that never happened, and drops them
+    from state so they return as "new" tomorrow.
+
+    A route that has left the feed entirely is gone rather than unobserved, and
+    is allowed to resolve. Keys are positional, so a stop swapped out at the same
+    index is still read as the old one; that is a separate defect.
+    """
+    carried = [k for k in old
+               if k not in new and k not in evidence["seen"]
+               and k.rsplit("|", 1)[0] in evidence["routes"]]
+    for k in carried:
+        new[k] = old[k]
+    return carried
 
 
 def diff(old, new):
@@ -171,7 +203,9 @@ def main():
     except FileNotFoundError:
         state = {"divergences": {}, "entries": []}
 
-    divergences, coverage = sweep()
+    divergences, coverage, evidence = sweep()
+    coverage["carried"] = len(carry_forward(state["divergences"], divergences,
+                                            evidence))
     appeared, resolved, changed = diff(state["divergences"], divergences)
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
