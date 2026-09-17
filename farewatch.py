@@ -148,7 +148,9 @@ def render_entry(stamp, appeared, resolved, changed, totals):
         ordered = sorted(group, key=lambda d: (d["route"], d["bound"], d["seq"]))
         for d in ordered[:25]:
             lines.append("<li>%s</li>" % escape(describe(d, past)))
-        if len(ordered) > 25:
+        if len(ordered) > 25 and past:
+            lines.append("<li>and %d more</li>" % (len(ordered) - 25))
+        elif len(ordered) > 25:
             lines.append('<li>and %d more, in the <a href="%s">standing list</a>'
                          "</li>" % (len(ordered) - 25, REPORT_URL))
         lines.append("</ul>")
@@ -197,6 +199,7 @@ def main():
     state["divergences"] = divergences
     state["coverage"] = coverage
     state["updated"] = stamp
+    state.setdefault("published", stamp)
     json.dump(state, open(state_path, "w", encoding="utf-8"),
               ensure_ascii=False, indent=2, sort_keys=True)
 

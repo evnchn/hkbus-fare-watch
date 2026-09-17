@@ -86,6 +86,32 @@ def a_quiet_day_leaves_the_feed_untouched():
 
 
 @case
+def a_state_file_predating_this_key_settles_down():
+    """The fallback has to be written, not just read, or it never stops moving."""
+    clock = Clock()
+    with tempfile.TemporaryDirectory() as d:
+        run(d, clock)
+        path = os.path.join(d, "state.json")
+        state = json.load(open(path))
+        del state["published"]                      # a state.json from before
+        json.dump(state, open(path, "w"))
+        first = run(d, clock)
+        second = run(d, clock)
+    assert first == second, "legacy state kept moving the feed"
+
+
+@case
+def a_resolved_overflow_does_not_link_to_the_standing_list():
+    """report.md lists what currently diverges, so it cannot show a resolution."""
+    entry = farewatch.render_entry(
+        "T", [], [{"route": "X1", "bound": "O", "seq": i, "stopName": "s",
+                   "app": 5.0, "kmb": 6.0} for i in range(26)], [],
+        {"stops": 0, "compared": 1})
+    assert "and 1 more" in entry
+    assert "standing list" not in entry, entry[-300:]
+
+
+@case
 def a_truncated_list_points_at_the_standing_list():
     """26 findings, 25 shown; the rest must be reachable."""
     with tempfile.TemporaryDirectory() as d:
