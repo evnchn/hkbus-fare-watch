@@ -22,6 +22,7 @@ DB_URL = "https://data.hkbus.app/routeFareList.min.json"
 KMB_URL = ("https://search.kmb.hk/KMBWebSite/Function/FunctionRequest.ashx"
            "?action=getstops&route={route}&bound={bound}&serviceType={st:02d}")
 FEED_URL = "https://evnchn.github.io/hkbus-fare-watch/feed.xml"
+REPORT_URL = "https://github.com/evnchn/hkbus-fare-watch/blob/main/report.md"
 UA = {"User-Agent": "hkbus-fare-watch (+https://github.com/evnchn/hkbus-fare-watch)"}
 BOUND = {"O": 1, "I": 2}
 WORKERS = int(os.environ.get("WORKERS", "6"))
@@ -148,7 +149,8 @@ def render_entry(stamp, appeared, resolved, changed, totals):
         for d in ordered[:25]:
             lines.append("<li>%s</li>" % escape(describe(d, past)))
         if len(ordered) > 25:
-            lines.append("<li>and %d more</li>" % (len(ordered) - 25))
+            lines.append('<li>and %d more, in the <a href="%s">standing list</a>'
+                         "</li>" % (len(ordered) - 25, REPORT_URL))
         lines.append("</ul>")
     lines.append("<p>%d stops diverging in total, across %d compared "
                  "route directions.</p>" % (totals["stops"], totals["compared"]))
@@ -180,12 +182,14 @@ def main():
         state["entries"].insert(0, render_entry(stamp, appeared, resolved,
                                                 changed, totals))
         state["entries"] = state["entries"][:50]
+        state["published"] = stamp
         print("changes: %d new, %d resolved, %d changed"
               % (len(appeared), len(resolved), len(changed)))
     elif not state["entries"]:
         # first ever run: publish the standing backlog so the feed is not empty
         state["entries"].insert(0, render_entry(stamp, list(divergences.values()),
                                                 [], [], totals))
+        state["published"] = stamp
         print("first run: %d standing divergences" % len(divergences))
     else:
         print("no change")
@@ -202,7 +206,10 @@ def main():
                 '  <title>hkbus fare divergence watch</title>\n'
                 '  <link href="%s" rel="self"/>\n'
                 '  <id>tag:evnchn.github.io,2026:hkbus-fare-watch</id>\n'
-                '  <updated>%s</updated>\n' % (FEED_URL, stamp))
+                '  <author><name>hkbus fare divergence watch</name>'
+                '<uri>https://github.com/evnchn/hkbus-fare-watch</uri></author>\n'
+                '  <updated>%s</updated>\n'
+                % (FEED_URL, state.get("published", stamp)))
         f.write("".join(state["entries"]))
         f.write("</feed>\n")
 
