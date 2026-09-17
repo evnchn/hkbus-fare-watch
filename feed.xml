@@ -3,7 +3,13 @@
   <title>hkbus fare divergence watch</title>
   <link href="https://evnchn.github.io/hkbus-fare-watch/feed.xml" rel="self"/>
   <id>tag:evnchn.github.io,2026:hkbus-fare-watch</id>
-  <updated>2026-09-16T05:33:06Z</updated>
+  <updated>2026-09-17T05:40:04Z</updated>
+  <entry>
+    <title>Fare divergence: 9 resolved</title>
+    <id>tag:evnchn.github.io,2026:hkbus-fare-watch/2026-09-17T05:40:04Z</id>
+    <updated>2026-09-17T05:40:04Z</updated>
+    <content type="html">&lt;h3&gt;Back in agreement&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;E42P outbound at 裕雅苑雅盛閣 (TC239): was $3.8 against KMB's $11.2, now agrees&lt;/li&gt;&lt;li&gt;E42P outbound at 匯東街: was $3.8 against KMB's $11.2, now agrees&lt;/li&gt;&lt;li&gt;E42P outbound at 迎東邨 (TC992): was $3.8 against KMB's $11.2, now agrees&lt;/li&gt;&lt;li&gt;E42P outbound at 昇薈 (TC220): was $3.8 against KMB's $11.2, now agrees&lt;/li&gt;&lt;li&gt;E42P outbound at 映灣園第二期 (TC160): was $3.8 against KMB's $11.2, now agrees&lt;/li&gt;&lt;li&gt;E42P outbound at 怡東路 (TC161): was $3.8 against KMB's $11.2, now agrees&lt;/li&gt;&lt;li&gt;E42P outbound at 怡文中學 (TC162): was $3.8 against KMB's $11.2, now agrees&lt;/li&gt;&lt;li&gt;E42P outbound at 海堤灣畔 (TC170): was $3.8 against KMB's $11.2, now agrees&lt;/li&gt;&lt;li&gt;E42P outbound at 逸東邨美逸樓 (TC440): was $3.8 against KMB's $11.2, now agrees&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;134 stops diverging in total, across 1280 compared route directions.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Fare divergence: 11 new</title>
     <id>tag:evnchn.github.io,2026:hkbus-fare-watch/2026-09-12T05:20:49Z</id>
