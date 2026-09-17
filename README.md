@@ -19,11 +19,14 @@ the **data sources disagreeing** — usually the GTFS carrying a stale sectional
 after a service change. Which one is right is not decided here; KMB's own published
 figure is simply the more likely candidate.
 
+Routes KMB runs jointly with Citybus are included, checked against KMB's figure
+only; CTB publishes its own and that is not compared here.
+
 Comparison only runs where a route's stop count and stop codes match on both sides,
 so a stop-ordering defect is skipped rather than misreported as a fare defect. Stops
 KMB publishes no fare for (`AirFare` 0) are skipped. `report.md` states what was
 skipped rather than implying full coverage.
 
-Fares come from `search.kmb.hk`, the KMB website's own endpoint, at roughly 1,300
+Fares come from `search.kmb.hk`, the KMB website's own endpoint, at roughly 1,500
 requests once a day. That is why this lives here rather than in the crawler: it is
 not part of the government open-data set the crawler is built on.

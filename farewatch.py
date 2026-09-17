@@ -53,7 +53,7 @@ def sweep():
 
     targets = []
     for key, route in route_list.items():
-        if route.get("co") != ["kmb"] or not route.get("fares"):
+        if "kmb" not in (route.get("co") or []) or not route.get("fares"):
             continue
         bound = route.get("bound", {}).get("kmb")
         if bound in BOUND:
