@@ -1,6 +1,6 @@
 # Standing fare divergences
 
-Updated 2026-09-18T05:28:13Z. 172 stops across 1463 compared route directions (11 skipped, 0 failed).
+Updated 2026-09-19T05:21:54Z. 172 stops across 1461 compared route directions (11 skipped, 0 failed).
 
 | route | dir | stop | app | KMB |
 |---|---|---|---:|---:|
@@ -107,7 +107,7 @@ Updated 2026-09-18T05:28:13Z. 172 stops across 1463 compared route directions (1
 | 58P | O | 屯門公路轉車站 (TM102) | 10.4 | 9.6 |
 | 59X | I | 屯門公路轉車站 (TM101) | 14.6 | 9.6 |
 | 5C | I | 天主教伍華中學 (WT320) | 6.7 | 5.8 |
-| 5C | I | 泰東樓 (WT323) | 6.7 | 5.8 |
+| 5C | I | 東頭邨泰東樓 (WT323) | 6.7 | 5.8 |
 | 5C | I | 黃大仙警署 (WT328) | 6.7 | 5.8 |
 | 5C | I | 富祐大廈 (WT351) | 6.7 | 5.8 |
 | 5C | I | 蒲慈里 (WT352) | 6.7 | 5.8 |
@@ -137,7 +137,7 @@ Updated 2026-09-18T05:28:13Z. 172 stops across 1463 compared route directions (1
 | 84M | O | 黃大仙轉車站-黃大仙廟 (WT206) | 7.5 | 6.5 |
 | 84M | O | 黃大仙轉車站-沙田坳道 (WT210) | 7.5 | 6.5 |
 | 84M | O | 鳳德商場 (WT407) | 7.5 | 6.5 |
-| 84M | O | 鑽石山站巴士總站 (WT960) | 7.5 | 6.5 |
+| 84M | O | 鑽石山站 荷里活廣場 (WT960) | 7.5 | 6.5 |
 | 84M | O | 大老山隧道 (ST110) | 7.4 | 6.3 |
 | 84M | O | 香港駕駛學院 (ST611) | 7.4 | 6.3 |
 | 84M | O | 愉翠苑 (ST633) | 7.4 | 6.3 |
@@ -159,8 +159,8 @@ Updated 2026-09-18T05:28:13Z. 172 stops across 1463 compared route directions (1
 | 91B | O | 坑口站 (TK941) | 5.8 | 6.0 |
 | 91B | O | 科大(羅桂祥樓) (SK940) | 5.8 | 6.0 |
 | 93K | O | 寶達邨轉車站 (KT460) | 10.2 | 8.2 |
-| 93K | O | 秀程樓 (KT502) | 10.2 | 8.2 |
-| 93K | O | 秀康樓 (KT503) | 10.2 | 8.2 |
+| 93K | O | 秀茂坪邨秀程樓 (KT502) | 10.2 | 8.2 |
+| 93K | O | 秀茂坪邨秀康樓 (KT503) | 10.2 | 8.2 |
 | 93K | O | 寧波第二中學 (KT504) | 10.2 | 8.2 |
 | 93K | O | 聯合醫院 (KT530) | 10.2 | 8.2 |
 | 93K | O | 祥和苑 (KT534) | 10.2 | 8.2 |
