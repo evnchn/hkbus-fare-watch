@@ -109,6 +109,18 @@ def main():
                         "stop's finding silently: published=%r, keys=%r"
                         % (published, sorted(state["divergences"])))
 
+    # The same two findings as state.json held them before issue 5, keyed by
+    # index. Nothing has changed, so the re-keying must not publish anything.
+    old = {"entries": ["  <entry>earlier</entry>\n"], "divergences": {
+        "%s|1" % k: {"route": n, "bound": b, "serviceType": 1, "seq": 1,
+                     "stop": c, "stopName": "站 (%s)" % c, "app": 5.0, "kmb": 6.0}
+        for k, n, b, c in (("1A+1+A+B", "1A", "O", "S2"),
+                           ("106+1+A+B", "106", "I", "J2"))}}
+    state, published = run(stub(DB, codes), old)
+    if published:
+        failures.append("re-keying state.json published unchanged findings as "
+                        "resolved and new: %r" % state["entries"][0])
+
     for f in failures:
         print("FAIL:", f)
     if failures:

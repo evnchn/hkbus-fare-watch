@@ -120,6 +120,19 @@ def sweep():
                          "skipped": skipped, "failed": len(failed)}
 
 
+def migrate(old):
+    """Re-key findings stored as "<route>|<index>" the way sweep() keys them now."""
+    new = {}
+    for k, d in sorted(old.items(), key=lambda kv: kv[1]["seq"]):
+        route_key, rest = k.split("|", 1)
+        if rest == str(d["seq"]):
+            k = "%s|%s" % (route_key, stop_id(d["stop"], d["stopName"]))
+            if k in new:
+                k += "|%d" % d["seq"]
+        new[k] = d
+    return new
+
+
 def diff(old, new):
     appeared = [new[k] for k in new if k not in old]
     resolved = [old[k] for k in old if k not in new]
@@ -184,7 +197,7 @@ def main():
         state = {"divergences": {}, "entries": []}
 
     divergences, coverage = sweep()
-    appeared, resolved, changed = diff(state["divergences"], divergences)
+    appeared, resolved, changed = diff(migrate(state["divergences"]), divergences)
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     totals = {"stops": len(divergences), "compared": coverage["compared"]}
