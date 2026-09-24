@@ -46,6 +46,11 @@ def stop_code(name):
     return None
 
 
+def stop_id(code, name):
+    """What a finding is keyed on: the stop, not its index on the route."""
+    return code or stop_code(name) or name
+
+
 def sweep():
     """Return {key: divergence} plus coverage counters."""
     db = get(DB_URL)
@@ -89,10 +94,14 @@ def sweep():
             if kmb == 0:  # KMB publishes no fare for that boarding stop
                 continue
             if abs(mine - kmb) > 0.001:
-                found["%s|%d" % (key, i)] = {
+                name = stop_list[stops[i]]["name"]["zh"]
+                ident = "%s|%s" % (key, stop_id(theirs[i], name))
+                if ident in found:  # a loop route serving the same stop twice
+                    ident += "|%d" % i
+                found[ident] = {
                     "route": route["route"], "bound": bound,
                     "serviceType": route.get("serviceType"), "seq": i,
-                    "stop": theirs[i], "stopName": stop_list[stops[i]]["name"]["zh"],
+                    "stop": theirs[i], "stopName": name,
                     "app": mine, "kmb": kmb,
                 }
         return ("ok", found, len(rows))
