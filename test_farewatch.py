@@ -103,8 +103,7 @@ def main():
     swapped["routeList"]["106+1+A+B"]["stops"]["kmb"] = ["J1", "J4", "J3"]
     state, published = run(stub(swapped, dict(codes, **{"106": ["J1", "J4", "J3"]})),
                            seeded)
-    j4 = [d for d in state["divergences"].values() if d["stop"] == "J4"]
-    if not published or [d["stopName"] for d in j4] != ["站 (J4)"]:
+    if not published or "106+1+A+B|J4" not in state["divergences"]:
         failures.append("a stop replaced at the same index inherited the old "
                         "stop's finding silently: published=%r, keys=%r"
                         % (published, sorted(state["divergences"])))
@@ -120,6 +119,25 @@ def main():
     if published:
         failures.append("re-keying state.json published unchanged findings as "
                         "resolved and new: %r" % state["entries"][0])
+
+    # A loop route serves L1 twice. When the first L1 comes into agreement, the
+    # second keeps its own key rather than taking over the first one's.
+    loop = {"stopList": {c: stop(c) for c in ("L1", "L2", "L3")},
+            "routeList": {"8+1+A+B": route(["kmb"], "8", "O", ["L1", "L2", "L1", "L3"])}}
+
+    def kmb(*fares):
+        return lambda url, tries=3: loop if url == farewatch.DB_URL else {
+            "data": {"routeStops": [{"CName": "站 (%s)" % c, "AirFare": f} for c, f
+                                    in zip(("L1", "L2", "L1", "L3"), fares)]}}
+    first, _ = run(kmb("6.0", "5.0", "6.0", "0"))
+    state, _ = run(kmb("5.0", "5.0", "6.0", "0"), first)
+    title = state["entries"][0].split("<title>")[1].split("</title>")[0]
+    second = [k for k, d in first["divergences"].items() if d["seq"] == 2]
+    if (len(first["divergences"]) != 2 or title != "Fare divergence: 1 resolved"
+            or list(state["divergences"]) != second):
+        failures.append("a stop served twice lost or swapped a finding: %r, then "
+                        "%r, %r" % (sorted(first["divergences"]), title,
+                                    sorted(state["divergences"])))
 
     for f in failures:
         print("FAIL:", f)

@@ -84,6 +84,7 @@ def sweep():
         if any(a != b for a, b in voted):
             return ("skipped", "stop codes", None)
 
+        idents = [stop_id(c, stop_list[s]["name"]["zh"]) for c, s in zip(theirs, stops)]
         found = {}
         for i in range(min(len(route["fares"]), len(rows) - 1)):
             try:
@@ -94,14 +95,13 @@ def sweep():
             if kmb == 0:  # KMB publishes no fare for that boarding stop
                 continue
             if abs(mine - kmb) > 0.001:
-                name = stop_list[stops[i]]["name"]["zh"]
-                ident = "%s|%s" % (key, stop_id(theirs[i], name))
-                if ident in found:  # a loop route serving the same stop twice
+                ident = "%s|%s" % (key, idents[i])
+                if idents.index(idents[i]) != i:  # a stop the route serves twice
                     ident += "|%d" % i
                 found[ident] = {
                     "route": route["route"], "bound": bound,
                     "serviceType": route.get("serviceType"), "seq": i,
-                    "stop": theirs[i], "stopName": name,
+                    "stop": theirs[i], "stopName": stop_list[stops[i]]["name"]["zh"],
                     "app": mine, "kmb": kmb,
                 }
         return ("ok", found, len(rows))
