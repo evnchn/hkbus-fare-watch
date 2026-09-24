@@ -1,6 +1,6 @@
 # RESULTS — issues #3 and #5
 
-**Verdict: both fixed on `cloud/stop-identity`. The full suite passes, and each new test fails with its fix reverted. Not deployed, the workflow was not run, and no feed was published.**
+**Verdict: both issues fixed and tested on the LOCAL branch `cloud/stop-identity`, but NOT pushed: the session's git proxy refused this repo (403, see Push). The full suite passes, and each new test fails with its fix reverted. The workflow was not run and no feed was published.**
 
 ## What I did
 
@@ -19,7 +19,8 @@ Tests added to `test_farewatch.py`, in its existing failures-list style. `run()`
 - **#5 migration:** an old-format state with nothing changed must publish nothing.
 - **#5 loop route:** L1 is served twice. When the first visit agrees, the second must keep its own key.
 
-Issues read via the public issue pages: `gh` is not installed, and the GitHub API returned "access not enabled" for this session. PRs 4 and 6 fetched with `git fetch <repo> refs/pull/N/head`. `data.hkbus.app` is blocked by the egress proxy, so I could not measure effects on live data. The real-data check below uses the committed `state.json`, read-only.
+Issues read via the public issue pages: `gh` is not installed, and the GitHub API returned "access not enabled" for this session. PRs 4 and 6 were fetched read-only with:
+`git fetch -q https://github.com/evnchn/hkbus-fare-watch.git refs/pull/4/head:pr4 refs/pull/6/head:pr6` (pr4 = `8ff1ca6`, pr6 = `1dedc76`). `data.hkbus.app` is blocked by the egress proxy, so I could not measure effects on live data. The real-data check below uses the committed `state.json`, read-only.
 
 ## Commands and real output
 
@@ -44,7 +45,7 @@ exit=1
 
 #5 re-key (all three #5 commits reverted, which is `main`'s keying):
 ```
-$ git revert -n cac67c1 6ea7f89 ff5b4fa && git checkout HEAD -- test_farewatch.py README.md && python3 test_farewatch.py; git reset -q --hard HEAD
+$ git revert -n cac67c1 6ea7f89 ff5b4fa && git checkout HEAD -- test_farewatch.py README.md && git diff --stat HEAD && python3 test_farewatch.py; git reset -q --hard HEAD
  farewatch.py | 26 ++------------------------
  1 file changed, 2 insertions(+), 24 deletions(-)
 FAIL: a stop replaced at the same index inherited the old stop's finding silently: published=False, keys=['106+1+A+B|1', '1A+1+A+B|1']
@@ -99,7 +100,8 @@ $ git merge-tree --write-tree --name-only cloud/stop-identity pr6   # pr6 = refs
 45796154388fc42c8f2ed2088442d2ffe630f78b
 exit=0
 
-$ (scratch worktree: cloud/stop-identity merged with pr6) python3 test_farewatch.py && python3 test_feed.py
+$ git worktree add -q --detach $W cloud/stop-identity && cd $W && git -c commit.gpgsign=false merge -q --no-edit pr6 >/dev/null   # W = a scratchpad dir, removed afterwards
+$ python3 test_farewatch.py && python3 test_feed.py
 ok: 2 targets compared, divergences on ['106', '1A']
 ok:   the_feed_declares_an_author
 ok:   a_quiet_day_leaves_the_feed_untouched
@@ -123,8 +125,32 @@ $ git diff --stat main..cloud/stop-identity -- state.json feed.xml report.md .gi
 6. **`test_farewatch.py`.** PR 4 rewrites it wholesale into `@case` functions. My four tests would need porting into that structure (its `run()`/`stub()` helpers are close to mine).
 
 ## Known limits, not fixed here
-- **Issue #5's own example still says "J2 … now agrees"** when J4 *agrees*: J2 left the route and was never compared. It now comes from J2's own key, not a positional one, but "a stop that left the route" still reads as "agreement". That is #4's unobserved-vs-agreed territory.
-- **Churn from name-keyed stops.** Codeless stops are keyed by our zh name, so a renamed stop reads as one resolved plus one new. The same applies to a stop whose code appears on one side only on some days. None of the current data has one-sided codes.
+- **Issue #5's own example still says "J2 … now agrees"** when J4 *agrees*: J2 left the route and was never compared. It now comes from J2's own key, not a positional one, but "a stop that left the route" still reads as "agreement". That is #4's unobserved-vs-agreed territory. Verified at HEAD by seeding with the test fixture and then swapping J2 for J4 with every index-1 fare agreeing (the 1A line is a genuine agreement):
+  ```
+  $ python3 - <<'EOF'
+  import json, re, test_farewatch as t
+  codes = {"1A": ["S1", "S2", "S3"], "106": ["J1", "J2", "J3"]}
+  seeded, _ = t.run(t.stub(t.DB, codes))
+  sw = json.loads(json.dumps(t.DB)); sw["stopList"]["J4"] = t.stop("J4")
+  sw["routeList"]["106+1+A+B"]["stops"]["kmb"] = ["J1", "J4", "J3"]
+  t.KMB_ROWS[1]["AirFare"] = "5.0"   # 106 and 1A now agree at index 1
+  state, pub = t.run(t.stub(sw, dict(codes, **{"106": ["J1", "J4", "J3"]})), seeded)
+  e = state["entries"][0]
+  print(re.search(r"<title>(.*?)</title>", e).group(1))
+  print([x for x in re.findall(r"&lt;li&gt;(.*?)&lt;/li&gt;", e)])
+  EOF
+  Fare divergence: 2 resolved
+  ["106 inbound at 站 (J2): was $5.0 against KMB's $6.0, now agrees", "1A outbound at 站 (S2): was $5.0 against KMB's $6.0, now agrees"]
+  ```
+- **Churn from name-keyed stops.** Codeless stops are keyed by our zh name, so a renamed stop reads as one resolved plus one new. The same applies to a stop whose code appears on one side only on some days. In the committed `state.json`, 0 findings have a code on only one side:
+  ```
+  $ python3 -c '
+  import json
+  s=json.load(open("state.json"))["divergences"]
+  print("findings with a code on only one side (KMB code vs code in our name):",
+        sum(1 for d in s.values() if bool(d["stop"]) != ("(" in d["stopName"] and d["stopName"].endswith(")"))))'
+  findings with a code on only one side (KMB code vs code in our name): 0
+  ```
 - **Newly skipped routes.** If a route newly hits `no stop codes` (KMB drops its codes for a day), its standing findings publish as "now agree". That is the same pre-existing behaviour as any other skip, which PR 4 addresses. All routes in the current `state.json` have at least one both-sides code, so this does not fire on deploy.
 - **Migration of doubled stops.** `migrate()` suffixes a doubled stop by order among *stored findings*, while `sweep()` uses the full stop list. They can disagree once, for a doubled stop whose first visit was not diverging. There are no such keys in the current state (0 suffixed).
 - **Scope of the #3 guard.** It requires ≥1 voting stop, not a proportion. The issue offered "a minimum number" or a README fix; I did the minimal code fix plus an exact README.
@@ -138,3 +164,5 @@ $ git push -u origin cloud/stop-identity
 remote: access denied by the git proxy: evnchn/hkbus-fare-watch is not in this session's authorized repository set, so the proxy will not inject a credential for it. To fix, add the repository to the session's sources.
 fatal: unable to access 'https://github.com/evnchn/hkbus-fare-watch.git/': The requested URL returned error: 403
 ```
+
+Because the container is ephemeral, the branch was also exported with `git format-patch main..cloud/stop-identity -o /tmp/claude-0/-home-user-repo/e36e1e51-b0c8-5983-94d5-43989e247c89/scratchpad/patches` (session scratchpad).
