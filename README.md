@@ -22,8 +22,10 @@ figure is simply the more likely candidate.
 Routes KMB runs jointly with Citybus are included, checked against KMB's figure
 only; CTB publishes its own and that is not compared here.
 
-Comparison only runs where a route's stop count and stop codes match on both sides,
-so a stop-ordering defect is skipped rather than misreported as a fare defect. Stops
+Comparison only runs where a route's stop count matches on both sides and its stop
+codes agree, so a stop-ordering defect is skipped rather than misreported as a fare
+defect. Codes are compared only at stops where both sides carry one; a route with no
+such stop is skipped rather than passed unchecked. Stops
 KMB publishes no fare for (`AirFare` 0) are skipped. `report.md` states what was
 skipped rather than implying full coverage.
 

@@ -51,6 +51,17 @@ def main():
     if coverage["targets"] != 2:
         failures.append("expected 2 targets, got %d" % coverage["targets"])
 
+    # Issue 3: neither side names its stops with a code, so nothing checks the
+    # stop order; the route must be skipped, not compared on stop count alone.
+    bare = {"stopList": {c: {"name": {"zh": "站%s" % c}} for c in ("B1", "B2", "B3")},
+            "routeList": {"9+1+A+B": route(["kmb"], "9", "O", ["B1", "B2", "B3"])}}
+    farewatch.get = lambda url, tries=3: bare if url == farewatch.DB_URL else {
+        "data": {"routeStops": [dict(r, CName="別站") for r in KMB_ROWS]}}
+    found, covered = farewatch.sweep()
+    if found or covered["skipped"] != {"no stop codes": 1}:
+        failures.append("a route with no stop codes on either side passed the "
+                        "stop-code guard unchecked: %r, %r" % (found, covered))
+
     for f in failures:
         print("FAIL:", f)
     if failures:
