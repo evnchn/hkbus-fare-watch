@@ -130,4 +130,11 @@ $ git diff --stat main..cloud/stop-identity -- state.json feed.xml report.md .gi
 - **Scope of the #3 guard.** It requires ≥1 voting stop, not a proportion. The issue offered "a minimum number" or a README fix; I did the minimal code fix plus an exact README.
 
 ## Push
-Not pushed yet at the time of this commit; see the follow-up commit.
+**Not pushed. The push was refused by the session's git proxy**, and I did not route around it. The branch exists only in this session's local clone. To publish it, add `evnchn/hkbus-fare-watch` to the session's sources and rerun the push.
+
+```
+$ git remote add origin https://github.com/evnchn/hkbus-fare-watch.git
+$ git push -u origin cloud/stop-identity
+remote: access denied by the git proxy: evnchn/hkbus-fare-watch is not in this session's authorized repository set, so the proxy will not inject a credential for it. To fix, add the repository to the session's sources.
+fatal: unable to access 'https://github.com/evnchn/hkbus-fare-watch.git/': The requested URL returned error: 403
+```
