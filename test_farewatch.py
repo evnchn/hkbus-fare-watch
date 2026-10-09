@@ -41,7 +41,7 @@ UNPRICED = ("5.0", "0", "0")      # KMB stops publishing a fare for that stop
 CODES = {"106": ["J1", "J2", "J3"], "1A": ["S1", "S2", "S3"]}
 
 
-def stub(db, fail=(), short=(), fares=None):
+def stub(db, fail=(), short=(), recode=(), fares=None):
     fares = fares or {}
 
     def fake_get(url, tries=3):
@@ -50,8 +50,11 @@ def stub(db, fail=(), short=(), fares=None):
         name = "106" if "route=106" in url else "1A"
         if name in fail:
             raise RuntimeError("stubbed network failure")
+        codes = CODES[name]
+        if name in recode:                      # KMB now names different stops
+            codes = ["X%d" % i for i in range(len(codes))]
         got = [{"CName": "站 (%s)" % c, "AirFare": f}
-               for f, c in zip(fares.get(name, DIVERGING), CODES[name])]
+               for f, c in zip(fares.get(name, DIVERGING), codes)]
         if name in short:
             got = got[:-1]                      # stop count no longer matches
         return {"data": {"routeStops": got}}
@@ -131,6 +134,16 @@ def a_newly_skipped_route_does_not_read_as_agreement():
     state, title = run(seeded(), short=("106",))
     assert state["coverage"]["skipped"] == {"stop count": 1}, state["coverage"]
     assert_silent(title, state, "the route was skipped")
+
+
+@case
+def a_stop_code_mismatch_does_not_read_as_agreement():
+    """The 2026-10-07 incident: the stop-code guard fired, eight route-directions
+    left the compared set, and findings on them were published as resolved. Two
+    came back two days later with identical values."""
+    state, title = run(seeded(), recode=("106",))
+    assert state["coverage"]["skipped"] == {"stop codes": 1}, state["coverage"]
+    assert_silent(title, state, "the stop codes disagreed")
 
 
 @case
