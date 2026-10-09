@@ -7,6 +7,7 @@ exercise the path the daily run actually takes, feed entry and all.
 
 import contextlib
 import copy
+import html
 import io
 import json
 import os
@@ -118,14 +119,17 @@ def joint_routes_are_compared():
 
 
 def assert_no_false_resolution(title, state, why):
-    """The invariant is not silence, it is never claiming an agreement nobody saw.
+    """A finding nobody looked at is reported as unverified, and kept.
 
-    Reporting "not checked" is allowed and is the point of the loud variant;
-    reporting "resolved" for a finding this run never looked at is the defect.
+    Asserting only "not resolved" is too weak: it also accepts announcing the
+    carried finding as new, or changed, or saying nothing at all. Pin the exact
+    title so a rendering mistake cannot pass by being merely non-committal.
     """
-    assert title is None or "resolved" not in title, (
+    assert title == "Fare divergence: 1 not checked", (
         "%s but the feed published %r" % (why, title))
     assert len(state["divergences"]) == 2, (why, state["divergences"])
+    body = state["entries"][0]
+    assert "not verified this run" in html.unescape(body), (why, body[:300])
 
 
 @case

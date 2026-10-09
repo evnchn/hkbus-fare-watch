@@ -149,10 +149,13 @@ def diff(old, new):
     return appeared, resolved, changed
 
 
-def describe(d, past=False):
+def describe(d, past=False, stale=False):
     st = "" if str(d.get("serviceType", 1)) == "1" else " (service type %s)" % d["serviceType"]
     where = "%s %sbound%s at %s" % (
         d["route"], "out" if d["bound"] == "O" else "in", st, d["stopName"])
+    if stale:
+        return "%s: last seen at $%.1f against KMB's $%.1f, not verified this run" % (
+            where, d["app"], d["kmb"])
     if past:
         return "%s: was $%.1f against KMB's $%.1f, now agrees" % (
             where, d["app"], d["kmb"])
@@ -172,21 +175,23 @@ def render_entry(stamp, appeared, resolved, changed, totals, unchecked=()):
     title = "Fare divergence: " + ", ".join(bits)
 
     lines = []
-    for label, group, past in (("Now diverging", appeared, False),
-                               ("Back in agreement", resolved, True),
-                               ("Amount changed", changed, False),
-                               ("Not checked this run", unchecked, False)):
+    for label, group, past, stale in (
+            ("Now diverging", appeared, False, False),
+            ("Back in agreement", resolved, True, False),
+            ("Amount changed", changed, False, False),
+            ("Not checked this run", unchecked, False, True)):
         if not group:
             continue
         lines.append("<h3>%s</h3><ul>" % label)
         ordered = sorted(group, key=lambda d: (d["route"], d["bound"], d["seq"]))
         for d in ordered[:25]:
-            lines.append("<li>%s</li>" % escape(describe(d, past)))
+            lines.append("<li>%s</li>" % escape(describe(d, past, stale)))
         if len(ordered) > 25:
             lines.append("<li>and %d more</li>" % (len(ordered) - 25))
         lines.append("</ul>")
-    lines.append("<p>%d stops diverging in total, across %d compared "
-                 "route directions.</p>" % (totals["stops"], totals["compared"]))
+    note = (", %d of them not verified this run" % len(unchecked)) if unchecked else ""
+    lines.append("<p>%d standing findings%s, across %d compared "
+                 "route directions.</p>" % (totals["stops"], note, totals["compared"]))
     body = "".join(lines)
 
     return ("  <entry>\n"
@@ -213,7 +218,10 @@ def main():
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     totals = {"stops": len(divergences), "compared": coverage["compared"]}
-    unchecked = [divergences[k] for k in carried]
+    # Announce carried findings when the set CHANGES. A route that stays skipped
+    # is still unverified, but repeating it daily would bury the real changes.
+    newly_unchecked = sorted(carried) != state.get("unchecked", [])
+    unchecked = [divergences[k] for k in carried] if newly_unchecked else []
     if appeared or resolved or changed or unchecked:
         state["entries"].insert(0, render_entry(stamp, appeared, resolved,
                                                 changed, totals, unchecked))
@@ -229,6 +237,7 @@ def main():
         print("no change")
 
     state["divergences"] = divergences
+    state["unchecked"] = sorted(carried)
     state["coverage"] = coverage
     state["updated"] = stamp
     json.dump(state, open(state_path, "w", encoding="utf-8"),
