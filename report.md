@@ -1,6 +1,6 @@
 # Standing fare divergences
 
-Updated 2026-10-08T06:55:39Z. 169 stops across 1459 compared route directions (24 skipped, 0 failed).
+Updated 2026-10-09T07:03:11Z. 171 stops across 1467 compared route directions (16 skipped, 0 failed).
 
 | route | dir | stop | app | KMB |
 |---|---|---|---:|---:|
@@ -54,6 +54,7 @@ Updated 2026-10-08T06:55:39Z. 169 stops across 1459 compared route directions (2
 | 23 | O | 觀塘開源道 (KT211) | 5.6 | 5.2 |
 | 23M | O | 寧波第二中學 (KT170) | 5.6 | 5.2 |
 | 258D | I | 屯門公路轉車站 (TM101) | 18.8 | 9.6 |
+| 259D | I | 屯門公路轉車站 (TM101) | 18.8 | 9.6 |
 | 260X | I | 屯門公路轉車站 (TM102) | 17.2 | 9.6 |
 | 263A | I | 屯門公路轉車站 (TM101) | 7.7 | 9.6 |
 | 263A | O | 沙田第一城 (ST146) | 7.7 | 7.4 |
@@ -118,6 +119,7 @@ Updated 2026-10-08T06:55:39Z. 169 stops across 1459 compared route directions (2
 | 606X | I | 東隧轉車站 (LT101) | 14.4 | 7.7 |
 | 60X | I | 屯門公路轉車站 (TM101) | 14.6 | 9.6 |
 | 61X | I | 屯門公路轉車站 (TM101) | 15.8 | 9.6 |
+| 62X | I | 屯門公路轉車站 (TM101) | 18.8 | 9.6 |
 | 63 | I | 小欖 (TM206) | 7.2 | 10.2 |
 | 63 | I | 屯門大會堂 (TM120) | 5.8 | 7.2 |
 | 63X | I | 屯門公路轉車站 (TM101) | 16.2 | 10.0 |
