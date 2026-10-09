@@ -117,8 +117,14 @@ def joint_routes_are_compared():
     assert routes == ["106", "1A"], routes
 
 
-def assert_silent(title, state, why):
-    assert title is None, "%s but the feed published %r" % (why, title)
+def assert_no_false_resolution(title, state, why):
+    """The invariant is not silence, it is never claiming an agreement nobody saw.
+
+    Reporting "not checked" is allowed and is the point of the loud variant;
+    reporting "resolved" for a finding this run never looked at is the defect.
+    """
+    assert title is None or "resolved" not in title, (
+        "%s but the feed published %r" % (why, title))
     assert len(state["divergences"]) == 2, (why, state["divergences"])
 
 
@@ -126,14 +132,14 @@ def assert_silent(title, state, why):
 def a_failed_fetch_does_not_read_as_agreement():
     state, title = run(seeded(), fail=("106",))
     assert state["coverage"]["failed"] == 1, state["coverage"]
-    assert_silent(title, state, "the request failed")
+    assert_no_false_resolution(title, state, "the request failed")
 
 
 @case
 def a_newly_skipped_route_does_not_read_as_agreement():
     state, title = run(seeded(), short=("106",))
     assert state["coverage"]["skipped"] == {"stop count": 1}, state["coverage"]
-    assert_silent(title, state, "the route was skipped")
+    assert_no_false_resolution(title, state, "the route was skipped")
 
 
 @case
@@ -143,7 +149,7 @@ def a_stop_code_mismatch_does_not_read_as_agreement():
     came back two days later with identical values."""
     state, title = run(seeded(), recode=("106",))
     assert state["coverage"]["skipped"] == {"stop codes": 1}, state["coverage"]
-    assert_silent(title, state, "the stop codes disagreed")
+    assert_no_false_resolution(title, state, "the stop codes disagreed")
 
 
 @case
@@ -153,7 +159,7 @@ def a_route_that_loses_its_fares_does_not_read_as_agreement():
     db["routeList"][KEY_106]["fares"] = []
     state, title = run(seeded(), db=db)
     assert state["coverage"]["targets"] == 1, state["coverage"]
-    assert_silent(title, state, "the route lost its fares")
+    assert_no_false_resolution(title, state, "the route lost its fares")
 
 
 @case
@@ -161,7 +167,7 @@ def a_stop_kmb_stops_pricing_does_not_read_as_agreement():
     """AirFare 0 is skipped inside an otherwise successful comparison."""
     state, title = run(seeded(), fares={"106": UNPRICED})
     assert state["coverage"]["compared"] == 2, state["coverage"]
-    assert_silent(title, state, "KMB published no fare for that stop")
+    assert_no_false_resolution(title, state, "KMB published no fare for that stop")
 
 
 @case
@@ -169,7 +175,7 @@ def an_unusable_fare_does_not_read_as_agreement():
     """float("NaN") parses fine and compares false against everything."""
     state, title = run(seeded(), fares={"106": ("5.0", "NaN", "0")})
     assert state["coverage"]["compared"] == 2, state["coverage"]
-    assert_silent(title, state, "the fare was not a usable number")
+    assert_no_false_resolution(title, state, "the fare was not a usable number")
 
 
 @case

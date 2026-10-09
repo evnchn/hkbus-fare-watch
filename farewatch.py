@@ -159,7 +159,7 @@ def describe(d, past=False):
     return "%s: app shows $%.1f, KMB publishes $%.1f" % (where, d["app"], d["kmb"])
 
 
-def render_entry(stamp, appeared, resolved, changed, totals):
+def render_entry(stamp, appeared, resolved, changed, totals, unchecked=()):
     bits = []
     if appeared:
         bits.append("%d new" % len(appeared))
@@ -167,12 +167,15 @@ def render_entry(stamp, appeared, resolved, changed, totals):
         bits.append("%d resolved" % len(resolved))
     if changed:
         bits.append("%d changed" % len(changed))
+    if unchecked:
+        bits.append("%d not checked" % len(unchecked))
     title = "Fare divergence: " + ", ".join(bits)
 
     lines = []
     for label, group, past in (("Now diverging", appeared, False),
                                ("Back in agreement", resolved, True),
-                               ("Amount changed", changed, False)):
+                               ("Amount changed", changed, False),
+                               ("Not checked this run", unchecked, False)):
         if not group:
             continue
         lines.append("<h3>%s</h3><ul>" % label)
@@ -204,18 +207,19 @@ def main():
         state = {"divergences": {}, "entries": []}
 
     divergences, coverage, evidence = sweep()
-    coverage["carried"] = len(carry_forward(state["divergences"], divergences,
-                                            evidence))
+    carried = carry_forward(state["divergences"], divergences, evidence)
+    coverage["carried"] = len(carried)
     appeared, resolved, changed = diff(state["divergences"], divergences)
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     totals = {"stops": len(divergences), "compared": coverage["compared"]}
-    if appeared or resolved or changed:
+    unchecked = [divergences[k] for k in carried]
+    if appeared or resolved or changed or unchecked:
         state["entries"].insert(0, render_entry(stamp, appeared, resolved,
-                                                changed, totals))
+                                                changed, totals, unchecked))
         state["entries"] = state["entries"][:50]
-        print("changes: %d new, %d resolved, %d changed"
-              % (len(appeared), len(resolved), len(changed)))
+        print("changes: %d new, %d resolved, %d changed, %d not checked"
+              % (len(appeared), len(resolved), len(changed), len(unchecked)))
     elif not state["entries"]:
         # first ever run: publish the standing backlog so the feed is not empty
         state["entries"].insert(0, render_entry(stamp, list(divergences.values()),
