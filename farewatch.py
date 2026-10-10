@@ -23,6 +23,7 @@ DB_URL = "https://data.hkbus.app/routeFareList.min.json"
 KMB_URL = ("https://search.kmb.hk/KMBWebSite/Function/FunctionRequest.ashx"
            "?action=getstops&route={route}&bound={bound}&serviceType={st:02d}")
 FEED_URL = "https://evnchn.github.io/hkbus-fare-watch/feed.xml"
+REPORT_URL = "https://github.com/evnchn/hkbus-fare-watch/blob/main/report.md"
 UA = {"User-Agent": "hkbus-fare-watch (+https://github.com/evnchn/hkbus-fare-watch)"}
 BOUND = {"O": 1, "I": 2}
 WORKERS = int(os.environ.get("WORKERS", "6"))
@@ -186,8 +187,11 @@ def render_entry(stamp, appeared, resolved, changed, totals, unchecked=()):
         ordered = sorted(group, key=lambda d: (d["route"], d["bound"], d["seq"]))
         for d in ordered[:25]:
             lines.append("<li>%s</li>" % escape(describe(d, past, stale)))
-        if len(ordered) > 25:
+        if len(ordered) > 25 and past:
             lines.append("<li>and %d more</li>" % (len(ordered) - 25))
+        elif len(ordered) > 25:
+            lines.append('<li>and %d more, in the <a href="%s">standing list</a>'
+                         "</li>" % (len(ordered) - 25, REPORT_URL))
         lines.append("</ul>")
     note = (", %d of them not verified this run" % len(unchecked)) if unchecked else ""
     lines.append("<p>%d standing findings%s, across %d compared "
@@ -226,12 +230,14 @@ def main():
         state["entries"].insert(0, render_entry(stamp, appeared, resolved,
                                                 changed, totals, unchecked))
         state["entries"] = state["entries"][:50]
+        state["published"] = stamp
         print("changes: %d new, %d resolved, %d changed, %d not checked"
               % (len(appeared), len(resolved), len(changed), len(unchecked)))
     elif not state["entries"]:
         # first ever run: publish the standing backlog so the feed is not empty
         state["entries"].insert(0, render_entry(stamp, list(divergences.values()),
                                                 [], [], totals))
+        state["published"] = stamp
         print("first run: %d standing divergences" % len(divergences))
     else:
         print("no change")
@@ -240,6 +246,7 @@ def main():
     state["unchecked"] = sorted(carried)
     state["coverage"] = coverage
     state["updated"] = stamp
+    state.setdefault("published", stamp)
     json.dump(state, open(state_path, "w", encoding="utf-8"),
               ensure_ascii=False, indent=2, sort_keys=True)
 
@@ -249,7 +256,10 @@ def main():
                 '  <title>hkbus fare divergence watch</title>\n'
                 '  <link href="%s" rel="self"/>\n'
                 '  <id>tag:evnchn.github.io,2026:hkbus-fare-watch</id>\n'
-                '  <updated>%s</updated>\n' % (FEED_URL, stamp))
+                '  <author><name>hkbus fare divergence watch</name>'
+                '<uri>https://github.com/evnchn/hkbus-fare-watch</uri></author>\n'
+                '  <updated>%s</updated>\n'
+                % (FEED_URL, state.get("published", stamp)))
         f.write("".join(state["entries"]))
         f.write("</feed>\n")
 
