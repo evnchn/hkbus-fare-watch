@@ -10,6 +10,7 @@ Stdlib only. Writes state.json, feed.xml and report.md next to itself.
 """
 
 import json
+import math
 import os
 import time
 import urllib.request
@@ -67,25 +68,28 @@ def sweep():
         try:
             rows = get(url)["data"]["routeStops"]
         except Exception as e:
-            return ("failed", key, repr(e)[:100])
+            return ("failed", key, repr(e)[:100], set())
 
         stops = route["stops"]["kmb"]
         if len(rows) != len(stops):
-            return ("skipped", "stop count", None)
+            return ("skipped", key, "stop count", set())
         theirs = [stop_code(r["CName"]) for r in rows]
         ours = [stop_code(stop_list[s]["name"]["zh"]) for s in stops]
         if any(a and b and a != b for a, b in zip(theirs, ours)):
-            return ("skipped", "stop codes", None)
+            return ("skipped", key, "stop codes", set())
 
-        found = {}
+        found, seen = {}, set()
         for i in range(min(len(route["fares"]), len(rows) - 1)):
             try:
                 mine = float(route["fares"][i])
                 kmb = float(rows[i]["AirFare"])
             except (TypeError, ValueError):
                 continue
+            if not (math.isfinite(mine) and math.isfinite(kmb)):
+                continue  # float("NaN") parses, and compares false against all
             if kmb == 0:  # KMB publishes no fare for that boarding stop
                 continue
+            seen.add("%s|%d" % (key, i))
             if abs(mine - kmb) > 0.001:
                 found["%s|%d" % (key, i)] = {
                     "route": route["route"], "bound": bound,
@@ -93,20 +97,48 @@ def sweep():
                     "stop": theirs[i], "stopName": stop_list[stops[i]]["name"]["zh"],
                     "app": mine, "kmb": kmb,
                 }
-        return ("ok", found, len(rows))
+        return ("ok", key, found, seen)
 
     divergences, skipped, failed, compared = {}, {}, [], 0
+    seen, unobserved = set(), set()
     with ThreadPoolExecutor(max_workers=WORKERS) as pool:
-        for kind, a, b in pool.map(check, targets):
+        for kind, key, detail, looked_at in pool.map(check, targets):
+            seen |= looked_at
             if kind == "ok":
                 compared += 1
-                divergences.update(a)
-            elif kind == "skipped":
-                skipped[a] = skipped.get(a, 0) + 1
+                divergences.update(detail)
+                continue
+            unobserved.add(key)
+            if kind == "skipped":
+                skipped[detail] = skipped.get(detail, 0) + 1
             else:
-                failed.append((a, b))
-    return divergences, {"targets": len(targets), "compared": compared,
-                         "skipped": skipped, "failed": len(failed)}
+                failed.append((key, detail))
+    coverage = {"targets": len(targets), "compared": compared,
+                "skipped": skipped, "failed": len(failed),
+                "unobserved": sorted(unobserved)}
+    return divergences, coverage, {"seen": seen, "routes": set(route_list)}
+
+
+def carry_forward(old, new, evidence):
+    """Keep findings this run did not actually look at.
+
+    A finding leaves `new` for two very different reasons: the fare was compared
+    and now agrees, or nothing ever looked at it — the request failed, a skip
+    guard fired, the route lost its fares, KMB published 0 for that stop. Only
+    the first is agreement. Without this, the second announces stops that "now
+    agree" on the strength of a comparison that never happened, and drops them
+    from state so they return as "new" tomorrow.
+
+    A route that has left the feed entirely is gone rather than unobserved, and
+    is allowed to resolve. Keys are positional, so a stop swapped out at the same
+    index is still read as the old one; that is a separate defect.
+    """
+    carried = [k for k in old
+               if k not in new and k not in evidence["seen"]
+               and k.rsplit("|", 1)[0] in evidence["routes"]]
+    for k in carried:
+        new[k] = old[k]
+    return carried
 
 
 def diff(old, new):
@@ -118,17 +150,20 @@ def diff(old, new):
     return appeared, resolved, changed
 
 
-def describe(d, past=False):
+def describe(d, past=False, stale=False):
     st = "" if str(d.get("serviceType", 1)) == "1" else " (service type %s)" % d["serviceType"]
     where = "%s %sbound%s at %s" % (
         d["route"], "out" if d["bound"] == "O" else "in", st, d["stopName"])
+    if stale:
+        return "%s: last seen at $%.1f against KMB's $%.1f, not verified this run" % (
+            where, d["app"], d["kmb"])
     if past:
         return "%s: was $%.1f against KMB's $%.1f, now agrees" % (
             where, d["app"], d["kmb"])
     return "%s: app shows $%.1f, KMB publishes $%.1f" % (where, d["app"], d["kmb"])
 
 
-def render_entry(stamp, appeared, resolved, changed, totals):
+def render_entry(stamp, appeared, resolved, changed, totals, unchecked=()):
     bits = []
     if appeared:
         bits.append("%d new" % len(appeared))
@@ -136,26 +171,31 @@ def render_entry(stamp, appeared, resolved, changed, totals):
         bits.append("%d resolved" % len(resolved))
     if changed:
         bits.append("%d changed" % len(changed))
+    if unchecked:
+        bits.append("%d not checked" % len(unchecked))
     title = "Fare divergence: " + ", ".join(bits)
 
     lines = []
-    for label, group, past in (("Now diverging", appeared, False),
-                               ("Back in agreement", resolved, True),
-                               ("Amount changed", changed, False)):
+    for label, group, past, stale in (
+            ("Now diverging", appeared, False, False),
+            ("Back in agreement", resolved, True, False),
+            ("Amount changed", changed, False, False),
+            ("Not checked this run", unchecked, False, True)):
         if not group:
             continue
         lines.append("<h3>%s</h3><ul>" % label)
         ordered = sorted(group, key=lambda d: (d["route"], d["bound"], d["seq"]))
         for d in ordered[:25]:
-            lines.append("<li>%s</li>" % escape(describe(d, past)))
+            lines.append("<li>%s</li>" % escape(describe(d, past, stale)))
         if len(ordered) > 25 and past:
             lines.append("<li>and %d more</li>" % (len(ordered) - 25))
         elif len(ordered) > 25:
             lines.append('<li>and %d more, in the <a href="%s">standing list</a>'
                          "</li>" % (len(ordered) - 25, REPORT_URL))
         lines.append("</ul>")
-    lines.append("<p>%d stops diverging in total, across %d compared "
-                 "route directions.</p>" % (totals["stops"], totals["compared"]))
+    note = (", %d of them not verified this run" % len(unchecked)) if unchecked else ""
+    lines.append("<p>%d standing findings%s, across %d compared "
+                 "route directions.</p>" % (totals["stops"], note, totals["compared"]))
     body = "".join(lines)
 
     return ("  <entry>\n"
@@ -175,18 +215,24 @@ def main():
     except FileNotFoundError:
         state = {"divergences": {}, "entries": []}
 
-    divergences, coverage = sweep()
+    divergences, coverage, evidence = sweep()
+    carried = carry_forward(state["divergences"], divergences, evidence)
+    coverage["carried"] = len(carried)
     appeared, resolved, changed = diff(state["divergences"], divergences)
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     totals = {"stops": len(divergences), "compared": coverage["compared"]}
-    if appeared or resolved or changed:
+    # Announce carried findings when the set CHANGES. A route that stays skipped
+    # is still unverified, but repeating it daily would bury the real changes.
+    newly_unchecked = sorted(carried) != state.get("unchecked", [])
+    unchecked = [divergences[k] for k in carried] if newly_unchecked else []
+    if appeared or resolved or changed or unchecked:
         state["entries"].insert(0, render_entry(stamp, appeared, resolved,
-                                                changed, totals))
+                                                changed, totals, unchecked))
         state["entries"] = state["entries"][:50]
         state["published"] = stamp
-        print("changes: %d new, %d resolved, %d changed"
-              % (len(appeared), len(resolved), len(changed)))
+        print("changes: %d new, %d resolved, %d changed, %d not checked"
+              % (len(appeared), len(resolved), len(changed), len(unchecked)))
     elif not state["entries"]:
         # first ever run: publish the standing backlog so the feed is not empty
         state["entries"].insert(0, render_entry(stamp, list(divergences.values()),
@@ -197,6 +243,7 @@ def main():
         print("no change")
 
     state["divergences"] = divergences
+    state["unchecked"] = sorted(carried)
     state["coverage"] = coverage
     state["updated"] = stamp
     state.setdefault("published", stamp)
