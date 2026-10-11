@@ -42,8 +42,9 @@ UNPRICED = ("5.0", "0", "0")      # KMB stops publishing a fare for that stop
 CODES = {"106": ["J1", "J2", "J3"], "1A": ["S1", "S2", "S3"]}
 
 
-def stub(db, fail=(), short=(), recode=(), fares=None, bare=()):
+def stub(db, fail=(), short=(), recode=(), fares=None, bare=(), codes=None):
     fares = fares or {}
+    stops = dict(CODES, **(codes or {}))
 
     def fake_get(url, tries=3):
         if url == farewatch.DB_URL:
@@ -51,12 +52,12 @@ def stub(db, fail=(), short=(), recode=(), fares=None, bare=()):
         name = "106" if "route=106" in url else "1A"
         if name in fail:
             raise RuntimeError("stubbed network failure")
-        codes = CODES[name]
+        names = stops[name]
         if name in recode:                      # KMB now names different stops
-            codes = ["X%d" % i for i in range(len(codes))]
+            names = ["X%d" % i for i in range(len(names))]
         label = "站" if name in bare else "站 (%s)"     # bare: KMB names no code
         got = [{"CName": label.replace("%s", c), "AirFare": f}
-               for f, c in zip(fares.get(name, DIVERGING), codes)]
+               for f, c in zip(fares.get(name, DIVERGING), names)]
         if name in short:
             got = got[:-1]                      # stop count no longer matches
         return {"data": {"routeStops": got}}
@@ -222,6 +223,66 @@ def a_route_with_no_stop_codes_is_skipped_not_compared_blind():
     assert state["coverage"]["skipped"] == {"no stop codes": 1}, state["coverage"]
     assert {d["route"] for d in state["divergences"].values()} == {"1A"}, (
         state["divergences"])
+
+
+def as_index_keyed(state):
+    """The same state as a run before findings were keyed by stop wrote it."""
+    old = {k: "%s|%d" % (k.split("|")[0], d["seq"])
+           for k, d in state["divergences"].items()}
+    state["divergences"] = {old[k]: d for k, d in state["divergences"].items()}
+    state["unchecked"] = sorted(old[k] for k in state["unchecked"])
+    return state
+
+
+def with_stops(db, key, stops):
+    db = copy.deepcopy(db)
+    db["stopList"].update({c: {"name": {"zh": "站 (%s)" % c}} for c in stops})
+    db["routeList"][key]["stops"]["kmb"] = stops
+    return db
+
+
+@case
+def a_stop_replaced_at_the_same_index_is_not_read_as_the_old_one():
+    """Issue 5: J2 becomes J4 in both sources, with the same diverging fare. A
+    positional key would carry J2's finding over to J4 and publish nothing."""
+    db = with_stops(DB, KEY_106, ["J1", "J4", "J3"])
+    state, title = run(seeded(), db=db, codes={"106": ["J1", "J4", "J3"]})
+    assert title == "Fare divergence: 1 new, 1 resolved", title
+    assert KEY_106 + "|J4" in state["divergences"], list(state["divergences"])
+
+
+@case
+def a_state_keyed_by_index_settles_without_announcing_anything():
+    """Deploy day: every stored key changes shape, and nothing else does."""
+    old = as_index_keyed(seeded())
+    state, title = run(old)
+    assert title is None, "re-keying the state published %r" % title
+    assert sorted(state["divergences"]) == [KEY_106 + "|J2", KEY_1A + "|S2"], (
+        list(state["divergences"]))
+
+    carrying, _ = run(seeded(), fail=("106",))
+    state, title = run(as_index_keyed(carrying), fail=("106",))
+    assert title is None, "re-keying the unchecked list published %r" % title
+
+
+@case
+def a_stop_served_twice_keeps_each_visit_apart():
+    """A loop route passes L1 twice. One visit agreeing must not hand its key to
+    the other, and a failed fetch must carry the second visit, not resolve it."""
+    loop = ["L1", "L2", "L1", "L3"]
+    db = with_stops(DB, KEY_106, loop)
+    db["routeList"][KEY_106]["fares"] = ["5.0"] * 3
+    kw = {"db": db, "codes": {"106": loop}}
+    both, _ = run(fares={"106": ("6.0", "5.0", "6.0", "0")}, **kw)
+    assert {KEY_106 + "|L1", KEY_106 + "|L1|2"} <= set(both["divergences"]), (
+        list(both["divergences"]))
+
+    state, title = run(copy.deepcopy(both), fares={"106": ("5.0", "5.0", "6.0", "0")}, **kw)
+    assert title == "Fare divergence: 1 resolved", title
+    assert KEY_106 + "|L1|2" in state["divergences"], list(state["divergences"])
+
+    state, title = run(copy.deepcopy(both), fail=("106",), **kw)
+    assert title == "Fare divergence: 2 not checked", title
 
 
 def main():

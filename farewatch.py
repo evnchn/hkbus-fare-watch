@@ -48,6 +48,11 @@ def stop_code(name):
     return None
 
 
+def stop_id(code, name):
+    """What a finding is keyed on: the stop, not its index on the route."""
+    return code or stop_code(name) or name
+
+
 def sweep():
     """Return {key: divergence} plus coverage counters."""
     db = get(DB_URL)
@@ -81,6 +86,9 @@ def sweep():
         if any(a != b for a, b in voted):
             return ("skipped", key, "stop codes", set())
 
+        idents = [stop_id(c, stop_list[s]["name"]["zh"]) for c, s in zip(theirs, stops)]
+        idents = ["%s|%s" % (key, x) if idents.index(x) == i  # a stop served twice
+                  else "%s|%s|%d" % (key, x, i) for i, x in enumerate(idents)]
         found, seen = {}, set()
         for i in range(min(len(route["fares"]), len(rows) - 1)):
             try:
@@ -92,24 +100,25 @@ def sweep():
                 continue  # float("NaN") parses, and compares false against all
             if kmb == 0:  # KMB publishes no fare for that boarding stop
                 continue
-            seen.add("%s|%d" % (key, i))
+            seen.add(idents[i])
             if abs(mine - kmb) > 0.001:
-                found["%s|%d" % (key, i)] = {
+                found[idents[i]] = {
                     "route": route["route"], "bound": bound,
                     "serviceType": route.get("serviceType"), "seq": i,
                     "stop": theirs[i], "stopName": stop_list[stops[i]]["name"]["zh"],
                     "app": mine, "kmb": kmb,
                 }
-        return ("ok", key, found, seen)
+        return ("ok", key, (found, set(idents)), seen)
 
     divergences, skipped, failed, compared = {}, {}, [], 0
-    seen, unobserved = set(), set()
+    seen, unobserved, present = set(), set(), {}
     with ThreadPoolExecutor(max_workers=WORKERS) as pool:
         for kind, key, detail, looked_at in pool.map(check, targets):
             seen |= looked_at
             if kind == "ok":
                 compared += 1
-                divergences.update(detail)
+                divergences.update(detail[0])
+                present[key] = detail[1]
                 continue
             unobserved.add(key)
             if kind == "skipped":
@@ -119,7 +128,8 @@ def sweep():
     coverage = {"targets": len(targets), "compared": compared,
                 "skipped": skipped, "failed": len(failed),
                 "unobserved": sorted(unobserved)}
-    return divergences, coverage, {"seen": seen, "routes": set(route_list)}
+    return divergences, coverage, {"seen": seen, "routes": set(route_list),
+                                   "present": present}
 
 
 def carry_forward(old, new, evidence):
@@ -133,15 +143,29 @@ def carry_forward(old, new, evidence):
     from state so they return as "new" tomorrow.
 
     A route that has left the feed entirely is gone rather than unobserved, and
-    is allowed to resolve. Keys are positional, so a stop swapped out at the same
-    index is still read as the old one; that is a separate defect.
+    is allowed to resolve, and so is a stop that has left a route compared this run.
     """
+    def gone(k):
+        route = k.split("|", 1)[0]
+        return (route not in evidence["routes"]
+                or k not in evidence["present"].get(route, (k,)))
     carried = [k for k in old
-               if k not in new and k not in evidence["seen"]
-               and k.rsplit("|", 1)[0] in evidence["routes"]]
+               if k not in new and k not in evidence["seen"] and not gone(k)]
     for k in carried:
         new[k] = old[k]
     return carried
+
+
+def migrate(state):
+    """Re-key findings stored as "<route>|<index>" the way sweep() keys them now."""
+    renamed = {}
+    for k, d in sorted(state["divergences"].items(), key=lambda kv: kv[1]["seq"]):
+        route_key, rest = k.split("|", 1)
+        if rest == str(d["seq"]):
+            new = "%s|%s" % (route_key, stop_id(d["stop"], d["stopName"]))
+            renamed[k] = new if new not in renamed.values() else "%s|%d" % (new, d["seq"])
+    state["divergences"] = {renamed.get(k, k): d for k, d in state["divergences"].items()}
+    state["unchecked"] = sorted(renamed.get(k, k) for k in state.get("unchecked", []))
 
 
 def diff(old, new):
@@ -218,6 +242,7 @@ def main():
     except FileNotFoundError:
         state = {"divergences": {}, "entries": []}
 
+    migrate(state)
     divergences, coverage, evidence = sweep()
     carried = carry_forward(state["divergences"], divergences, evidence)
     coverage["carried"] = len(carried)
