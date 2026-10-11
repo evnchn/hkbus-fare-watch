@@ -249,6 +249,8 @@ def a_stop_replaced_at_the_same_index_is_not_read_as_the_old_one():
     state, title = run(seeded(), db=db, codes={"106": ["J1", "J4", "J3"]})
     assert title == "Fare divergence: 1 new, 1 resolved", title
     assert KEY_106 + "|J4" in state["divergences"], list(state["divergences"])
+    body = html.unescape(state["entries"][0])
+    assert "J2): was $5.0 against KMB's $6.0, no longer on the route" in body, body
 
 
 @case
@@ -305,6 +307,12 @@ def a_loop_visit_keyed_by_index_migrates_to_the_same_visit():
     state, title = run(as_index_keyed(copy.deepcopy(old)), **kw)
     assert title is None, "migrating a second visit published %r" % title
     assert KEY_106 + "|L1|1" in state["divergences"], list(state["divergences"])
+
+    # Deploy day's fetch fails: the old key waits for a run that saw the route.
+    waited, _ = run(as_index_keyed(copy.deepcopy(old)), fail=("106",), **kw)
+    state, title = run(waited, **dict(kw, fares={"106": ("5.0", "5.0", "0", "0")}))
+    assert KEY_106 + "|L1|1" in state["divergences"], list(state["divergences"])
+    assert title != "Fare divergence: 1 resolved", "an unpriced second visit resolved"
 
 
 def main():

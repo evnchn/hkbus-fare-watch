@@ -163,14 +163,14 @@ def migrate(state, evidence):
     for k, d in sorted(state["divergences"].items(), key=lambda kv: kv[1]["seq"]):
         route_key, rest = k.split("|", 1)
         if rest == str(d["seq"]):
-            new = "%s|%s" % (route_key, stop_id(d["stop"], d["stopName"]))
+            stop = [route_key, stop_id(d["stop"], d["stopName"])]
             now = evidence["present"].get(route_key, [])
-            if d["seq"] < len(now) and now[d["seq"]].split("|")[:2] == new.split("|"):
-                new = now[d["seq"]]           # this run saw the same stop there
-            elif new in renamed.values():     # ponytail: guesses the visit order
-                new += "|%d" % sum(v.split("|")[:2] == new.split("|")
-                                   for v in renamed.values())
-            renamed[k] = new
+            same = [x for x in now if x.split("|")[:2] == stop]
+            if d["seq"] < len(now) and now[d["seq"]] in same:
+                renamed[k] = now[d["seq"]]    # this run saw the same stop there
+            elif len(same) == 1:
+                renamed[k] = same[0]          # it moved along the route
+            # otherwise keep the old key until a run can tell which visit it was
     state["divergences"] = {renamed.get(k, k): d for k, d in state["divergences"].items()}
     state["unchecked"] = sorted(renamed.get(k, k) for k in state.get("unchecked", []))
 
@@ -192,8 +192,9 @@ def describe(d, past=False, stale=False):
         return "%s: last seen at $%.1f against KMB's $%.1f, not verified this run" % (
             where, d["app"], d["kmb"])
     if past:
-        return "%s: was $%.1f against KMB's $%.1f, now agrees" % (
-            where, d["app"], d["kmb"])
+        return "%s: was $%.1f against KMB's $%.1f, %s" % (
+            where, d["app"], d["kmb"],
+            "no longer on the route" if d.get("gone") else "now agrees")
     return "%s: app shows $%.1f, KMB publishes $%.1f" % (where, d["app"], d["kmb"])
 
 
@@ -212,7 +213,7 @@ def render_entry(stamp, appeared, resolved, changed, totals, unchecked=()):
     lines = []
     for label, group, past, stale in (
             ("Now diverging", appeared, False, False),
-            ("Back in agreement", resolved, True, False),
+            ("No longer diverging", resolved, True, False),
             ("Amount changed", changed, False, False),
             ("Not checked this run", unchecked, False, True)):
         if not group:
@@ -253,6 +254,9 @@ def main():
     migrate(state, evidence)
     carried = carry_forward(state["divergences"], divergences, evidence)
     coverage["carried"] = len(carried)
+    for k, d in state["divergences"].items():
+        if k not in divergences and k not in evidence["seen"]:
+            d["gone"] = True  # resolved by leaving, not by a compared agreement
     appeared, resolved, changed = diff(state["divergences"], divergences)
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
