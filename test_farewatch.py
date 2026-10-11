@@ -333,6 +333,13 @@ def a_loop_visit_keyed_by_index_migrates_to_the_same_visit():
     assert title == "Fare divergence: 1 resolved", title
     assert "now agrees" in state["entries"][0], state["entries"][0]
 
+    # One visit agrees but the other is unpriced, or still diverges: not resolved.
+    for fares in (("5.0", "5.0", "5.0", "0", "0"), ("5.0", "5.0", "5.0", "6.0", "0")):
+        state, title = run(as_index_keyed(copy.deepcopy(old)), db=db2, codes={"106": longer},
+                           fares={"106": fares})
+        assert KEY_106 + "|0" in state["divergences"], (fares, list(state["divergences"]))
+        assert "resolved" not in (title or ""), (fares, title)
+
 
 def main():
     bad = 0
