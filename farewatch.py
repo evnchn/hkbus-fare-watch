@@ -148,8 +148,15 @@ def carry_forward(old, new, evidence):
     """
     def gone(k):
         route = k.split("|", 1)[0]
-        return (route not in evidence["routes"]
-                or k not in evidence["present"].get(route, (k,)))
+        if route not in evidence["routes"]:
+            return True
+        if route not in evidence["present"]:  # not compared this run
+            return False
+        now = evidence["present"][route]
+        if k.split("|", 1)[1].isdigit():  # a legacy key migrate() could not place
+            stop = [route, stop_id(old[k]["stop"], old[k]["stopName"])]
+            return not any(x.split("|")[:2] == stop for x in now)
+        return k not in now
     carried = [k for k in old
                if k not in new and k not in evidence["seen"] and not gone(k)]
     for k in carried:

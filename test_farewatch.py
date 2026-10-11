@@ -314,6 +314,18 @@ def a_loop_visit_keyed_by_index_migrates_to_the_same_visit():
     assert KEY_106 + "|L1|1" in state["divergences"], list(state["divergences"])
     assert title != "Fare divergence: 1 resolved", "an unpriced second visit resolved"
 
+    # The loop gains a stop before its first visit on deploy day, so the old
+    # index cannot say which L1 it was: it must wait, not resolve.
+    longer = ["L4", "L1", "L2", "L1", "L3"]
+    db2 = with_stops(db, KEY_106, longer)
+    db2["routeList"][KEY_106]["fares"] = ["5.0"] * 4
+    first = dict(kw, fares={"106": ("6.0", "5.0", "5.0", "0")})
+    old, _ = run(**first)
+    state, title = run(as_index_keyed(copy.deepcopy(old)), db=db2, codes={"106": longer},
+                       fares={"106": ("5.0", "0", "5.0", "0", "0")})
+    assert KEY_106 + "|0" in state["divergences"], list(state["divergences"])
+    assert "resolved" not in (title or ""), "an ambiguous legacy key resolved: %r" % title
+
 
 def main():
     bad = 0
