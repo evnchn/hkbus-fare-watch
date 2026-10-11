@@ -75,7 +75,10 @@ def sweep():
             return ("skipped", key, "stop count", set())
         theirs = [stop_code(r["CName"]) for r in rows]
         ours = [stop_code(stop_list[s]["name"]["zh"]) for s in stops]
-        if any(a and b and a != b for a, b in zip(theirs, ours)):
+        voted = [(a, b) for a, b in zip(theirs, ours) if a and b]
+        if not voted:  # nothing to check the stop order against
+            return ("skipped", key, "no stop codes", set())
+        if any(a != b for a, b in voted):
             return ("skipped", key, "stop codes", set())
 
         found, seen = {}, set()

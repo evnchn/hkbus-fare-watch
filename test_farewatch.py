@@ -42,7 +42,7 @@ UNPRICED = ("5.0", "0", "0")      # KMB stops publishing a fare for that stop
 CODES = {"106": ["J1", "J2", "J3"], "1A": ["S1", "S2", "S3"]}
 
 
-def stub(db, fail=(), short=(), recode=(), fares=None):
+def stub(db, fail=(), short=(), recode=(), fares=None, bare=()):
     fares = fares or {}
 
     def fake_get(url, tries=3):
@@ -54,7 +54,8 @@ def stub(db, fail=(), short=(), recode=(), fares=None):
         codes = CODES[name]
         if name in recode:                      # KMB now names different stops
             codes = ["X%d" % i for i in range(len(codes))]
-        got = [{"CName": "站 (%s)" % c, "AirFare": f}
+        label = "站" if name in bare else "站 (%s)"     # bare: KMB names no code
+        got = [{"CName": label.replace("%s", c), "AirFare": f}
                for f, c in zip(fares.get(name, DIVERGING), codes)]
         if name in short:
             got = got[:-1]                      # stop count no longer matches
@@ -208,6 +209,19 @@ def a_route_that_leaves_the_feed_still_resolves():
     state, title = run(seeded(), db=db)
     assert title == "Fare divergence: 1 resolved", title
     assert len(state["divergences"]) == 1, state["divergences"]
+
+
+@case
+def a_route_with_no_stop_codes_is_skipped_not_compared_blind():
+    """Issue 3: if neither side names its stops with a code, the stop-code guard
+    has checked nothing, so the route must not count as verified."""
+    db = copy.deepcopy(DB)
+    for c in CODES["106"]:
+        db["stopList"][c]["name"]["zh"] = "站%s" % c
+    state, _ = run(db=db, bare=("106",))
+    assert state["coverage"]["skipped"] == {"no stop codes": 1}, state["coverage"]
+    assert {d["route"] for d in state["divergences"].values()} == {"1A"}, (
+        state["divergences"])
 
 
 def main():
