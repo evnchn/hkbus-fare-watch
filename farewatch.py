@@ -87,8 +87,9 @@ def sweep():
             return ("skipped", key, "stop codes", set())
 
         idents = [stop_id(c, stop_list[s]["name"]["zh"]) for c, s in zip(theirs, stops)]
-        idents = ["%s|%s" % (key, x) if idents.index(x) == i  # a stop served twice
-                  else "%s|%s|%d" % (key, x, i) for i, x in enumerate(idents)]
+        # a stop the route serves again is told apart by visit, not by index
+        idents = ["%s|%s" % (key, x) + ("|%d" % n if n else "")
+                  for x, n in ((x, idents[:i].count(x)) for i, x in enumerate(idents))]
         found, seen = {}, set()
         for i in range(min(len(route["fares"]), len(rows) - 1)):
             try:
@@ -108,7 +109,7 @@ def sweep():
                     "stop": theirs[i], "stopName": stop_list[stops[i]]["name"]["zh"],
                     "app": mine, "kmb": kmb,
                 }
-        return ("ok", key, (found, set(idents)), seen)
+        return ("ok", key, (found, idents), seen)
 
     divergences, skipped, failed, compared = {}, {}, [], 0
     seen, unobserved, present = set(), set(), {}
@@ -156,14 +157,20 @@ def carry_forward(old, new, evidence):
     return carried
 
 
-def migrate(state):
+def migrate(state, evidence):
     """Re-key findings stored as "<route>|<index>" the way sweep() keys them now."""
     renamed = {}
     for k, d in sorted(state["divergences"].items(), key=lambda kv: kv[1]["seq"]):
         route_key, rest = k.split("|", 1)
         if rest == str(d["seq"]):
             new = "%s|%s" % (route_key, stop_id(d["stop"], d["stopName"]))
-            renamed[k] = new if new not in renamed.values() else "%s|%d" % (new, d["seq"])
+            now = evidence["present"].get(route_key, [])
+            if d["seq"] < len(now) and now[d["seq"]].split("|")[:2] == new.split("|"):
+                new = now[d["seq"]]           # this run saw the same stop there
+            elif new in renamed.values():     # ponytail: guesses the visit order
+                new += "|%d" % sum(v.split("|")[:2] == new.split("|")
+                                   for v in renamed.values())
+            renamed[k] = new
     state["divergences"] = {renamed.get(k, k): d for k, d in state["divergences"].items()}
     state["unchecked"] = sorted(renamed.get(k, k) for k in state.get("unchecked", []))
 
@@ -242,8 +249,8 @@ def main():
     except FileNotFoundError:
         state = {"divergences": {}, "entries": []}
 
-    migrate(state)
     divergences, coverage, evidence = sweep()
+    migrate(state, evidence)
     carried = carry_forward(state["divergences"], divergences, evidence)
     coverage["carried"] = len(carried)
     appeared, resolved, changed = diff(state["divergences"], divergences)

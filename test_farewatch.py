@@ -274,15 +274,37 @@ def a_stop_served_twice_keeps_each_visit_apart():
     db["routeList"][KEY_106]["fares"] = ["5.0"] * 3
     kw = {"db": db, "codes": {"106": loop}}
     both, _ = run(fares={"106": ("6.0", "5.0", "6.0", "0")}, **kw)
-    assert {KEY_106 + "|L1", KEY_106 + "|L1|2"} <= set(both["divergences"]), (
+    assert {KEY_106 + "|L1", KEY_106 + "|L1|1"} <= set(both["divergences"]), (
         list(both["divergences"]))
 
     state, title = run(copy.deepcopy(both), fares={"106": ("5.0", "5.0", "6.0", "0")}, **kw)
     assert title == "Fare divergence: 1 resolved", title
-    assert KEY_106 + "|L1|2" in state["divergences"], list(state["divergences"])
+    assert KEY_106 + "|L1|1" in state["divergences"], list(state["divergences"])
 
     state, title = run(copy.deepcopy(both), fail=("106",), **kw)
     assert title == "Fare divergence: 2 not checked", title
+
+    # A stop added before the second visit must not make it a different finding.
+    longer = ["L1", "L2", "L4", "L1", "L3"]
+    db2 = with_stops(db, KEY_106, longer)
+    db2["routeList"][KEY_106]["fares"] = ["5.0"] * 4
+    state, title = run(copy.deepcopy(both), db=db2, codes={"106": longer},
+                       fares={"106": ("6.0", "5.0", "5.0", "6.0", "0")})
+    assert title is None, "a stop inserted before the loop's second visit published %r" % title
+
+
+@case
+def a_loop_visit_keyed_by_index_migrates_to_the_same_visit():
+    """Only the second visit to L1 diverges. Migrating its old index key must
+    land on the second visit, not the first, or deploy day reports a change."""
+    loop = ["L1", "L2", "L1", "L3"]
+    db = with_stops(DB, KEY_106, loop)
+    db["routeList"][KEY_106]["fares"] = ["5.0"] * 3
+    kw = {"db": db, "codes": {"106": loop}, "fares": {"106": ("5.0", "5.0", "6.0", "0")}}
+    old, _ = run(**kw)
+    state, title = run(as_index_keyed(copy.deepcopy(old)), **kw)
+    assert title is None, "migrating a second visit published %r" % title
+    assert KEY_106 + "|L1|1" in state["divergences"], list(state["divergences"])
 
 
 def main():
