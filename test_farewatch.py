@@ -326,6 +326,13 @@ def a_loop_visit_keyed_by_index_migrates_to_the_same_visit():
     assert KEY_106 + "|0" in state["divergences"], list(state["divergences"])
     assert "resolved" not in (title or ""), "an ambiguous legacy key resolved: %r" % title
 
+    # Same reshape, but every L1 visit is priced and agrees: it has resolved.
+    state, title = run(as_index_keyed(copy.deepcopy(old)), db=db2, codes={"106": longer},
+                       fares={"106": ("5.0", "5.0", "5.0", "5.0", "0")})
+    assert KEY_106 + "|0" not in state["divergences"], list(state["divergences"])
+    assert title == "Fare divergence: 1 resolved", title
+    assert "now agrees" in state["entries"][0], state["entries"][0]
+
 
 def main():
     bad = 0

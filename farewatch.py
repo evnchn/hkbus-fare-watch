@@ -155,7 +155,11 @@ def carry_forward(old, new, evidence):
         now = evidence["present"][route]
         if k.split("|", 1)[1].isdigit():  # a legacy key migrate() could not place
             stop = [route, stop_id(old[k]["stop"], old[k]["stopName"])]
-            return not any(x.split("|")[:2] == stop for x in now)
+            visits = [x for x in now if x.split("|")[:2] == stop]
+            if visits and all(x in evidence["seen"] and x not in new for x in visits):
+                evidence["seen"].add(k)  # every visit it could be was compared and agrees
+                return True
+            return not visits
         return k not in now
     carried = [k for k in old
                if k not in new and k not in evidence["seen"] and not gone(k)]
