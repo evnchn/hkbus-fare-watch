@@ -5,9 +5,9 @@
     "failed": 0,
     "skipped": {
       "stop codes": 1,
-      "stop count": 12
+      "stop count": 13
     },
-    "targets": 1481,
+    "targets": 1482,
     "unobserved": [
       "102+2+CROSS HARBOUR TUNNEL BBI (HH502)+SHAU KEI WAN BUS TERMINUS",
       "107P+1+CYBERPORT+LAGUNA VERDE",
@@ -20,6 +20,7 @@
       "78+1+SHA TAU KOK+SHEUNG SHUI (TAI PING)",
       "83X+1+KWUN TONG FERRY (KT941)+WONG NAI TAU BUS TERMINUS (ST892)",
       "84M+1+CHEVALIER GARDEN+LOK FU",
+      "87E+1+NAI CHUNG (SK970)+TSIM SHA TSUI BBI - MIDDLE ROAD (YT563)",
       "92+2+DIAMOND HILL STATION, PLAZA HOLLYWOOOD (WT962)+SAI KUNG BUS TERMINUS (SK902)",
       "98A+2+KWUN TONG BBI - MILLENNIUM CITY (KT640)+HANG HAU (NORTH) (TSEUNG KWAN O HOSPITAL) (TK950)"
     ]
@@ -1749,5 +1750,5 @@
   ],
   "published": "2026-10-10T06:36:57Z",
   "unchecked": [],
-  "updated": "2026-10-11T06:43:30Z"
+  "updated": "2026-10-12T06:52:10Z"
 }
