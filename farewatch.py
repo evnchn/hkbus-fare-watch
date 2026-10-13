@@ -48,6 +48,11 @@ def stop_code(name):
     return None
 
 
+def stop_id(code, name):
+    """What a finding is keyed on: the stop, not its index on the route."""
+    return code or stop_code(name) or name
+
+
 def sweep():
     """Return {key: divergence} plus coverage counters."""
     db = get(DB_URL)
@@ -75,9 +80,16 @@ def sweep():
             return ("skipped", key, "stop count", set())
         theirs = [stop_code(r["CName"]) for r in rows]
         ours = [stop_code(stop_list[s]["name"]["zh"]) for s in stops]
-        if any(a and b and a != b for a, b in zip(theirs, ours)):
+        voted = [(a, b) for a, b in zip(theirs, ours) if a and b]
+        if not voted:  # nothing to check the stop order against
+            return ("skipped", key, "no stop codes", set())
+        if any(a != b for a, b in voted):
             return ("skipped", key, "stop codes", set())
 
+        idents = [stop_id(c, stop_list[s]["name"]["zh"]) for c, s in zip(theirs, stops)]
+        # a stop the route serves again is told apart by visit, not by index
+        idents = ["%s|%s" % (key, x) + ("|%d" % n if n else "")
+                  for x, n in ((x, idents[:i].count(x)) for i, x in enumerate(idents))]
         found, seen = {}, set()
         for i in range(min(len(route["fares"]), len(rows) - 1)):
             try:
@@ -89,24 +101,25 @@ def sweep():
                 continue  # float("NaN") parses, and compares false against all
             if kmb == 0:  # KMB publishes no fare for that boarding stop
                 continue
-            seen.add("%s|%d" % (key, i))
+            seen.add(idents[i])
             if abs(mine - kmb) > 0.001:
-                found["%s|%d" % (key, i)] = {
+                found[idents[i]] = {
                     "route": route["route"], "bound": bound,
                     "serviceType": route.get("serviceType"), "seq": i,
                     "stop": theirs[i], "stopName": stop_list[stops[i]]["name"]["zh"],
                     "app": mine, "kmb": kmb,
                 }
-        return ("ok", key, found, seen)
+        return ("ok", key, (found, idents), seen)
 
     divergences, skipped, failed, compared = {}, {}, [], 0
-    seen, unobserved = set(), set()
+    seen, unobserved, present = set(), set(), {}
     with ThreadPoolExecutor(max_workers=WORKERS) as pool:
         for kind, key, detail, looked_at in pool.map(check, targets):
             seen |= looked_at
             if kind == "ok":
                 compared += 1
-                divergences.update(detail)
+                divergences.update(detail[0])
+                present[key] = detail[1]
                 continue
             unobserved.add(key)
             if kind == "skipped":
@@ -116,7 +129,8 @@ def sweep():
     coverage = {"targets": len(targets), "compared": compared,
                 "skipped": skipped, "failed": len(failed),
                 "unobserved": sorted(unobserved)}
-    return divergences, coverage, {"seen": seen, "routes": set(route_list)}
+    return divergences, coverage, {"seen": seen, "routes": set(route_list),
+                                   "present": present}
 
 
 def carry_forward(old, new, evidence):
@@ -130,15 +144,46 @@ def carry_forward(old, new, evidence):
     from state so they return as "new" tomorrow.
 
     A route that has left the feed entirely is gone rather than unobserved, and
-    is allowed to resolve. Keys are positional, so a stop swapped out at the same
-    index is still read as the old one; that is a separate defect.
+    is allowed to resolve, and so is a stop that has left a route compared this run.
     """
+    def gone(k):
+        route = k.split("|", 1)[0]
+        if route not in evidence["routes"]:
+            return True
+        if route not in evidence["present"]:  # not compared this run
+            return False
+        now = evidence["present"][route]
+        if k.split("|", 1)[1].isdigit():  # a legacy key migrate() could not place
+            stop = [route, stop_id(old[k]["stop"], old[k]["stopName"])]
+            visits = [x for x in now if x.split("|")[:2] == stop]
+            if visits and all(x in evidence["seen"] and x not in new for x in visits):
+                evidence["seen"].add(k)  # every visit it could be was compared and agrees
+                return True
+            return not visits
+        return k not in now
     carried = [k for k in old
-               if k not in new and k not in evidence["seen"]
-               and k.rsplit("|", 1)[0] in evidence["routes"]]
+               if k not in new and k not in evidence["seen"] and not gone(k)]
     for k in carried:
         new[k] = old[k]
     return carried
+
+
+def migrate(state, evidence):
+    """Re-key findings stored as "<route>|<index>" the way sweep() keys them now."""
+    renamed = {}
+    for k, d in sorted(state["divergences"].items(), key=lambda kv: kv[1]["seq"]):
+        route_key, rest = k.split("|", 1)
+        if rest == str(d["seq"]):
+            stop = [route_key, stop_id(d["stop"], d["stopName"])]
+            now = evidence["present"].get(route_key, [])
+            same = [x for x in now if x.split("|")[:2] == stop]
+            if d["seq"] < len(now) and now[d["seq"]] in same:
+                renamed[k] = now[d["seq"]]    # this run saw the same stop there
+            elif len(same) == 1:
+                renamed[k] = same[0]          # it moved along the route
+            # otherwise keep the old key until a run can tell which visit it was
+    state["divergences"] = {renamed.get(k, k): d for k, d in state["divergences"].items()}
+    state["unchecked"] = sorted(renamed.get(k, k) for k in state.get("unchecked", []))
 
 
 def diff(old, new):
@@ -158,8 +203,9 @@ def describe(d, past=False, stale=False):
         return "%s: last seen at $%.1f against KMB's $%.1f, not verified this run" % (
             where, d["app"], d["kmb"])
     if past:
-        return "%s: was $%.1f against KMB's $%.1f, now agrees" % (
-            where, d["app"], d["kmb"])
+        return "%s: was $%.1f against KMB's $%.1f, %s" % (
+            where, d["app"], d["kmb"],
+            "no longer on the route" if d.get("gone") else "now agrees")
     return "%s: app shows $%.1f, KMB publishes $%.1f" % (where, d["app"], d["kmb"])
 
 
@@ -178,7 +224,7 @@ def render_entry(stamp, appeared, resolved, changed, totals, unchecked=()):
     lines = []
     for label, group, past, stale in (
             ("Now diverging", appeared, False, False),
-            ("Back in agreement", resolved, True, False),
+            ("No longer diverging", resolved, True, False),
             ("Amount changed", changed, False, False),
             ("Not checked this run", unchecked, False, True)):
         if not group:
@@ -216,8 +262,12 @@ def main():
         state = {"divergences": {}, "entries": []}
 
     divergences, coverage, evidence = sweep()
+    migrate(state, evidence)
     carried = carry_forward(state["divergences"], divergences, evidence)
     coverage["carried"] = len(carried)
+    for k, d in state["divergences"].items():
+        if k not in divergences and k not in evidence["seen"]:
+            d["gone"] = True  # resolved by leaving, not by a compared agreement
     appeared, resolved, changed = diff(state["divergences"], divergences)
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
