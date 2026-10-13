@@ -1,13 +1,13 @@
 {
   "coverage": {
     "carried": 0,
-    "compared": 1468,
+    "compared": 1463,
     "failed": 0,
     "skipped": {
       "stop codes": 1,
-      "stop count": 13
+      "stop count": 15
     },
-    "targets": 1482,
+    "targets": 1479,
     "unobserved": [
       "102+2+CROSS HARBOUR TUNNEL BBI (HH502)+SHAU KEI WAN BUS TERMINUS",
       "107P+1+CYBERPORT+LAGUNA VERDE",
@@ -16,6 +16,8 @@
       "270B+2+SHEUNG SHUI+OLYMPIC STATION",
       "45+1+KWAI CHUNG (LAI YIU ESTATE)+KOWLOON CITY FERRY",
       "64K+2+SHEUNG TSUEN PLAYGROUND (YL681)+YUEN LONG (WEST) BUS TERMINUS (YL944)",
+      "68X+1+HUNG SHUI KIU (HUNG FUK ESTATE)+MONG KOK (PARK AVENUE)",
+      "68X+3+YUEN LONG (WEST)+MONG KOK (PARK AVENUE)",
       "76K+2+CHING HO ESTATE BUS TERMINUS (ND936)+PAK SHEK AU, EUROPA GARDEN (ND196)",
       "78+1+SHA TAU KOK+SHEUNG SHUI (TAI PING)",
       "83X+1+KWUN TONG FERRY (KT941)+WONG NAI TAU BUS TERMINUS (ST892)",
@@ -26,7 +28,7 @@
     ]
   },
   "divergences": {
-    "106+1+SIU SAI WAN (ISLAND RESORT)+WONG TAI SIN|31": {
+    "106+1+SIU SAI WAN (ISLAND RESORT)+WONG TAI SIN|HH601": {
       "app": 12.2,
       "bound": "I",
       "kmb": 7.7,
@@ -36,7 +38,17 @@
       "stop": "HH601",
       "stopName": "紅隧轉車站 (HH601)"
     },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|0": {
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|HH504": {
+      "app": 12.9,
+      "bound": "O",
+      "kmb": 12.2,
+      "route": "118",
+      "seq": 5,
+      "serviceType": "2",
+      "stop": "HH504",
+      "stopName": "紅隧轉車站 (HH504)"
+    },
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|MK518": {
       "app": 12.9,
       "bound": "O",
       "kmb": 12.2,
@@ -46,7 +58,7 @@
       "stop": "MK518",
       "stopName": "旺角奶路臣街 (MK518)"
     },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|1": {
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|MK524": {
       "app": 12.9,
       "bound": "O",
       "kmb": 12.2,
@@ -56,117 +68,7 @@
       "stop": "MK524",
       "stopName": "旺角登打士街 (MK524)"
     },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|10": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 10,
-      "serviceType": "2",
-      "stop": null,
-      "stopName": "高威閣"
-    },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|11": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 11,
-      "serviceType": "2",
-      "stop": null,
-      "stopName": "康民街"
-    },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|12": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 12,
-      "serviceType": "2",
-      "stop": null,
-      "stopName": "興華邨興翠樓"
-    },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|13": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 13,
-      "serviceType": "2",
-      "stop": null,
-      "stopName": "興華邨卓華樓"
-    },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|14": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 14,
-      "serviceType": "2",
-      "stop": null,
-      "stopName": "青年廣場"
-    },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|15": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 15,
-      "serviceType": "2",
-      "stop": null,
-      "stopName": "怡泰街"
-    },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|16": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 16,
-      "serviceType": "2",
-      "stop": null,
-      "stopName": "漁灣邨"
-    },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|17": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 17,
-      "serviceType": "2",
-      "stop": null,
-      "stopName": "常安街"
-    },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|18": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 18,
-      "serviceType": "2",
-      "stop": null,
-      "stopName": "富欣花園"
-    },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|19": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 19,
-      "serviceType": "2",
-      "stop": null,
-      "stopName": "培僑小學"
-    },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|2": {
-      "app": 12.9,
-      "bound": "O",
-      "kmb": 12.2,
-      "route": "118",
-      "seq": 2,
-      "serviceType": "2",
-      "stop": "YT541",
-      "stopName": "油麻地文明里 (YT541)"
-    },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|3": {
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|YT330": {
       "app": 12.9,
       "bound": "O",
       "kmb": 12.2,
@@ -176,7 +78,17 @@
       "stop": "YT330",
       "stopName": "勞資審裁處 (YT330)"
     },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|4": {
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|YT541": {
+      "app": 12.9,
+      "bound": "O",
+      "kmb": 12.2,
+      "route": "118",
+      "seq": 2,
+      "serviceType": "2",
+      "stop": "YT541",
+      "stopName": "油麻地文明里 (YT541)"
+    },
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|YT611": {
       "app": 12.9,
       "bound": "O",
       "kmb": 12.2,
@@ -186,37 +98,17 @@
       "stop": "YT611",
       "stopName": "香港理工大學第八期 (YT611)"
     },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|5": {
-      "app": 12.9,
-      "bound": "O",
-      "kmb": 12.2,
-      "route": "118",
-      "seq": 5,
-      "serviceType": "2",
-      "stop": "HH504",
-      "stopName": "紅隧轉車站 (HH504)"
-    },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|6": {
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|培僑小學": {
       "app": 7.7,
       "bound": "O",
       "kmb": 6.1,
       "route": "118",
-      "seq": 6,
+      "seq": 19,
       "serviceType": "2",
       "stop": null,
-      "stopName": "阿公岩道"
+      "stopName": "培僑小學"
     },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|7": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 7,
-      "serviceType": "2",
-      "stop": null,
-      "stopName": "鯉魚門公園"
-    },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|8": {
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|大潭道": {
       "app": 7.7,
       "bound": "O",
       "kmb": 6.1,
@@ -226,7 +118,47 @@
       "stop": null,
       "stopName": "大潭道"
     },
-    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|9": {
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|富欣花園": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 18,
+      "serviceType": "2",
+      "stop": null,
+      "stopName": "富欣花園"
+    },
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|常安街": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 17,
+      "serviceType": "2",
+      "stop": null,
+      "stopName": "常安街"
+    },
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|康民街": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 11,
+      "serviceType": "2",
+      "stop": null,
+      "stopName": "康民街"
+    },
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|怡泰街": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 15,
+      "serviceType": "2",
+      "stop": null,
+      "stopName": "怡泰街"
+    },
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|東區醫院": {
       "app": 7.7,
       "bound": "O",
       "kmb": 6.1,
@@ -236,7 +168,77 @@
       "stop": null,
       "stopName": "東區醫院"
     },
-    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|0": {
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|漁灣邨": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 16,
+      "serviceType": "2",
+      "stop": null,
+      "stopName": "漁灣邨"
+    },
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|興華邨卓華樓": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 13,
+      "serviceType": "2",
+      "stop": null,
+      "stopName": "興華邨卓華樓"
+    },
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|興華邨興翠樓": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 12,
+      "serviceType": "2",
+      "stop": null,
+      "stopName": "興華邨興翠樓"
+    },
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|阿公岩道": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 6,
+      "serviceType": "2",
+      "stop": null,
+      "stopName": "阿公岩道"
+    },
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|青年廣場": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 14,
+      "serviceType": "2",
+      "stop": null,
+      "stopName": "青年廣場"
+    },
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|高威閣": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 10,
+      "serviceType": "2",
+      "stop": null,
+      "stopName": "高威閣"
+    },
+    "118+2+MONG KOK (NELSON ST)+SIU SAI WAN (ISLAND RESORT)|鯉魚門公園": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 7,
+      "serviceType": "2",
+      "stop": null,
+      "stopName": "鯉魚門公園"
+    },
+    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|HH504": {
       "app": 12.9,
       "bound": "O",
       "kmb": 12.2,
@@ -246,57 +248,7 @@
       "stop": "HH504",
       "stopName": "紅隧轉車站 (HH504)"
     },
-    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|1": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 1,
-      "serviceType": "3",
-      "stop": null,
-      "stopName": "阿公岩道"
-    },
-    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|10": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 10,
-      "serviceType": "3",
-      "stop": null,
-      "stopName": "怡泰街"
-    },
-    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|11": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 11,
-      "serviceType": "3",
-      "stop": null,
-      "stopName": "漁灣邨"
-    },
-    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|12": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 12,
-      "serviceType": "3",
-      "stop": null,
-      "stopName": "常安街"
-    },
-    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|13": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 13,
-      "serviceType": "3",
-      "stop": null,
-      "stopName": "富欣花園"
-    },
-    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|14": {
+    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|培僑小學": {
       "app": 7.7,
       "bound": "O",
       "kmb": 6.1,
@@ -306,17 +258,7 @@
       "stop": null,
       "stopName": "培僑小學"
     },
-    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|2": {
-      "app": 7.7,
-      "bound": "O",
-      "kmb": 6.1,
-      "route": "118",
-      "seq": 2,
-      "serviceType": "3",
-      "stop": null,
-      "stopName": "鯉魚門公園"
-    },
-    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|3": {
+    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|大潭道": {
       "app": 7.7,
       "bound": "O",
       "kmb": 6.1,
@@ -326,27 +268,27 @@
       "stop": null,
       "stopName": "大潭道"
     },
-    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|4": {
+    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|富欣花園": {
       "app": 7.7,
       "bound": "O",
       "kmb": 6.1,
       "route": "118",
-      "seq": 4,
+      "seq": 13,
       "serviceType": "3",
       "stop": null,
-      "stopName": "東區醫院"
+      "stopName": "富欣花園"
     },
-    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|5": {
+    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|常安街": {
       "app": 7.7,
       "bound": "O",
       "kmb": 6.1,
       "route": "118",
-      "seq": 5,
+      "seq": 12,
       "serviceType": "3",
       "stop": null,
-      "stopName": "高威閣"
+      "stopName": "常安街"
     },
-    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|6": {
+    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|康民街": {
       "app": 7.7,
       "bound": "O",
       "kmb": 6.1,
@@ -356,17 +298,37 @@
       "stop": null,
       "stopName": "康民街"
     },
-    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|7": {
+    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|怡泰街": {
       "app": 7.7,
       "bound": "O",
       "kmb": 6.1,
       "route": "118",
-      "seq": 7,
+      "seq": 10,
       "serviceType": "3",
       "stop": null,
-      "stopName": "興華邨興翠樓"
+      "stopName": "怡泰街"
     },
-    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|8": {
+    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|東區醫院": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 4,
+      "serviceType": "3",
+      "stop": null,
+      "stopName": "東區醫院"
+    },
+    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|漁灣邨": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 11,
+      "serviceType": "3",
+      "stop": null,
+      "stopName": "漁灣邨"
+    },
+    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|興華邨卓華樓": {
       "app": 7.7,
       "bound": "O",
       "kmb": 6.1,
@@ -376,7 +338,27 @@
       "stop": null,
       "stopName": "興華邨卓華樓"
     },
-    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|9": {
+    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|興華邨興翠樓": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 7,
+      "serviceType": "3",
+      "stop": null,
+      "stopName": "興華邨興翠樓"
+    },
+    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|阿公岩道": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 1,
+      "serviceType": "3",
+      "stop": null,
+      "stopName": "阿公岩道"
+    },
+    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|青年廣場": {
       "app": 7.7,
       "bound": "O",
       "kmb": 6.1,
@@ -386,7 +368,27 @@
       "stop": null,
       "stopName": "青年廣場"
     },
-    "215X+1+KOWLOON STATION+LAM TIN (KWONG TIN ESTATE)|10": {
+    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|高威閣": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 5,
+      "serviceType": "3",
+      "stop": null,
+      "stopName": "高威閣"
+    },
+    "118+3+CROSS HARBOUR TUNNEL+SIU SAI WAN (ISLAND RESORT)|鯉魚門公園": {
+      "app": 7.7,
+      "bound": "O",
+      "kmb": 6.1,
+      "route": "118",
+      "seq": 2,
+      "serviceType": "3",
+      "stop": null,
+      "stopName": "鯉魚門公園"
+    },
+    "215X+1+KOWLOON STATION+LAM TIN (KWONG TIN ESTATE)|KT101": {
       "app": 6.7,
       "bound": "I",
       "kmb": 8.6,
@@ -396,7 +398,7 @@
       "stop": "KT101",
       "stopName": "九龍灣宏通街 (KT101)"
     },
-    "215X+1+KOWLOON STATION+LAM TIN (KWONG TIN ESTATE)|13": {
+    "215X+1+KOWLOON STATION+LAM TIN (KWONG TIN ESTATE)|KT341": {
       "app": 5.2,
       "bound": "I",
       "kmb": 6.7,
@@ -406,7 +408,7 @@
       "stop": "KT341",
       "stopName": "創紀之城 (KT341)"
     },
-    "215X+1+KOWLOON STATION+LAM TIN (KWONG TIN ESTATE)|15": {
+    "215X+1+KOWLOON STATION+LAM TIN (KWONG TIN ESTATE)|KT361": {
       "app": 4.0,
       "bound": "I",
       "kmb": 5.2,
@@ -416,27 +418,7 @@
       "stop": "KT361",
       "stopName": "觀塘游泳池 (KT361)"
     },
-    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|10": {
-      "app": 5.6,
-      "bound": "O",
-      "kmb": 5.2,
-      "route": "23",
-      "seq": 10,
-      "serviceType": "1",
-      "stop": "KT182",
-      "stopName": "順利邨利恒樓 (KT182)"
-    },
-    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|11": {
-      "app": 5.6,
-      "bound": "O",
-      "kmb": 5.2,
-      "route": "23",
-      "seq": 11,
-      "serviceType": "1",
-      "stop": "KT184",
-      "stopName": "順利消防局 (KT184)"
-    },
-    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|12": {
+    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|KT165": {
       "app": 5.6,
       "bound": "O",
       "kmb": 5.2,
@@ -446,57 +428,7 @@
       "stop": "KT165",
       "stopName": "順安邨安頌樓 (KT165)"
     },
-    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|13": {
-      "app": 5.6,
-      "bound": "O",
-      "kmb": 5.2,
-      "route": "23",
-      "seq": 13,
-      "serviceType": "1",
-      "stop": "KT531",
-      "stopName": "聯合醫院 (KT531)"
-    },
-    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|14": {
-      "app": 5.6,
-      "bound": "O",
-      "kmb": 5.2,
-      "route": "23",
-      "seq": 14,
-      "serviceType": "1",
-      "stop": "KT532",
-      "stopName": "秀雅道遊樂場 (KT532)"
-    },
-    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|15": {
-      "app": 5.6,
-      "bound": "O",
-      "kmb": 5.2,
-      "route": "23",
-      "seq": 15,
-      "serviceType": "1",
-      "stop": "KT535",
-      "stopName": "和樂邨 (KT535)"
-    },
-    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|16": {
-      "app": 5.6,
-      "bound": "O",
-      "kmb": 5.2,
-      "route": "23",
-      "seq": 16,
-      "serviceType": "1",
-      "stop": "KT538",
-      "stopName": "協和街, 裕民坊 (KT538)"
-    },
-    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|17": {
-      "app": 5.6,
-      "bound": "O",
-      "kmb": 5.2,
-      "route": "23",
-      "seq": 17,
-      "serviceType": "1",
-      "stop": "KT211",
-      "stopName": "觀塘開源道 (KT211)"
-    },
-    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|9": {
+    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|KT181": {
       "app": 5.6,
       "bound": "O",
       "kmb": 5.2,
@@ -506,7 +438,77 @@
       "stop": "KT181",
       "stopName": "順利邨利業樓 (KT181)"
     },
-    "23M+1+LOK WAH+SHUN LEE (CIRCULAR)|9": {
+    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|KT182": {
+      "app": 5.6,
+      "bound": "O",
+      "kmb": 5.2,
+      "route": "23",
+      "seq": 10,
+      "serviceType": "1",
+      "stop": "KT182",
+      "stopName": "順利邨利恒樓 (KT182)"
+    },
+    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|KT184": {
+      "app": 5.6,
+      "bound": "O",
+      "kmb": 5.2,
+      "route": "23",
+      "seq": 11,
+      "serviceType": "1",
+      "stop": "KT184",
+      "stopName": "順利消防局 (KT184)"
+    },
+    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|KT211": {
+      "app": 5.6,
+      "bound": "O",
+      "kmb": 5.2,
+      "route": "23",
+      "seq": 17,
+      "serviceType": "1",
+      "stop": "KT211",
+      "stopName": "觀塘開源道 (KT211)"
+    },
+    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|KT531": {
+      "app": 5.6,
+      "bound": "O",
+      "kmb": 5.2,
+      "route": "23",
+      "seq": 13,
+      "serviceType": "1",
+      "stop": "KT531",
+      "stopName": "聯合醫院 (KT531)"
+    },
+    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|KT532": {
+      "app": 5.6,
+      "bound": "O",
+      "kmb": 5.2,
+      "route": "23",
+      "seq": 14,
+      "serviceType": "1",
+      "stop": "KT532",
+      "stopName": "秀雅道遊樂場 (KT532)"
+    },
+    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|KT535": {
+      "app": 5.6,
+      "bound": "O",
+      "kmb": 5.2,
+      "route": "23",
+      "seq": 15,
+      "serviceType": "1",
+      "stop": "KT535",
+      "stopName": "和樂邨 (KT535)"
+    },
+    "23+1+KWUN TONG FERRY+SHUN LEE (CIRCULAR)|KT538": {
+      "app": 5.6,
+      "bound": "O",
+      "kmb": 5.2,
+      "route": "23",
+      "seq": 16,
+      "serviceType": "1",
+      "stop": "KT538",
+      "stopName": "協和街, 裕民坊 (KT538)"
+    },
+    "23M+1+LOK WAH+SHUN LEE (CIRCULAR)|KT170": {
       "app": 5.6,
       "bound": "O",
       "kmb": 5.2,
@@ -516,7 +518,7 @@
       "stop": "KT170",
       "stopName": "寧波第二中學 (KT170)"
     },
-    "258D+1+LAM TIN STATION+TUEN MUN (PO TIN ESTATE)|15": {
+    "258D+1+LAM TIN STATION+TUEN MUN (PO TIN ESTATE)|TM101": {
       "app": 18.8,
       "bound": "I",
       "kmb": 9.6,
@@ -526,7 +528,7 @@
       "stop": "TM101",
       "stopName": "屯門公路轉車站 (TM101)"
     },
-    "259D+1+LEI YUE MUN ESTATE+TUEN MUN (LUNG MUN OASIS)|21": {
+    "259D+1+LEI YUE MUN ESTATE+TUEN MUN (LUNG MUN OASIS)|TM101": {
       "app": 18.8,
       "bound": "I",
       "kmb": 9.6,
@@ -536,7 +538,7 @@
       "stop": "TM101",
       "stopName": "屯門公路轉車站 (TM101)"
     },
-    "260X+1+HUNG HOM STATION+TUEN MUN (PO TIN ESTATE)|10": {
+    "260X+1+HUNG HOM STATION+TUEN MUN (PO TIN ESTATE)|TM102": {
       "app": 17.2,
       "bound": "I",
       "kmb": 9.6,
@@ -546,7 +548,7 @@
       "stop": "TM102",
       "stopName": "屯門公路轉車站 (TM102)"
     },
-    "263A+1+HONG KONG SCIENCE PARK+TUEN MUN STATION|10": {
+    "263A+1+HONG KONG SCIENCE PARK+TUEN MUN STATION|TM101": {
       "app": 7.7,
       "bound": "I",
       "kmb": 9.6,
@@ -556,7 +558,7 @@
       "stop": "TM101",
       "stopName": "屯門公路轉車站 (TM101)"
     },
-    "263A+1+TUEN MUN STATION+HONG KONG SCIENCE PARK|10": {
+    "263A+1+TUEN MUN STATION+HONG KONG SCIENCE PARK|PA100": {
       "app": 7.7,
       "bound": "O",
       "kmb": 7.4,
@@ -566,7 +568,7 @@
       "stop": "PA100",
       "stopName": "馬料水公眾碼頭 (PA100)"
     },
-    "263A+1+TUEN MUN STATION+HONG KONG SCIENCE PARK|11": {
+    "263A+1+TUEN MUN STATION+HONG KONG SCIENCE PARK|PA104": {
       "app": 7.7,
       "bound": "O",
       "kmb": 7.4,
@@ -576,7 +578,7 @@
       "stop": "PA104",
       "stopName": "水上活動中心 (PA104)"
     },
-    "263A+1+TUEN MUN STATION+HONG KONG SCIENCE PARK|12": {
+    "263A+1+TUEN MUN STATION+HONG KONG SCIENCE PARK|PA105": {
       "app": 7.7,
       "bound": "O",
       "kmb": 7.4,
@@ -586,7 +588,7 @@
       "stop": "PA105",
       "stopName": "香港生物科技研究院 (PA105)"
     },
-    "263A+1+TUEN MUN STATION+HONG KONG SCIENCE PARK|13": {
+    "263A+1+TUEN MUN STATION+HONG KONG SCIENCE PARK|PA111": {
       "app": 7.7,
       "bound": "O",
       "kmb": 7.4,
@@ -596,7 +598,7 @@
       "stop": "PA111",
       "stopName": "香港科學園 (PA111)"
     },
-    "263A+1+TUEN MUN STATION+HONG KONG SCIENCE PARK|7": {
+    "263A+1+TUEN MUN STATION+HONG KONG SCIENCE PARK|ST146": {
       "app": 7.7,
       "bound": "O",
       "kmb": 7.4,
@@ -606,7 +608,7 @@
       "stop": "ST146",
       "stopName": "沙田第一城 (ST146)"
     },
-    "263A+1+TUEN MUN STATION+HONG KONG SCIENCE PARK|8": {
+    "263A+1+TUEN MUN STATION+HONG KONG SCIENCE PARK|ST148": {
       "app": 7.7,
       "bound": "O",
       "kmb": 7.4,
@@ -616,7 +618,7 @@
       "stop": "ST148",
       "stopName": "石門轉車站 - 濱景花園 (ST148)"
     },
-    "263A+1+TUEN MUN STATION+HONG KONG SCIENCE PARK|9": {
+    "263A+1+TUEN MUN STATION+HONG KONG SCIENCE PARK|ST903": {
       "app": 7.7,
       "bound": "O",
       "kmb": 7.4,
@@ -626,17 +628,7 @@
       "stop": "ST903",
       "stopName": "大學站 (ST903)"
     },
-    "264X+1+TAI PO MARKET STATION+TIN YIU|0": {
-      "app": 18.9,
-      "bound": "O",
-      "kmb": 16.9,
-      "route": "264X",
-      "seq": 0,
-      "serviceType": "1",
-      "stop": "TP940",
-      "stopName": "大埔墟站巴士總站 (TP940)"
-    },
-    "264X+1+TAI PO MARKET STATION+TIN YIU|1": {
+    "264X+1+TAI PO MARKET STATION+TIN YIU|TP276": {
       "app": 18.9,
       "bound": "O",
       "kmb": 16.9,
@@ -646,7 +638,7 @@
       "stop": "TP276",
       "stopName": "廣福道轉車站 (TP276)"
     },
-    "264X+1+TAI PO MARKET STATION+TIN YIU|2": {
+    "264X+1+TAI PO MARKET STATION+TIN YIU|TP305": {
       "app": 18.9,
       "bound": "O",
       "kmb": 16.9,
@@ -656,7 +648,7 @@
       "stop": "TP305",
       "stopName": "廣福道轉車站 - 寶鄉橋 (TP305)"
     },
-    "264X+1+TAI PO MARKET STATION+TIN YIU|3": {
+    "264X+1+TAI PO MARKET STATION+TIN YIU|TP311": {
       "app": 18.9,
       "bound": "O",
       "kmb": 16.9,
@@ -666,17 +658,7 @@
       "stop": "TP311",
       "stopName": "大埔安祥路 (TP311)"
     },
-    "264X+1+TAI PO MARKET STATION+TIN YIU|4": {
-      "app": 18.9,
-      "bound": "O",
-      "kmb": 16.9,
-      "route": "264X",
-      "seq": 4,
-      "serviceType": "1",
-      "stop": "TP742",
-      "stopName": "大埔安慈路 (TP742)"
-    },
-    "264X+1+TAI PO MARKET STATION+TIN YIU|5": {
+    "264X+1+TAI PO MARKET STATION+TIN YIU|TP336": {
       "app": 18.9,
       "bound": "O",
       "kmb": 16.9,
@@ -686,17 +668,27 @@
       "stop": "TP336",
       "stopName": "太和廣場 (TP336)"
     },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|0": {
+    "264X+1+TAI PO MARKET STATION+TIN YIU|TP742": {
       "app": 18.9,
-      "bound": "I",
+      "bound": "O",
+      "kmb": 16.9,
+      "route": "264X",
+      "seq": 4,
+      "serviceType": "1",
+      "stop": "TP742",
+      "stopName": "大埔安慈路 (TP742)"
+    },
+    "264X+1+TAI PO MARKET STATION+TIN YIU|TP940": {
+      "app": 18.9,
+      "bound": "O",
       "kmb": 16.9,
       "route": "264X",
       "seq": 0,
       "serviceType": "1",
-      "stop": "TN920",
-      "stopName": "天耀總站 (TN920)"
+      "stop": "TP940",
+      "stopName": "大埔墟站巴士總站 (TP940)"
     },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|1": {
+    "264X+1+TIN YIU+TAI PO MARKET STATION|TN210": {
       "app": 18.9,
       "bound": "I",
       "kmb": 16.9,
@@ -706,97 +698,7 @@
       "stop": "TN210",
       "stopName": "賞湖居 (TN210)"
     },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|10": {
-      "app": 18.9,
-      "bound": "I",
-      "kmb": 16.9,
-      "route": "264X",
-      "seq": 10,
-      "serviceType": "1",
-      "stop": "TN535",
-      "stopName": "美湖居 (TN535)"
-    },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|11": {
-      "app": 18.9,
-      "bound": "I",
-      "kmb": 16.9,
-      "route": "264X",
-      "seq": 11,
-      "serviceType": "1",
-      "stop": "TN602",
-      "stopName": "景湖居 (TN602)"
-    },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|12": {
-      "app": 18.9,
-      "bound": "I",
-      "kmb": 16.9,
-      "route": "264X",
-      "seq": 12,
-      "serviceType": "1",
-      "stop": "YL140",
-      "stopName": "鳳池村 (YL140)"
-    },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|13": {
-      "app": 18.9,
-      "bound": "I",
-      "kmb": 16.9,
-      "route": "264X",
-      "seq": 13,
-      "serviceType": "1",
-      "stop": "YL220",
-      "stopName": "香港家庭計劃指導會 (YL220)"
-    },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|14": {
-      "app": 18.9,
-      "bound": "I",
-      "kmb": 16.9,
-      "route": "264X",
-      "seq": 14,
-      "serviceType": "1",
-      "stop": "YL359",
-      "stopName": "元朗廣場 (YL359)"
-    },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|15": {
-      "app": 18.9,
-      "bound": "I",
-      "kmb": 16.9,
-      "route": "264X",
-      "seq": 15,
-      "serviceType": "1",
-      "stop": "YL372",
-      "stopName": "元朗同樂街 (YL372)"
-    },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|16": {
-      "app": 18.9,
-      "bound": "I",
-      "kmb": 16.9,
-      "route": "264X",
-      "seq": 16,
-      "serviceType": "1",
-      "stop": "YL375",
-      "stopName": "元朗谷亭街 (YL375)"
-    },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|17": {
-      "app": 18.9,
-      "bound": "I",
-      "kmb": 16.9,
-      "route": "264X",
-      "seq": 17,
-      "serviceType": "1",
-      "stop": "YL390",
-      "stopName": "形點 II (YL390)"
-    },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|18": {
-      "app": 18.9,
-      "bound": "I",
-      "kmb": 16.9,
-      "route": "264X",
-      "seq": 18,
-      "serviceType": "1",
-      "stop": "YL408",
-      "stopName": "形點 I (YL408)"
-    },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|2": {
+    "264X+1+TIN YIU+TAI PO MARKET STATION|TN220": {
       "app": 18.9,
       "bound": "I",
       "kmb": 16.9,
@@ -806,7 +708,7 @@
       "stop": "TN220",
       "stopName": "天水圍公園 (TN220)"
     },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|3": {
+    "264X+1+TIN YIU+TAI PO MARKET STATION|TN223": {
       "app": 18.9,
       "bound": "I",
       "kmb": 16.9,
@@ -816,7 +718,7 @@
       "stop": "TN223",
       "stopName": "天瑞邨 (TN223)"
     },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|4": {
+    "264X+1+TIN YIU+TAI PO MARKET STATION|TN225": {
       "app": 18.9,
       "bound": "I",
       "kmb": 16.9,
@@ -826,7 +728,7 @@
       "stop": "TN225",
       "stopName": "天華邨 (TN225)"
     },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|5": {
+    "264X+1+TIN YIU+TAI PO MARKET STATION|TN226": {
       "app": 18.9,
       "bound": "I",
       "kmb": 16.9,
@@ -836,7 +738,7 @@
       "stop": "TN226",
       "stopName": "天恩邨 (TN226)"
     },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|6": {
+    "264X+1+TIN YIU+TAI PO MARKET STATION|TN229": {
       "app": 18.9,
       "bound": "I",
       "kmb": 16.9,
@@ -846,7 +748,7 @@
       "stop": "TN229",
       "stopName": "天澤邨 (TN229)"
     },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|7": {
+    "264X+1+TIN YIU+TAI PO MARKET STATION|TN300": {
       "app": 18.9,
       "bound": "I",
       "kmb": 16.9,
@@ -856,7 +758,7 @@
       "stop": "TN300",
       "stopName": "香港濕地公園 (TN300)"
     },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|8": {
+    "264X+1+TIN YIU+TAI PO MARKET STATION|TN530": {
       "app": 18.9,
       "bound": "I",
       "kmb": 16.9,
@@ -866,7 +768,7 @@
       "stop": "TN530",
       "stopName": "慧景軒 (TN530)"
     },
-    "264X+1+TIN YIU+TAI PO MARKET STATION|9": {
+    "264X+1+TIN YIU+TAI PO MARKET STATION|TN533": {
       "app": 18.9,
       "bound": "I",
       "kmb": 16.9,
@@ -876,7 +778,107 @@
       "stop": "TN533",
       "stopName": "香港青年協會李兆基書院 (TN533)"
     },
-    "269C+1+KWUN TONG FERRY+TIN SHUI WAI TOWN CENTRE|17": {
+    "264X+1+TIN YIU+TAI PO MARKET STATION|TN535": {
+      "app": 18.9,
+      "bound": "I",
+      "kmb": 16.9,
+      "route": "264X",
+      "seq": 10,
+      "serviceType": "1",
+      "stop": "TN535",
+      "stopName": "美湖居 (TN535)"
+    },
+    "264X+1+TIN YIU+TAI PO MARKET STATION|TN602": {
+      "app": 18.9,
+      "bound": "I",
+      "kmb": 16.9,
+      "route": "264X",
+      "seq": 11,
+      "serviceType": "1",
+      "stop": "TN602",
+      "stopName": "景湖居 (TN602)"
+    },
+    "264X+1+TIN YIU+TAI PO MARKET STATION|TN920": {
+      "app": 18.9,
+      "bound": "I",
+      "kmb": 16.9,
+      "route": "264X",
+      "seq": 0,
+      "serviceType": "1",
+      "stop": "TN920",
+      "stopName": "天耀總站 (TN920)"
+    },
+    "264X+1+TIN YIU+TAI PO MARKET STATION|YL140": {
+      "app": 18.9,
+      "bound": "I",
+      "kmb": 16.9,
+      "route": "264X",
+      "seq": 12,
+      "serviceType": "1",
+      "stop": "YL140",
+      "stopName": "鳳池村 (YL140)"
+    },
+    "264X+1+TIN YIU+TAI PO MARKET STATION|YL220": {
+      "app": 18.9,
+      "bound": "I",
+      "kmb": 16.9,
+      "route": "264X",
+      "seq": 13,
+      "serviceType": "1",
+      "stop": "YL220",
+      "stopName": "香港家庭計劃指導會 (YL220)"
+    },
+    "264X+1+TIN YIU+TAI PO MARKET STATION|YL359": {
+      "app": 18.9,
+      "bound": "I",
+      "kmb": 16.9,
+      "route": "264X",
+      "seq": 14,
+      "serviceType": "1",
+      "stop": "YL359",
+      "stopName": "元朗廣場 (YL359)"
+    },
+    "264X+1+TIN YIU+TAI PO MARKET STATION|YL372": {
+      "app": 18.9,
+      "bound": "I",
+      "kmb": 16.9,
+      "route": "264X",
+      "seq": 15,
+      "serviceType": "1",
+      "stop": "YL372",
+      "stopName": "元朗同樂街 (YL372)"
+    },
+    "264X+1+TIN YIU+TAI PO MARKET STATION|YL375": {
+      "app": 18.9,
+      "bound": "I",
+      "kmb": 16.9,
+      "route": "264X",
+      "seq": 16,
+      "serviceType": "1",
+      "stop": "YL375",
+      "stopName": "元朗谷亭街 (YL375)"
+    },
+    "264X+1+TIN YIU+TAI PO MARKET STATION|YL390": {
+      "app": 18.9,
+      "bound": "I",
+      "kmb": 16.9,
+      "route": "264X",
+      "seq": 17,
+      "serviceType": "1",
+      "stop": "YL390",
+      "stopName": "形點 II (YL390)"
+    },
+    "264X+1+TIN YIU+TAI PO MARKET STATION|YL408": {
+      "app": 18.9,
+      "bound": "I",
+      "kmb": 16.9,
+      "route": "264X",
+      "seq": 18,
+      "serviceType": "1",
+      "stop": "YL408",
+      "stopName": "形點 I (YL408)"
+    },
+    "269C+1+KWUN TONG FERRY+TIN SHUI WAI TOWN CENTRE|YL232": {
       "app": 20.8,
       "bound": "I",
       "kmb": 11.5,
@@ -886,7 +888,7 @@
       "stop": "YL232",
       "stopName": "大欖隧道轉車站 (YL232)"
     },
-    "269D+1+LEK YUEN+TIN FU|5": {
+    "269D+1+LEK YUEN+TIN FU|YL232": {
       "app": 9.6,
       "bound": "I",
       "kmb": 11.5,
@@ -896,7 +898,7 @@
       "stop": "YL232",
       "stopName": "大欖隧道轉車站 (YL232)"
     },
-    "272A+3+PAK SHEK KOK+UNIVERSITY STATION|5": {
+    "272A+3+PAK SHEK KOK+UNIVERSITY STATION|PA214": {
       "app": 5.1,
       "bound": "O",
       "kmb": 4.6,
@@ -906,7 +908,7 @@
       "stop": "PA214",
       "stopName": "科研路 (PA214)"
     },
-    "272A+3+PAK SHEK KOK+UNIVERSITY STATION|6": {
+    "272A+3+PAK SHEK KOK+UNIVERSITY STATION|PA219": {
       "app": 5.1,
       "bound": "O",
       "kmb": 4.6,
@@ -916,7 +918,7 @@
       "stop": "PA219",
       "stopName": "科學園(第一期) (PA219)"
     },
-    "272A+3+PAK SHEK KOK+UNIVERSITY STATION|7": {
+    "272A+3+PAK SHEK KOK+UNIVERSITY STATION|PA230": {
       "app": 5.1,
       "bound": "O",
       "kmb": 4.6,
@@ -926,7 +928,7 @@
       "stop": "PA230",
       "stopName": "香港生物科技研究院 (PA230)"
     },
-    "272A+3+PAK SHEK KOK+UNIVERSITY STATION|8": {
+    "272A+3+PAK SHEK KOK+UNIVERSITY STATION|PA234": {
       "app": 5.1,
       "bound": "O",
       "kmb": 4.6,
@@ -936,7 +938,7 @@
       "stop": "PA234",
       "stopName": "水上活動中心 (PA234)"
     },
-    "272A+3+PAK SHEK KOK+UNIVERSITY STATION|9": {
+    "272A+3+PAK SHEK KOK+UNIVERSITY STATION|PA237": {
       "app": 5.1,
       "bound": "O",
       "kmb": 4.6,
@@ -946,7 +948,7 @@
       "stop": "PA237",
       "stopName": "馬料水公眾碼頭 (PA237)"
     },
-    "281A+1+KOWLOON STATION+KWONG YUEN|18": {
+    "281A+1+KOWLOON STATION+KWONG YUEN|KC344": {
       "app": 6.3,
       "bound": "I",
       "kmb": 9.0,
@@ -956,7 +958,7 @@
       "stop": "KC344",
       "stopName": "映月台 (KC344)"
     },
-    "307P+1+CAUSEWAY BAY (TIN HAU)+TAI PO (TING TAI ROAD)|16": {
+    "307P+1+CAUSEWAY BAY (TIN HAU)+TAI PO (TING TAI ROAD)|TP326": {
       "app": 7.7,
       "bound": "I",
       "kmb": 6.8,
@@ -966,27 +968,7 @@
       "stop": "TP326",
       "stopName": "大埔中心第五期 (TP326)"
     },
-    "31+1+TSUEN WAN WEST STATION+SHEK LEI (CIRCULAR)|7": {
-      "app": 5.1,
-      "bound": "O",
-      "kmb": 4.8,
-      "route": "31",
-      "seq": 7,
-      "serviceType": "1",
-      "stop": "KW405",
-      "stopName": "葵涌屏麗徑 (KW405)"
-    },
-    "31+1+TSUEN WAN WEST STATION+SHEK LEI (CIRCULAR)|8": {
-      "app": 5.1,
-      "bound": "O",
-      "kmb": 4.8,
-      "route": "31",
-      "seq": 8,
-      "serviceType": "1",
-      "stop": "KW407",
-      "stopName": "葵涌石英徑 (KW407)"
-    },
-    "31+1+TSUEN WAN WEST STATION+SHEK LEI (CIRCULAR)|9": {
+    "31+1+TSUEN WAN WEST STATION+SHEK LEI (CIRCULAR)|KW201": {
       "app": 5.1,
       "bound": "O",
       "kmb": 4.8,
@@ -996,7 +978,27 @@
       "stop": "KW201",
       "stopName": "石排街嘉翠園 (KW201)"
     },
-    "43S+1+SHEK YAM+HONG KONG SCIENCE PARK|12": {
+    "31+1+TSUEN WAN WEST STATION+SHEK LEI (CIRCULAR)|KW405": {
+      "app": 5.1,
+      "bound": "O",
+      "kmb": 4.8,
+      "route": "31",
+      "seq": 7,
+      "serviceType": "1",
+      "stop": "KW405",
+      "stopName": "葵涌屏麗徑 (KW405)"
+    },
+    "31+1+TSUEN WAN WEST STATION+SHEK LEI (CIRCULAR)|KW407": {
+      "app": 5.1,
+      "bound": "O",
+      "kmb": 4.8,
+      "route": "31",
+      "seq": 8,
+      "serviceType": "1",
+      "stop": "KW407",
+      "stopName": "葵涌石英徑 (KW407)"
+    },
+    "43S+1+SHEK YAM+HONG KONG SCIENCE PARK|TW500": {
       "app": 10.4,
       "bound": "O",
       "kmb": 1.2,
@@ -1006,7 +1008,7 @@
       "stop": "TW500",
       "stopName": "城門隧道轉車站 (TW500)"
     },
-    "58M+1+KWAI FONG STATION+TUEN MUN (LEUNG KING ESTATE)|8": {
+    "58M+1+KWAI FONG STATION+TUEN MUN (LEUNG KING ESTATE)|TM102": {
       "app": 10.4,
       "bound": "I",
       "kmb": 9.6,
@@ -1016,7 +1018,7 @@
       "stop": "TM102",
       "stopName": "屯門公路轉車站 (TM102)"
     },
-    "58P+1+KWAI FONG STATION+TIN KING ESTATE (TIN YUE HOUSE)|8": {
+    "58P+1+KWAI FONG STATION+TIN KING ESTATE (TIN YUE HOUSE)|TM102": {
       "app": 10.4,
       "bound": "O",
       "kmb": 9.6,
@@ -1026,7 +1028,7 @@
       "stop": "TM102",
       "stopName": "屯門公路轉車站 (TM102)"
     },
-    "59X+1+MONG KOK EAST STATION+TUEN MUN PIER HEAD|12": {
+    "59X+1+MONG KOK EAST STATION+TUEN MUN PIER HEAD|TM101": {
       "app": 14.6,
       "bound": "I",
       "kmb": 9.6,
@@ -1036,7 +1038,7 @@
       "stop": "TM101",
       "stopName": "屯門公路轉車站 (TM101)"
     },
-    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|18": {
+    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|WT320": {
       "app": 6.7,
       "bound": "I",
       "kmb": 5.8,
@@ -1046,7 +1048,7 @@
       "stop": "WT320",
       "stopName": "天主教伍華中學 (WT320)"
     },
-    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|19": {
+    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|WT323": {
       "app": 6.7,
       "bound": "I",
       "kmb": 5.8,
@@ -1056,7 +1058,7 @@
       "stop": "WT323",
       "stopName": "東頭邨泰東樓 (WT323)"
     },
-    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|20": {
+    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|WT328": {
       "app": 6.7,
       "bound": "I",
       "kmb": 5.8,
@@ -1066,7 +1068,7 @@
       "stop": "WT328",
       "stopName": "黃大仙警署 (WT328)"
     },
-    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|21": {
+    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|WT351": {
       "app": 6.7,
       "bound": "I",
       "kmb": 5.8,
@@ -1076,7 +1078,7 @@
       "stop": "WT351",
       "stopName": "富祐大廈 (WT351)"
     },
-    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|22": {
+    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|WT352": {
       "app": 6.7,
       "bound": "I",
       "kmb": 5.8,
@@ -1086,7 +1088,7 @@
       "stop": "WT352",
       "stopName": "蒲慈里 (WT352)"
     },
-    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|23": {
+    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|WT353": {
       "app": 6.7,
       "bound": "I",
       "kmb": 5.8,
@@ -1096,7 +1098,7 @@
       "stop": "WT353",
       "stopName": "蒲蘅里 (WT353)"
     },
-    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|24": {
+    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|WT515": {
       "app": 6.7,
       "bound": "I",
       "kmb": 5.8,
@@ -1106,7 +1108,7 @@
       "stop": "WT515",
       "stopName": "德愛中學 (WT515)"
     },
-    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|25": {
+    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|WT517": {
       "app": 6.7,
       "bound": "I",
       "kmb": 5.8,
@@ -1116,7 +1118,7 @@
       "stop": "WT517",
       "stopName": "慈民邨 (WT517)"
     },
-    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|26": {
+    "5C+2+STAR FERRY+TSZ WAN SHAN (CENTRAL)|WT525": {
       "app": 6.7,
       "bound": "I",
       "kmb": 5.8,
@@ -1126,7 +1128,7 @@
       "stop": "WT525",
       "stopName": "慈安苑 (WT525)"
     },
-    "603A+1+CENTRAL (RUMSEY STREET)+PING TIN|17": {
+    "603A+1+CENTRAL (RUMSEY STREET)+PING TIN|LT101": {
       "app": 13.9,
       "bound": "I",
       "kmb": 7.5,
@@ -1136,7 +1138,7 @@
       "stop": "LT101",
       "stopName": "東隧轉車站 (LT101)"
     },
-    "603A+1+CENTRAL (RUMSEY STREET)+PING TIN|20": {
+    "603A+1+CENTRAL (RUMSEY STREET)+PING TIN|LT115": {
       "app": 7.5,
       "bound": "I",
       "kmb": 6.1,
@@ -1146,7 +1148,7 @@
       "stop": "LT115",
       "stopName": "高怡邨 (LT115)"
     },
-    "606X+1+SIU SAI WAN (ISLAND RESORT)+KOWLOON BAY|15": {
+    "606X+1+SIU SAI WAN (ISLAND RESORT)+KOWLOON BAY|LT101": {
       "app": 14.4,
       "bound": "I",
       "kmb": 7.7,
@@ -1156,7 +1158,7 @@
       "stop": "LT101",
       "stopName": "東隧轉車站 (LT101)"
     },
-    "60X+1+HIGH SPEED RAIL WEST KOWLOON STATION+TUEN MUN CENTRAL|17": {
+    "60X+1+HIGH SPEED RAIL WEST KOWLOON STATION+TUEN MUN CENTRAL|TM101": {
       "app": 14.6,
       "bound": "I",
       "kmb": 9.6,
@@ -1166,7 +1168,7 @@
       "stop": "TM101",
       "stopName": "屯門公路轉車站 (TM101)"
     },
-    "61X+1+KOWLOON CITY FERRY+TUEN MUN CENTRAL|15": {
+    "61X+1+KOWLOON CITY FERRY+TUEN MUN CENTRAL|TM101": {
       "app": 15.8,
       "bound": "I",
       "kmb": 9.6,
@@ -1176,7 +1178,7 @@
       "stop": "TM101",
       "stopName": "屯門公路轉車站 (TM101)"
     },
-    "62X+1+LEI YUE MUN ESTATE+SIU HONG STATION (SOUTH)|21": {
+    "62X+1+LEI YUE MUN ESTATE+SIU HONG STATION (SOUTH)|TM101": {
       "app": 18.8,
       "bound": "I",
       "kmb": 9.6,
@@ -1186,17 +1188,7 @@
       "stop": "TM101",
       "stopName": "屯門公路轉車站 (TM101)"
     },
-    "63+1+TUEN MUN ROAD BBI (TUEN MUN BOUND)+LONG TIN COURT|2": {
-      "app": 7.2,
-      "bound": "I",
-      "kmb": 10.2,
-      "route": "63",
-      "seq": 2,
-      "serviceType": "1",
-      "stop": "TM206",
-      "stopName": "小欖 (TM206)"
-    },
-    "63+1+TUEN MUN ROAD BBI (TUEN MUN BOUND)+LONG TIN COURT|3": {
+    "63+1+TUEN MUN ROAD BBI (TUEN MUN BOUND)+LONG TIN COURT|TM120": {
       "app": 5.8,
       "bound": "I",
       "kmb": 7.2,
@@ -1206,7 +1198,17 @@
       "stop": "TM120",
       "stopName": "屯門大會堂 (TM120)"
     },
-    "63X+1+HIGH SPEED RAIL WEST KOWLOON STATION+HUNG SHUI KIU (HUNG FUK ESTATE)|12": {
+    "63+1+TUEN MUN ROAD BBI (TUEN MUN BOUND)+LONG TIN COURT|TM206": {
+      "app": 7.2,
+      "bound": "I",
+      "kmb": 10.2,
+      "route": "63",
+      "seq": 2,
+      "serviceType": "1",
+      "stop": "TM206",
+      "stopName": "小欖 (TM206)"
+    },
+    "63X+1+HIGH SPEED RAIL WEST KOWLOON STATION+HUNG SHUI KIU (HUNG FUK ESTATE)|TM101": {
       "app": 16.2,
       "bound": "I",
       "kmb": 10.0,
@@ -1216,7 +1218,7 @@
       "stop": "TM101",
       "stopName": "屯門公路轉車站 (TM101)"
     },
-    "65K+1+NG TUNG CHAI (PAK NGAU SHEK)+TAI PO CENTRAL|13": {
+    "65K+1+NG TUNG CHAI (PAK NGAU SHEK)+TAI PO CENTRAL|TP226": {
       "app": 6.7,
       "bound": "O",
       "kmb": 5.8,
@@ -1226,7 +1228,7 @@
       "stop": "TP226",
       "stopName": "三渡坑 (TP226)"
     },
-    "65K+1+NG TUNG CHAI (PAK NGAU SHEK)+TAI PO CENTRAL|14": {
+    "65K+1+NG TUNG CHAI (PAK NGAU SHEK)+TAI PO CENTRAL|TP227": {
       "app": 6.7,
       "bound": "O",
       "kmb": 5.8,
@@ -1236,17 +1238,7 @@
       "stop": "TP227",
       "stopName": "帝欣苑 (TP227)"
     },
-    "65K+1+NG TUNG CHAI (PAK NGAU SHEK)+TAI PO CENTRAL|15": {
-      "app": 6.7,
-      "bound": "O",
-      "kmb": 5.8,
-      "route": "65K",
-      "seq": 15,
-      "serviceType": "1",
-      "stop": "TP981",
-      "stopName": "太和站 (TP981)"
-    },
-    "65K+1+NG TUNG CHAI (PAK NGAU SHEK)+TAI PO CENTRAL|16": {
+    "65K+1+NG TUNG CHAI (PAK NGAU SHEK)+TAI PO CENTRAL|TP611": {
       "app": 6.7,
       "bound": "O",
       "kmb": 5.8,
@@ -1256,7 +1248,7 @@
       "stop": "TP611",
       "stopName": "大埔政府合署 (TP611)"
     },
-    "65K+1+NG TUNG CHAI (PAK NGAU SHEK)+TAI PO CENTRAL|17": {
+    "65K+1+NG TUNG CHAI (PAK NGAU SHEK)+TAI PO CENTRAL|TP612": {
       "app": 6.7,
       "bound": "O",
       "kmb": 5.8,
@@ -1266,7 +1258,17 @@
       "stop": "TP612",
       "stopName": "大埔平安里 (TP612)"
     },
-    "66X+1+OLYMPIC STATION+TUEN MUN (TAI HING ESTATE)|14": {
+    "65K+1+NG TUNG CHAI (PAK NGAU SHEK)+TAI PO CENTRAL|TP981": {
+      "app": 6.7,
+      "bound": "O",
+      "kmb": 5.8,
+      "route": "65K",
+      "seq": 15,
+      "serviceType": "1",
+      "stop": "TP981",
+      "stopName": "太和站 (TP981)"
+    },
+    "66X+1+OLYMPIC STATION+TUEN MUN (TAI HING ESTATE)|TM102": {
       "app": 14.6,
       "bound": "I",
       "kmb": 9.6,
@@ -1276,7 +1278,7 @@
       "stop": "TM102",
       "stopName": "屯門公路轉車站 (TM102)"
     },
-    "67M+1+KWAI FONG STATION+TUEN MUN (PO TIN ESTATE)|8": {
+    "67M+1+KWAI FONG STATION+TUEN MUN (PO TIN ESTATE)|TM102": {
       "app": 10.4,
       "bound": "I",
       "kmb": 9.6,
@@ -1286,7 +1288,7 @@
       "stop": "TM102",
       "stopName": "屯門公路轉車站 (TM102)"
     },
-    "67X+1+MONG KOK EAST STATION+TUEN MUN (SIU HONG COURT)|12": {
+    "67X+1+MONG KOK EAST STATION+TUEN MUN (SIU HONG COURT)|TM101": {
       "app": 14.6,
       "bound": "I",
       "kmb": 9.6,
@@ -1296,7 +1298,7 @@
       "stop": "TM101",
       "stopName": "屯門公路轉車站 (TM101)"
     },
-    "80A+1+MEI LAM+KWUN TONG FERRY|11": {
+    "80A+1+MEI LAM+KWUN TONG FERRY|TA606": {
       "app": 7.4,
       "bound": "O",
       "kmb": 8.4,
@@ -1306,7 +1308,7 @@
       "stop": "TA606",
       "stopName": "世界花園 (TA606)"
     },
-    "82X+1+RAVANA GARDEN+WONG TAI SIN (CIRCULAR)|11": {
+    "82X+1+RAVANA GARDEN+WONG TAI SIN (CIRCULAR)|ST790": {
       "app": 6.3,
       "bound": "O",
       "kmb": 6.5,
@@ -1316,47 +1318,7 @@
       "stop": "ST790",
       "stopName": "大老山隧道 (ST790)"
     },
-    "84M+3+LOK FU+CHEVALIER GARDEN|10": {
-      "app": 7.4,
-      "bound": "O",
-      "kmb": 6.3,
-      "route": "84M",
-      "seq": 10,
-      "serviceType": "3",
-      "stop": "ST702",
-      "stopName": "愉田苑 (ST702)"
-    },
-    "84M+3+LOK FU+CHEVALIER GARDEN|11": {
-      "app": 7.4,
-      "bound": "O",
-      "kmb": 6.3,
-      "route": "84M",
-      "seq": 11,
-      "serviceType": "3",
-      "stop": "ST706",
-      "stopName": "第一城總站 (ST706)"
-    },
-    "84M+3+LOK FU+CHEVALIER GARDEN|12": {
-      "app": 7.4,
-      "bound": "O",
-      "kmb": 6.3,
-      "route": "84M",
-      "seq": 12,
-      "serviceType": "3",
-      "stop": "ST712",
-      "stopName": "置富第一城 (ST712)"
-    },
-    "84M+3+LOK FU+CHEVALIER GARDEN|13": {
-      "app": 7.4,
-      "bound": "O",
-      "kmb": 6.3,
-      "route": "84M",
-      "seq": 13,
-      "serviceType": "3",
-      "stop": "ST148",
-      "stopName": "石門轉車站 - 濱景花園 (ST148)"
-    },
-    "84M+3+LOK FU+CHEVALIER GARDEN|14": {
+    "84M+3+LOK FU+CHEVALIER GARDEN|MA101": {
       "app": 7.4,
       "bound": "O",
       "kmb": 6.3,
@@ -1366,7 +1328,7 @@
       "stop": "MA101",
       "stopName": "沙田醫院 (MA101)"
     },
-    "84M+3+LOK FU+CHEVALIER GARDEN|15": {
+    "84M+3+LOK FU+CHEVALIER GARDEN|MA104": {
       "app": 7.4,
       "bound": "O",
       "kmb": 6.3,
@@ -1376,7 +1338,7 @@
       "stop": "MA104",
       "stopName": "亞公角 (MA104)"
     },
-    "84M+3+LOK FU+CHEVALIER GARDEN|16": {
+    "84M+3+LOK FU+CHEVALIER GARDEN|MA106": {
       "app": 7.4,
       "bound": "O",
       "kmb": 6.3,
@@ -1386,47 +1348,7 @@
       "stop": "MA106",
       "stopName": "富安花園 (MA106)"
     },
-    "84M+3+LOK FU+CHEVALIER GARDEN|2": {
-      "app": 7.5,
-      "bound": "O",
-      "kmb": 6.5,
-      "route": "84M",
-      "seq": 2,
-      "serviceType": "3",
-      "stop": "WT206",
-      "stopName": "黃大仙轉車站-黃大仙廟 (WT206)"
-    },
-    "84M+3+LOK FU+CHEVALIER GARDEN|3": {
-      "app": 7.5,
-      "bound": "O",
-      "kmb": 6.5,
-      "route": "84M",
-      "seq": 3,
-      "serviceType": "3",
-      "stop": "WT210",
-      "stopName": "黃大仙轉車站-沙田坳道 (WT210)"
-    },
-    "84M+3+LOK FU+CHEVALIER GARDEN|4": {
-      "app": 7.5,
-      "bound": "O",
-      "kmb": 6.5,
-      "route": "84M",
-      "seq": 4,
-      "serviceType": "3",
-      "stop": "WT407",
-      "stopName": "鳳德商場 (WT407)"
-    },
-    "84M+3+LOK FU+CHEVALIER GARDEN|5": {
-      "app": 7.5,
-      "bound": "O",
-      "kmb": 6.5,
-      "route": "84M",
-      "seq": 5,
-      "serviceType": "3",
-      "stop": "WT960",
-      "stopName": "鑽石山站 荷里活廣場 (WT960)"
-    },
-    "84M+3+LOK FU+CHEVALIER GARDEN|6": {
+    "84M+3+LOK FU+CHEVALIER GARDEN|ST110": {
       "app": 7.4,
       "bound": "O",
       "kmb": 6.3,
@@ -1436,7 +1358,17 @@
       "stop": "ST110",
       "stopName": "大老山隧道 (ST110)"
     },
-    "84M+3+LOK FU+CHEVALIER GARDEN|7": {
+    "84M+3+LOK FU+CHEVALIER GARDEN|ST148": {
+      "app": 7.4,
+      "bound": "O",
+      "kmb": 6.3,
+      "route": "84M",
+      "seq": 13,
+      "serviceType": "3",
+      "stop": "ST148",
+      "stopName": "石門轉車站 - 濱景花園 (ST148)"
+    },
+    "84M+3+LOK FU+CHEVALIER GARDEN|ST611": {
       "app": 7.4,
       "bound": "O",
       "kmb": 6.3,
@@ -1446,7 +1378,7 @@
       "stop": "ST611",
       "stopName": "香港駕駛學院 (ST611)"
     },
-    "84M+3+LOK FU+CHEVALIER GARDEN|8": {
+    "84M+3+LOK FU+CHEVALIER GARDEN|ST633": {
       "app": 7.4,
       "bound": "O",
       "kmb": 6.3,
@@ -1456,7 +1388,37 @@
       "stop": "ST633",
       "stopName": "愉翠苑 (ST633)"
     },
-    "84M+3+LOK FU+CHEVALIER GARDEN|9": {
+    "84M+3+LOK FU+CHEVALIER GARDEN|ST702": {
+      "app": 7.4,
+      "bound": "O",
+      "kmb": 6.3,
+      "route": "84M",
+      "seq": 10,
+      "serviceType": "3",
+      "stop": "ST702",
+      "stopName": "愉田苑 (ST702)"
+    },
+    "84M+3+LOK FU+CHEVALIER GARDEN|ST706": {
+      "app": 7.4,
+      "bound": "O",
+      "kmb": 6.3,
+      "route": "84M",
+      "seq": 11,
+      "serviceType": "3",
+      "stop": "ST706",
+      "stopName": "第一城總站 (ST706)"
+    },
+    "84M+3+LOK FU+CHEVALIER GARDEN|ST712": {
+      "app": 7.4,
+      "bound": "O",
+      "kmb": 6.3,
+      "route": "84M",
+      "seq": 12,
+      "serviceType": "3",
+      "stop": "ST712",
+      "stopName": "置富第一城 (ST712)"
+    },
+    "84M+3+LOK FU+CHEVALIER GARDEN|ST860": {
       "app": 7.4,
       "bound": "O",
       "kmb": 6.3,
@@ -1466,7 +1428,47 @@
       "stop": "ST860",
       "stopName": "威爾斯親王醫院 (ST860)"
     },
-    "85+1+FO TAN CHUN YEUNG ESTATE+KOWLOON CITY FERRY|12": {
+    "84M+3+LOK FU+CHEVALIER GARDEN|WT206": {
+      "app": 7.5,
+      "bound": "O",
+      "kmb": 6.5,
+      "route": "84M",
+      "seq": 2,
+      "serviceType": "3",
+      "stop": "WT206",
+      "stopName": "黃大仙轉車站-黃大仙廟 (WT206)"
+    },
+    "84M+3+LOK FU+CHEVALIER GARDEN|WT210": {
+      "app": 7.5,
+      "bound": "O",
+      "kmb": 6.5,
+      "route": "84M",
+      "seq": 3,
+      "serviceType": "3",
+      "stop": "WT210",
+      "stopName": "黃大仙轉車站-沙田坳道 (WT210)"
+    },
+    "84M+3+LOK FU+CHEVALIER GARDEN|WT407": {
+      "app": 7.5,
+      "bound": "O",
+      "kmb": 6.5,
+      "route": "84M",
+      "seq": 4,
+      "serviceType": "3",
+      "stop": "WT407",
+      "stopName": "鳳德商場 (WT407)"
+    },
+    "84M+3+LOK FU+CHEVALIER GARDEN|WT960": {
+      "app": 7.5,
+      "bound": "O",
+      "kmb": 6.5,
+      "route": "84M",
+      "seq": 5,
+      "serviceType": "3",
+      "stop": "WT960",
+      "stopName": "鑽石山站 荷里活廣場 (WT960)"
+    },
+    "85+1+FO TAN CHUN YEUNG ESTATE+KOWLOON CITY FERRY|KC620": {
       "app": 7.8,
       "bound": "O",
       "kmb": 7.4,
@@ -1476,7 +1478,7 @@
       "stop": "KC620",
       "stopName": "金城道，香港浸會大學 (KC620)"
     },
-    "87C+1+KAM YING COURT+HUNG HOM STATION|7": {
+    "87C+1+KAM YING COURT+HUNG HOM STATION|ST780": {
       "app": 7.4,
       "bound": "O",
       "kmb": 10.8,
@@ -1486,7 +1488,7 @@
       "stop": "ST780",
       "stopName": "獅子山隧道 (ST780)"
     },
-    "88X+2+PING TIN+SUI WO COURT|13": {
+    "88X+2+PING TIN+SUI WO COURT|LT421": {
       "app": 11.6,
       "bound": "I",
       "kmb": 9.4,
@@ -1496,7 +1498,7 @@
       "stop": "LT421",
       "stopName": "麗港公園 (LT421)"
     },
-    "88X+2+SUI WO COURT+PING TIN|11": {
+    "88X+2+SUI WO COURT+PING TIN|KT317": {
       "app": 11.6,
       "bound": "O",
       "kmb": 7.4,
@@ -1506,7 +1508,7 @@
       "stop": "KT317",
       "stopName": "九龍灣站(東九文化中心) (KT317)"
     },
-    "88X+2+SUI WO COURT+PING TIN|12": {
+    "88X+2+SUI WO COURT+PING TIN|KT329": {
       "app": 11.6,
       "bound": "O",
       "kmb": 7.4,
@@ -1516,7 +1518,7 @@
       "stop": "KT329",
       "stopName": "觀塘道休憩處 (KT329)"
     },
-    "88X+2+SUI WO COURT+PING TIN|13": {
+    "88X+2+SUI WO COURT+PING TIN|KT344": {
       "app": 11.6,
       "bound": "O",
       "kmb": 7.4,
@@ -1526,7 +1528,7 @@
       "stop": "KT344",
       "stopName": "觀塘轉車站 - 創紀之城 (KT344)"
     },
-    "88X+2+SUI WO COURT+PING TIN|14": {
+    "88X+2+SUI WO COURT+PING TIN|KT361": {
       "app": 11.6,
       "bound": "O",
       "kmb": 7.4,
@@ -1536,17 +1538,7 @@
       "stop": "KT361",
       "stopName": "觀塘游泳池 (KT361)"
     },
-    "91B+1+HANG HAU STATION+HKUST|0": {
-      "app": 5.8,
-      "bound": "O",
-      "kmb": 6.0,
-      "route": "91B",
-      "seq": 0,
-      "serviceType": "1",
-      "stop": "TK941",
-      "stopName": "坑口站 (TK941)"
-    },
-    "91B+1+HANG HAU STATION+HKUST|1": {
+    "91B+1+HANG HAU STATION+HKUST|SK940": {
       "app": 5.8,
       "bound": "O",
       "kmb": 6.0,
@@ -1556,37 +1548,17 @@
       "stop": "SK940",
       "stopName": "科大(羅桂祥樓) (SK940)"
     },
-    "93K+1+TSUI LAM+MONG KOK EAST STATION|10": {
-      "app": 10.2,
+    "91B+1+HANG HAU STATION+HKUST|TK941": {
+      "app": 5.8,
       "bound": "O",
-      "kmb": 8.2,
-      "route": "93K",
-      "seq": 10,
+      "kmb": 6.0,
+      "route": "91B",
+      "seq": 0,
       "serviceType": "1",
-      "stop": "KT534",
-      "stopName": "祥和苑 (KT534)"
+      "stop": "TK941",
+      "stopName": "坑口站 (TK941)"
     },
-    "93K+1+TSUI LAM+MONG KOK EAST STATION|11": {
-      "app": 10.2,
-      "bound": "O",
-      "kmb": 8.2,
-      "route": "93K",
-      "seq": 11,
-      "serviceType": "1",
-      "stop": "KT537",
-      "stopName": "和樂邨 (KT537)"
-    },
-    "93K+1+TSUI LAM+MONG KOK EAST STATION|12": {
-      "app": 10.2,
-      "bound": "O",
-      "kmb": 8.2,
-      "route": "93K",
-      "seq": 12,
-      "serviceType": "1",
-      "stop": "KT625",
-      "stopName": "apm創紀之城5期 (KT625)"
-    },
-    "93K+1+TSUI LAM+MONG KOK EAST STATION|5": {
+    "93K+1+TSUI LAM+MONG KOK EAST STATION|KT460": {
       "app": 10.2,
       "bound": "O",
       "kmb": 8.2,
@@ -1596,7 +1568,7 @@
       "stop": "KT460",
       "stopName": "寶達邨轉車站 (KT460)"
     },
-    "93K+1+TSUI LAM+MONG KOK EAST STATION|6": {
+    "93K+1+TSUI LAM+MONG KOK EAST STATION|KT502": {
       "app": 10.2,
       "bound": "O",
       "kmb": 8.2,
@@ -1606,7 +1578,7 @@
       "stop": "KT502",
       "stopName": "秀茂坪邨秀程樓 (KT502)"
     },
-    "93K+1+TSUI LAM+MONG KOK EAST STATION|7": {
+    "93K+1+TSUI LAM+MONG KOK EAST STATION|KT503": {
       "app": 10.2,
       "bound": "O",
       "kmb": 8.2,
@@ -1616,7 +1588,7 @@
       "stop": "KT503",
       "stopName": "秀茂坪邨秀康樓 (KT503)"
     },
-    "93K+1+TSUI LAM+MONG KOK EAST STATION|8": {
+    "93K+1+TSUI LAM+MONG KOK EAST STATION|KT504": {
       "app": 10.2,
       "bound": "O",
       "kmb": 8.2,
@@ -1626,7 +1598,7 @@
       "stop": "KT504",
       "stopName": "寧波第二中學 (KT504)"
     },
-    "93K+1+TSUI LAM+MONG KOK EAST STATION|9": {
+    "93K+1+TSUI LAM+MONG KOK EAST STATION|KT530": {
       "app": 10.2,
       "bound": "O",
       "kmb": 8.2,
@@ -1636,7 +1608,37 @@
       "stop": "KT530",
       "stopName": "聯合醫院 (KT530)"
     },
-    "960B+1+QUARRY BAY (KING'S ROAD)+TUEN MUN (KIN SANG ESTATE)|4": {
+    "93K+1+TSUI LAM+MONG KOK EAST STATION|KT534": {
+      "app": 10.2,
+      "bound": "O",
+      "kmb": 8.2,
+      "route": "93K",
+      "seq": 10,
+      "serviceType": "1",
+      "stop": "KT534",
+      "stopName": "祥和苑 (KT534)"
+    },
+    "93K+1+TSUI LAM+MONG KOK EAST STATION|KT537": {
+      "app": 10.2,
+      "bound": "O",
+      "kmb": 8.2,
+      "route": "93K",
+      "seq": 11,
+      "serviceType": "1",
+      "stop": "KT537",
+      "stopName": "和樂邨 (KT537)"
+    },
+    "93K+1+TSUI LAM+MONG KOK EAST STATION|KT625": {
+      "app": 10.2,
+      "bound": "O",
+      "kmb": 8.2,
+      "route": "93K",
+      "seq": 12,
+      "serviceType": "1",
+      "stop": "KT625",
+      "stopName": "apm創紀之城5期 (KT625)"
+    },
+    "960B+1+QUARRY BAY (KING'S ROAD)+TUEN MUN (KIN SANG ESTATE)|TM102": {
       "app": 17.6,
       "bound": "O",
       "kmb": 9.7,
@@ -1646,7 +1648,7 @@
       "stop": "TM102",
       "stopName": "屯門公路轉車站 (TM102)"
     },
-    "961+1+Wan Chai (HKCECE)+TUEN MUN (SHAN KING ESTATE)|11": {
+    "961+1+Wan Chai (HKCECE)+TUEN MUN (SHAN KING ESTATE)|TM102": {
       "app": 17.6,
       "bound": "I",
       "kmb": 9.7,
@@ -1656,7 +1658,7 @@
       "stop": "TM102",
       "stopName": "屯門公路轉車站 (TM102)"
     },
-    "968+1+CAUSEWAY BAY (TIN HAU)+YUEN LONG (WEST)|12": {
+    "968+1+CAUSEWAY BAY (TIN HAU)+YUEN LONG (WEST)|YL232": {
       "app": 20.6,
       "bound": "I",
       "kmb": 11.7,
@@ -1666,7 +1668,7 @@
       "stop": "YL232",
       "stopName": "大欖隧道轉車站 (YL232)"
     },
-    "98A+1+HANG HAU (NORTH) (TSEUNG KWAN O HOSPITAL)+NGAU TAU KOK STATION (CIRCULAR)|23": {
+    "98A+1+HANG HAU (NORTH) (TSEUNG KWAN O HOSPITAL)+NGAU TAU KOK STATION (CIRCULAR)|KT192": {
       "app": 7.1,
       "bound": "O",
       "kmb": 5.8,
@@ -1676,7 +1678,7 @@
       "stop": "KT192",
       "stopName": "安達臣道 (KT192)"
     },
-    "98C+1+MEI FOO+HANG HAU (NORTH) (TSEUNG KWAN O HOSPITAL)|21": {
+    "98C+1+MEI FOO+HANG HAU (NORTH) (TSEUNG KWAN O HOSPITAL)|KT192": {
       "app": 11.3,
       "bound": "I",
       "kmb": 5.8,
@@ -1686,7 +1688,7 @@
       "stop": "KT192",
       "stopName": "安達臣道 (KT192)"
     },
-    "98E+1+MEI FOO+HANG HAU (NORTH) (TSEUNG KWAN O HOSPITAL)|15": {
+    "98E+1+MEI FOO+HANG HAU (NORTH) (TSEUNG KWAN O HOSPITAL)|KT192": {
       "app": 11.3,
       "bound": "I",
       "kmb": 5.8,
@@ -1696,7 +1698,7 @@
       "stop": "KT192",
       "stopName": "安達臣道 (KT192)"
     },
-    "98P+1+TSIM SHA TSUI EAST+HANG HAU (NORTH) (TSEUNG KWAN O HOSPITAL)|13": {
+    "98P+1+TSIM SHA TSUI EAST+HANG HAU (NORTH) (TSEUNG KWAN O HOSPITAL)|KT192": {
       "app": 11.3,
       "bound": "I",
       "kmb": 5.8,
@@ -1706,7 +1708,7 @@
       "stop": "KT192",
       "stopName": "安達臣道 (KT192)"
     },
-    "E33P+1+SIU HONG STATION (SOUTH)+AIRPORT (GROUND TRANSPORTATION CENTRE)|20": {
+    "E33P+1+SIU HONG STATION (SOUTH)+AIRPORT (GROUND TRANSPORTATION CENTRE)|TM512": {
       "app": 4.5,
       "bound": "O",
       "kmb": 12.4,
@@ -1716,7 +1718,7 @@
       "stop": "TM512",
       "stopName": "屯門赤鱲角隧道轉車站 (TM512)"
     },
-    "N30+1+AIRPORT (CHEONG TAT ROAD)+YUEN LONG STATION|17": {
+    "N30+1+AIRPORT (CHEONG TAT ROAD)+YUEN LONG STATION|YL113": {
       "app": 9.4,
       "bound": "I",
       "kmb": 7.1,
@@ -1726,7 +1728,7 @@
       "stop": "YL113",
       "stopName": "天水圍站 (YL113)"
     },
-    "T74+1+NG TUNG CHAI (PAK NGAU SHEK)+KWUN TONG FERRY|21": {
+    "T74+1+NG TUNG CHAI (PAK NGAU SHEK)+KWUN TONG FERRY|ST791": {
       "app": 7.4,
       "bound": "O",
       "kmb": 14.9,
@@ -1750,5 +1752,5 @@
   ],
   "published": "2026-10-10T06:36:57Z",
   "unchecked": [],
-  "updated": "2026-10-12T06:52:10Z"
+  "updated": "2026-10-13T07:18:22Z"
 }
