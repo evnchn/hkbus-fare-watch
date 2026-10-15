@@ -1,6 +1,6 @@
 # Standing fare divergences
 
-Updated 2026-10-14T05:41:54Z. 171 stops across 1464 compared route directions (16 skipped, 0 failed).
+Updated 2026-10-15T05:29:10Z. 179 stops across 1469 compared route directions (15 skipped, 0 failed).
 
 | route | dir | stop | app | KMB |
 |---|---|---|---:|---:|
@@ -131,6 +131,12 @@ Updated 2026-10-14T05:41:54Z. 171 stops across 1464 compared route directions (1
 | 66X | I | 屯門公路轉車站 (TM102) | 14.6 | 9.6 |
 | 67M | I | 屯門公路轉車站 (TM102) | 10.4 | 9.6 |
 | 67X | I | 屯門公路轉車站 (TM101) | 14.6 | 9.6 |
+| 73B | O | 塘坑 (ND450) | 9.0 | 9.6 |
+| 73B | O | 粉嶺中心 (ND470) | 9.0 | 9.6 |
+| 73B | O | 粉嶺站轉車站-粉嶺名都 (ND472) | 9.0 | 9.6 |
+| 73B | O | 北區公園北門 (ND453) | 9.0 | 9.6 |
+| 73B | O | 順欣花園 (ND454) | 9.0 | 9.6 |
+| 73B | O | 龍豐花園 (ND336) | 9.0 | 9.6 |
 | 80A | O | 世界花園 (TA606) | 7.4 | 8.4 |
 | 82X | O | 大老山隧道 (ST790) | 6.3 | 6.5 |
 | 84M | O | 黃大仙轉車站-黃大仙廟 (WT206) | 7.5 | 6.5 |
@@ -150,6 +156,8 @@ Updated 2026-10-14T05:41:54Z. 171 stops across 1464 compared route directions (1
 | 84M | O | 富安花園 (MA106) | 7.4 | 6.3 |
 | 85 | O | 金城道，香港浸會大學 (KC620) | 7.8 | 7.4 |
 | 87C | O | 獅子山隧道 (ST780) | 7.4 | 10.8 |
+| 87E | O | 利安邨 (MA300) | 10.8 | 14.3 |
+| 87E | O | 富寶花園 (MA303) | 10.8 | 14.3 |
 | 88X | I | 麗港公園 (LT421) | 11.6 | 9.4 |
 | 88X | O | 九龍灣站(東九文化中心) (KT317) | 11.6 | 7.4 |
 | 88X | O | 觀塘道休憩處 (KT329) | 11.6 | 7.4 |

@@ -4,7 +4,13 @@
   <link href="https://evnchn.github.io/hkbus-fare-watch/feed.xml" rel="self"/>
   <id>tag:evnchn.github.io,2026:hkbus-fare-watch</id>
   <author><name>hkbus fare divergence watch</name><uri>https://github.com/evnchn/hkbus-fare-watch</uri></author>
-  <updated>2026-10-10T06:36:57Z</updated>
+  <updated>2026-10-15T05:29:10Z</updated>
+  <entry>
+    <title>Fare divergence: 8 new</title>
+    <id>tag:evnchn.github.io,2026:hkbus-fare-watch/2026-10-15T05:29:10Z</id>
+    <updated>2026-10-15T05:29:10Z</updated>
+    <content type="html">&lt;h3&gt;Now diverging&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;73B outbound (service type 4) at 塘坑 (ND450): app shows $9.0, KMB publishes $9.6&lt;/li&gt;&lt;li&gt;73B outbound (service type 4) at 粉嶺中心 (ND470): app shows $9.0, KMB publishes $9.6&lt;/li&gt;&lt;li&gt;73B outbound (service type 4) at 粉嶺站轉車站-粉嶺名都 (ND472): app shows $9.0, KMB publishes $9.6&lt;/li&gt;&lt;li&gt;73B outbound (service type 4) at 北區公園北門 (ND453): app shows $9.0, KMB publishes $9.6&lt;/li&gt;&lt;li&gt;73B outbound (service type 4) at 順欣花園 (ND454): app shows $9.0, KMB publishes $9.6&lt;/li&gt;&lt;li&gt;73B outbound (service type 4) at 龍豐花園 (ND336): app shows $9.0, KMB publishes $9.6&lt;/li&gt;&lt;li&gt;87E outbound at 利安邨 (MA300): app shows $10.8, KMB publishes $14.3&lt;/li&gt;&lt;li&gt;87E outbound at 富寶花園 (MA303): app shows $10.8, KMB publishes $14.3&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;179 standing findings, across 1469 compared route directions.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Fare divergence: 2 new</title>
     <id>tag:evnchn.github.io,2026:hkbus-fare-watch/2026-10-09T07:03:11Z</id>
