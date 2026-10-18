@@ -1,13 +1,13 @@
 {
   "coverage": {
     "carried": 0,
-    "compared": 1468,
+    "compared": 1466,
     "failed": 0,
     "skipped": {
-      "stop codes": 1,
+      "stop codes": 2,
       "stop count": 15
     },
-    "targets": 1484,
+    "targets": 1483,
     "unobserved": [
       "102+2+CROSS HARBOUR TUNNEL BBI (HH502)+SHAU KEI WAN BUS TERMINUS",
       "107P+1+CYBERPORT+LAGUNA VERDE",
@@ -21,6 +21,7 @@
       "78+1+SHA TAU KOK+SHEUNG SHUI (TAI PING)",
       "83X+1+KWUN TONG FERRY (KT941)+WONG NAI TAU BUS TERMINUS (ST892)",
       "84M+1+CHEVALIER GARDEN+LOK FU",
+      "85P+1+HUNG HOM (HUNG LUEN ROAD)+NAI CHUNG",
       "92R+1+SAI KUNG BUS TERMINUS (SK903)+STAR FERRY, HARBOUR CITY (YT901)",
       "92R+1+STAR FERRY, HARBOUR CITY (YT900)+SAI KUNG BUS TERMINUS (SK902)",
       "98A+2+KWUN TONG BBI - MILLENNIUM CITY (KT640)+HANG HAU (NORTH) (TSEUNG KWAN O HOSPITAL) (TK950)",
@@ -1833,5 +1834,5 @@
   ],
   "published": "2026-10-15T05:29:10Z",
   "unchecked": [],
-  "updated": "2026-10-17T05:16:47Z"
+  "updated": "2026-10-18T05:21:20Z"
 }
