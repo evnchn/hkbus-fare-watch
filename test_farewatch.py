@@ -341,6 +341,33 @@ def a_loop_visit_keyed_by_index_migrates_to_the_same_visit():
         assert "resolved" not in (title or ""), (fares, title)
 
 
+@case
+def the_standing_list_tells_service_types_apart():
+    """Two service types of one route and bound must not read as duplicate rows."""
+    db = copy.deepcopy(DB)
+    db["routeList"]["1A+2+A+B"] = dict(db["routeList"][KEY_1A], serviceType="2")
+    del db["routeList"][KEY_1A]["serviceType"]   # absent upstream: the default
+    saved = (farewatch.get, farewatch.HERE)
+    farewatch.get = stub(db, fares={"1A": ("6.0", "6.0", "0")})
+    try:
+        with tempfile.TemporaryDirectory() as d:
+            farewatch.HERE = d
+            with contextlib.redirect_stdout(io.StringIO()):
+                farewatch.main()
+            rows = [r for r in open(os.path.join(d, "report.md"), encoding="utf-8")
+                    if r.startswith("| 1A")]
+            feed = html.unescape(open(os.path.join(d, "feed.xml"), encoding="utf-8").read())
+    finally:
+        farewatch.get, farewatch.HERE = saved
+    labels = [r.split(" | ")[0] for r in rows]
+    assert labels == ["| 1A"] * 2 + ["| 1A (service type 2)"] * 2, rows
+    assert len(set(rows)) == len(rows), rows
+    listed = re.findall(r"<li>(1A [^:]*):", feed)
+    assert listed == ["1A outbound at 站 (S1)", "1A outbound at 站 (S2)",
+                      "1A outbound (service type 2) at 站 (S1)",
+                      "1A outbound (service type 2) at 站 (S2)"], listed
+
+
 def main():
     bad = 0
     for fn in CASES:

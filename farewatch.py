@@ -195,10 +195,19 @@ def diff(old, new):
     return appeared, resolved, changed
 
 
+def variant(d):
+    st = str(d.get("serviceType") or 1)
+    return "" if st == "1" else " (service type %s)" % st
+
+
+def order(d):
+    """Keep each service type's stops together; they share a route and bound."""
+    return d["route"], d["bound"], str(d.get("serviceType") or 1), d["seq"]
+
+
 def describe(d, past=False, stale=False):
-    st = "" if str(d.get("serviceType", 1)) == "1" else " (service type %s)" % d["serviceType"]
     where = "%s %sbound%s at %s" % (
-        d["route"], "out" if d["bound"] == "O" else "in", st, d["stopName"])
+        d["route"], "out" if d["bound"] == "O" else "in", variant(d), d["stopName"])
     if stale:
         return "%s: last seen at $%.1f against KMB's $%.1f, not verified this run" % (
             where, d["app"], d["kmb"])
@@ -230,7 +239,7 @@ def render_entry(stamp, appeared, resolved, changed, totals, unchecked=()):
         if not group:
             continue
         lines.append("<h3>%s</h3><ul>" % label)
-        ordered = sorted(group, key=lambda d: (d["route"], d["bound"], d["seq"]))
+        ordered = sorted(group, key=order)
         for d in ordered[:25]:
             lines.append("<li>%s</li>" % escape(describe(d, past, stale)))
         if len(ordered) > 25 and past:
@@ -320,10 +329,9 @@ def main():
                 % (stamp, len(divergences), coverage["compared"],
                    sum(coverage["skipped"].values()), coverage["failed"]))
         f.write("| route | dir | stop | app | KMB |\n|---|---|---|---:|---:|\n")
-        for d in sorted(divergences.values(),
-                        key=lambda d: (d["route"], d["bound"], d["seq"])):
-            f.write("| %s | %s | %s | %.1f | %.1f |\n"
-                    % (d["route"], d["bound"], d["stopName"],
+        for d in sorted(divergences.values(), key=order):
+            f.write("| %s%s | %s | %s | %.1f | %.1f |\n"
+                    % (d["route"], variant(d), d["bound"], d["stopName"],
                        d["app"], d["kmb"]))
 
 
