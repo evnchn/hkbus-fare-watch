@@ -1,11 +1,11 @@
 {
   "coverage": {
     "carried": 0,
-    "compared": 1458,
-    "failed": 7,
+    "compared": 1466,
+    "failed": 0,
     "skipped": {
       "stop codes": 1,
-      "stop count": 18
+      "stop count": 17
     },
     "targets": 1484,
     "unobserved": [
@@ -18,14 +18,6 @@
       "2X+1+MEI FOO+CHOI FOOK",
       "45+1+KWAI CHUNG (LAI YIU ESTATE)+KOWLOON CITY FERRY",
       "64K+2+SHEUNG TSUEN PLAYGROUND (YL681)+YUEN LONG (WEST) BUS TERMINUS (YL944)",
-      "673+1+CENTRAL (HONG KONG STATION)+SHEUNG SHUI",
-      "673+1+SHEUNG SHUI+CENTRAL (HONG KONG STATION)",
-      "673A+1+CENTRAL (HONG KONG STATION)+SHEUNG SHUI",
-      "68X+1+MONG KOK (PARK AVENUE)+HUNG SHUI KIU (HUNG FUK ESTATE)",
-      "7+1+STAR FERRY+LOK FU",
-      "70K+1+FANLING (WAH MING)+CHING HO (CIRCULAR)",
-      "70K+2+SHEUNG SHUI (CHING HO)+FANLING (WAH MING)",
-      "71B+1+TAI PO (FU HENG)+TAI PO CENTRAL (CIRCULAR)",
       "78+1+SHA TAU KOK+SHEUNG SHUI (TAI PING)",
       "83X+1+KWUN TONG FERRY (KT941)+WONG NAI TAU BUS TERMINUS (ST892)",
       "84M+1+CHEVALIER GARDEN+LOK FU",
@@ -1843,5 +1835,5 @@
   ],
   "published": "2026-10-15T05:29:10Z",
   "unchecked": [],
-  "updated": "2026-10-20T05:38:29Z"
+  "updated": "2026-10-21T05:37:59Z"
 }
