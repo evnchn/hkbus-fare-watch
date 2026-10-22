@@ -1,11 +1,11 @@
 {
   "coverage": {
     "carried": 0,
-    "compared": 1466,
+    "compared": 1465,
     "failed": 0,
     "skipped": {
       "stop codes": 1,
-      "stop count": 17
+      "stop count": 18
     },
     "targets": 1484,
     "unobserved": [
@@ -13,6 +13,7 @@
       "107P+1+CYBERPORT+LAGUNA VERDE",
       "115+1+CENTRAL (MACAO FERRY)+KOWLOON CITY FERRY",
       "241X+1+TSING YI (CHEUNG CHING ESTATE)+KOWLOON CITY FERRY",
+      "270+2+TIN PING ESTATE BUS TERMINUS (ND951)+TSUI LAI GARDEN (ND945)",
       "270B+2+SHEUNG SHUI+OLYMPIC STATION",
       "2A+1+MEI FOO+LOK WAH",
       "2X+1+MEI FOO+CHOI FOOK",
@@ -1835,5 +1836,5 @@
   ],
   "published": "2026-10-15T05:29:10Z",
   "unchecked": [],
-  "updated": "2026-10-21T05:37:59Z"
+  "updated": "2026-10-22T05:41:38Z"
 }
