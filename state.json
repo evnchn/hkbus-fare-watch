@@ -1,11 +1,11 @@
 {
   "coverage": {
     "carried": 0,
-    "compared": 1462,
+    "compared": 1459,
     "failed": 0,
     "skipped": {
       "stop codes": 4,
-      "stop count": 18
+      "stop count": 21
     },
     "targets": 1484,
     "unobserved": [
@@ -27,8 +27,11 @@
       "92R+1+SAI KUNG BUS TERMINUS (SK903)+STAR FERRY, HARBOUR CITY (YT901)",
       "92R+1+STAR FERRY, HARBOUR CITY (YT900)+SAI KUNG BUS TERMINUS (SK902)",
       "98A+2+KWUN TONG BBI - MILLENNIUM CITY (KT640)+HANG HAU (NORTH) (TSEUNG KWAN O HOSPITAL) (TK950)",
+      "A30+1+LEI MUK SHUE+AIRPORT (GROUND TRANSPORTATION CENTRE)",
+      "A30+2+LEI MUK SHUE+AIRPORT (GROUND TRANSPORTATION CENTRE)",
       "A34+1+AIRPORT (GROUND TRANSPORTATION CENTRE)+HUNG SHUI KIU (HUNG YUEN ROAD)",
       "A34+2+AIRPORT (GROUND TRANSPORTATION CENTRE)+HUNG SHUI KIU (HUNG YUEN ROAD)",
+      "A42+1+AIRPORT (GROUND TRANSPORTATION CENTRE)+WONG NAI TAU",
       "B10+1+HUANGGANG PORT+KWAI FONG (KWAI TSUI ESTATE)",
       "NA33+1+Cathay City+TUEN MUN (FU TAI ESTATE)"
     ]
@@ -1839,5 +1842,5 @@
   ],
   "published": "2026-10-15T05:29:10Z",
   "unchecked": [],
-  "updated": "2026-10-25T05:34:31Z"
+  "updated": "2026-10-26T05:41:01Z"
 }
