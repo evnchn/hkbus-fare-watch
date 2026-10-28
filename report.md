@@ -1,6 +1,6 @@
 # Standing fare divergences
 
-Updated 2026-10-27T05:52:58Z. 179 stops across 1462 compared route directions (22 skipped, 0 failed).
+Updated 2026-10-28T06:30:51Z. 179 stops across 1462 compared route directions (22 skipped, 0 failed).
 
 | route | dir | stop | app | KMB |
 |---|---|---|---:|---:|
@@ -11,35 +11,35 @@ Updated 2026-10-27T05:52:58Z. 179 stops across 1462 compared route directions (2
 | 118 (service type 2) | O | 勞資審裁處 (YT330) | 12.9 | 12.2 |
 | 118 (service type 2) | O | 香港理工大學第八期 (YT611) | 12.9 | 12.2 |
 | 118 (service type 2) | O | 紅隧轉車站 (HH504) | 12.9 | 12.2 |
-| 118 (service type 2) | O | 阿公岩道 ( ) | 7.7 | 6.1 |
-| 118 (service type 2) | O | 鯉魚門公園 ( ) | 7.7 | 6.1 |
-| 118 (service type 2) | O | 大潭道 ( ) | 7.7 | 6.1 |
-| 118 (service type 2) | O | 東區醫院 ( ) | 7.7 | 6.1 |
-| 118 (service type 2) | O | 高威閣 ( ) | 7.7 | 6.1 |
-| 118 (service type 2) | O | 康民街 ( ) | 7.7 | 6.1 |
-| 118 (service type 2) | O | 興華邨興翠樓 ( ) | 7.7 | 6.1 |
-| 118 (service type 2) | O | 興華邨卓華樓 ( ) | 7.7 | 6.1 |
-| 118 (service type 2) | O | 青年廣場 ( ) | 7.7 | 6.1 |
-| 118 (service type 2) | O | 怡泰街 ( ) | 7.7 | 6.1 |
-| 118 (service type 2) | O | 漁灣邨 ( ) | 7.7 | 6.1 |
-| 118 (service type 2) | O | 常安街 ( ) | 7.7 | 6.1 |
-| 118 (service type 2) | O | 富欣花園 ( ) | 7.7 | 6.1 |
-| 118 (service type 2) | O | 培僑小學 ( ) | 7.7 | 6.1 |
+| 118 (service type 2) | O | 阿公岩道 | 7.7 | 6.1 |
+| 118 (service type 2) | O | 鯉魚門公園 | 7.7 | 6.1 |
+| 118 (service type 2) | O | 大潭道 | 7.7 | 6.1 |
+| 118 (service type 2) | O | 東區醫院 | 7.7 | 6.1 |
+| 118 (service type 2) | O | 高威閣 | 7.7 | 6.1 |
+| 118 (service type 2) | O | 康民街 | 7.7 | 6.1 |
+| 118 (service type 2) | O | 興華邨興翠樓 | 7.7 | 6.1 |
+| 118 (service type 2) | O | 興華邨卓華樓 | 7.7 | 6.1 |
+| 118 (service type 2) | O | 青年廣場 | 7.7 | 6.1 |
+| 118 (service type 2) | O | 怡泰街 | 7.7 | 6.1 |
+| 118 (service type 2) | O | 漁灣邨 | 7.7 | 6.1 |
+| 118 (service type 2) | O | 常安街 | 7.7 | 6.1 |
+| 118 (service type 2) | O | 富欣花園 | 7.7 | 6.1 |
+| 118 (service type 2) | O | 培僑小學 | 7.7 | 6.1 |
 | 118 (service type 3) | O | 紅隧轉車站 (HH504) | 12.9 | 12.2 |
-| 118 (service type 3) | O | 阿公岩道 ( ) | 7.7 | 6.1 |
-| 118 (service type 3) | O | 鯉魚門公園 ( ) | 7.7 | 6.1 |
-| 118 (service type 3) | O | 大潭道 ( ) | 7.7 | 6.1 |
-| 118 (service type 3) | O | 東區醫院 ( ) | 7.7 | 6.1 |
-| 118 (service type 3) | O | 高威閣 ( ) | 7.7 | 6.1 |
-| 118 (service type 3) | O | 康民街 ( ) | 7.7 | 6.1 |
-| 118 (service type 3) | O | 興華邨興翠樓 ( ) | 7.7 | 6.1 |
-| 118 (service type 3) | O | 興華邨卓華樓 ( ) | 7.7 | 6.1 |
-| 118 (service type 3) | O | 青年廣場 ( ) | 7.7 | 6.1 |
-| 118 (service type 3) | O | 怡泰街 ( ) | 7.7 | 6.1 |
-| 118 (service type 3) | O | 漁灣邨 ( ) | 7.7 | 6.1 |
-| 118 (service type 3) | O | 常安街 ( ) | 7.7 | 6.1 |
-| 118 (service type 3) | O | 富欣花園 ( ) | 7.7 | 6.1 |
-| 118 (service type 3) | O | 培僑小學 ( ) | 7.7 | 6.1 |
+| 118 (service type 3) | O | 阿公岩道 | 7.7 | 6.1 |
+| 118 (service type 3) | O | 鯉魚門公園 | 7.7 | 6.1 |
+| 118 (service type 3) | O | 大潭道 | 7.7 | 6.1 |
+| 118 (service type 3) | O | 東區醫院 | 7.7 | 6.1 |
+| 118 (service type 3) | O | 高威閣 | 7.7 | 6.1 |
+| 118 (service type 3) | O | 康民街 | 7.7 | 6.1 |
+| 118 (service type 3) | O | 興華邨興翠樓 | 7.7 | 6.1 |
+| 118 (service type 3) | O | 興華邨卓華樓 | 7.7 | 6.1 |
+| 118 (service type 3) | O | 青年廣場 | 7.7 | 6.1 |
+| 118 (service type 3) | O | 怡泰街 | 7.7 | 6.1 |
+| 118 (service type 3) | O | 漁灣邨 | 7.7 | 6.1 |
+| 118 (service type 3) | O | 常安街 | 7.7 | 6.1 |
+| 118 (service type 3) | O | 富欣花園 | 7.7 | 6.1 |
+| 118 (service type 3) | O | 培僑小學 | 7.7 | 6.1 |
 | 215X | I | 九龍灣宏通街 (KT101) | 6.7 | 8.6 |
 | 215X | I | 創紀之城 (KT341) | 5.2 | 6.7 |
 | 215X | I | 觀塘游泳池 (KT361) | 4.0 | 5.2 |
