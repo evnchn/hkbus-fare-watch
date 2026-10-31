@@ -1,6 +1,6 @@
 # Standing fare divergences
 
-Updated 2026-10-30T06:41:55Z. 179 stops across 1462 compared route directions (22 skipped, 0 failed).
+Updated 2026-10-31T06:32:17Z. 179 stops across 1462 compared route directions (22 skipped, 0 failed).
 
 | route | dir | stop | app | KMB |
 |---|---|---|---:|---:|
