@@ -1,6 +1,6 @@
 # Standing fare divergences
 
-Updated 2026-11-02T07:04:03Z. 179 stops across 1462 compared route directions (22 skipped, 0 failed).
+Updated 2026-11-03T07:27:42Z. 168 stops across 1341 compared route directions (105 skipped, 0 failed).
 
 | route | dir | stop | app | KMB |
 |---|---|---|---:|---:|
@@ -129,7 +129,6 @@ Updated 2026-11-02T07:04:03Z. 179 stops across 1462 compared route directions (2
 | 65K | O | 大埔政府合署 (TP611) | 6.7 | 5.8 |
 | 65K | O | 大埔平安里 (TP612) | 6.7 | 5.8 |
 | 66X | I | 屯門公路轉車站 (TM102) | 14.6 | 9.6 |
-| 67M | I | 屯門公路轉車站 (TM102) | 10.4 | 9.6 |
 | 67X | I | 屯門公路轉車站 (TM101) | 14.6 | 9.6 |
 | 73B (service type 4) | O | 塘坑 (ND450) | 9.0 | 9.6 |
 | 73B (service type 4) | O | 粉嶺中心 (ND470) | 9.0 | 9.6 |
@@ -156,8 +155,6 @@ Updated 2026-11-02T07:04:03Z. 179 stops across 1462 compared route directions (2
 | 84M (service type 3) | O | 富安花園 (MA106) | 7.4 | 6.3 |
 | 85 | O | 金城道，香港浸會大學 (KC620) | 7.8 | 7.4 |
 | 87C | O | 獅子山隧道 (ST780) | 7.4 | 10.8 |
-| 87E | O | 利安邨 (MA300) | 10.8 | 14.3 |
-| 87E | O | 富寶花園 (MA303) | 10.8 | 14.3 |
 | 88X (service type 2) | I | 麗港公園 (LT421) | 11.6 | 9.4 |
 | 88X (service type 2) | O | 九龍灣站(東九文化中心) (KT317) | 11.6 | 7.4 |
 | 88X (service type 2) | O | 觀塘道休憩處 (KT329) | 11.6 | 7.4 |
@@ -165,14 +162,6 @@ Updated 2026-11-02T07:04:03Z. 179 stops across 1462 compared route directions (2
 | 88X (service type 2) | O | 觀塘游泳池 (KT361) | 11.6 | 7.4 |
 | 91B | O | 坑口站 (TK941) | 5.8 | 6.0 |
 | 91B | O | 科大(羅桂祥樓) (SK940) | 5.8 | 6.0 |
-| 93K | O | 寶達邨轉車站 (KT460) | 10.2 | 8.2 |
-| 93K | O | 秀茂坪邨秀程樓 (KT502) | 10.2 | 8.2 |
-| 93K | O | 秀茂坪邨秀康樓 (KT503) | 10.2 | 8.2 |
-| 93K | O | 寧波第二中學 (KT504) | 10.2 | 8.2 |
-| 93K | O | 聯合醫院 (KT530) | 10.2 | 8.2 |
-| 93K | O | 祥和苑 (KT534) | 10.2 | 8.2 |
-| 93K | O | 和樂邨 (KT537) | 10.2 | 8.2 |
-| 93K | O | apm創紀之城5期 (KT625) | 10.2 | 8.2 |
 | 960B | O | 屯門公路轉車站 (TM102) | 17.6 | 9.7 |
 | 961 | I | 屯門公路轉車站 (TM102) | 17.6 | 9.7 |
 | 968 | I | 大欖隧道轉車站 (YL232) | 20.6 | 11.7 |
