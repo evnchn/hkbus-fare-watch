@@ -1,15 +1,16 @@
 {
   "coverage": {
     "carried": 33,
-    "compared": 1341,
+    "compared": 1336,
     "failed": 0,
     "skipped": {
       "stop codes": 1,
-      "stop count": 104
+      "stop count": 107
     },
-    "targets": 1446,
+    "targets": 1444,
     "unobserved": [
       "102+2+CROSS HARBOUR TUNNEL BBI (HH502)+SHAU KEI WAN BUS TERMINUS",
+      "103+1+POKFIELD RD+CHUK YUEN ESTATE",
       "107+1+KOWLOON BAY+WAH KWAI",
       "107+1+WAH KWAI ESTATE BUS TERMINUS+KOWLOON BAY BUS TERMINUS (KT906)",
       "107+2+KOWLOON BAY+WAH KWAI",
@@ -42,6 +43,7 @@
       "171+9+SOUTH HORIZONS+LAI CHI KOK",
       "171A+1+LEI TUNG ESTATE+LAI CHI KOK",
       "171P+1+SOUTH HORIZONS+LAI CHI KOK",
+      "182+1+CENTRAL (MACAO FERRY)+YU CHUI COURT",
       "1A+1+SAU MAU PING (CENTRAL)+STAR FERRY",
       "213E+2+ANDERSON+KOWLOON STATION",
       "213E+2+KOWLOON STATION+ANDERSON",
@@ -110,6 +112,7 @@
       "N170+1+WAH FU (CENTRAL)+SHATIN CENTRAL",
       "N171+1+AP LEI CHAU ESTATE+LAI CHI KOK",
       "N171+1+LAI CHI KOK+AP LEI CHAU ESTATE",
+      "N182+1+CENTRAL (MACAO FERRY)+KWONG YUEN",
       "N213+1+TSIM SHA TSUI EAST (MODY ROAD)+ON TAI (WEST)",
       "N293+1+SHEUNG TAK+MONG KOK (PARK AVENUE)",
       "S64X+2+Tung Chung (Mun Tung)+Airport(Circular)",
@@ -1849,5 +1852,5 @@
     "91B+1+HANG HAU STATION+HKUST|SK940",
     "91B+1+HANG HAU STATION+HKUST|TK941"
   ],
-  "updated": "2026-11-04T07:10:04Z"
+  "updated": "2026-11-05T07:38:35Z"
 }
