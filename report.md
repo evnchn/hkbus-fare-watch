@@ -1,6 +1,6 @@
 # Standing fare divergences
 
-Updated 2026-11-07T06:47:17Z. 168 stops across 1330 compared route directions (111 skipped, 0 failed).
+Updated 2026-11-08T06:54:19Z. 177 stops across 1340 compared route directions (105 skipped, 0 failed).
 
 | route | dir | stop | app | KMB |
 |---|---|---|---:|---:|
@@ -98,6 +98,8 @@ Updated 2026-11-07T06:47:17Z. 168 stops across 1330 compared route directions (1
 | 272A (service type 3) | O | 馬料水公眾碼頭 (PA237) | 5.1 | 4.6 |
 | 281A | I | 映月台 (KC344) | 6.3 | 9.0 |
 | 307P | I | 大埔中心第五期 (TP326) | 7.7 | 6.8 |
+| 30X | O | 觀音街 (HH340) | 5.8 | 5.1 |
+| 30X | O | 德民街 (HH346) | 5.8 | 5.1 |
 | 31 | O | 葵涌屏麗徑 (KW405) | 5.1 | 4.8 |
 | 31 | O | 葵涌石英徑 (KW407) | 5.1 | 4.8 |
 | 31 | O | 石排街嘉翠園 (KW201) | 5.1 | 4.8 |
@@ -136,6 +138,13 @@ Updated 2026-11-07T06:47:17Z. 168 stops across 1330 compared route directions (1
 | 73B (service type 4) | O | 北區公園北門 (ND453) | 9.0 | 9.6 |
 | 73B (service type 4) | O | 順欣花園 (ND454) | 9.0 | 9.6 |
 | 73B (service type 4) | O | 龍豐花園 (ND336) | 9.0 | 9.6 |
+| 8 | I | 寶其利街 (HH621) | 5.8 | 5.1 |
+| 8 | I | 機利士南路 (HH334) | 5.8 | 5.1 |
+| 8 | I | 紅磡站 (HH979) | 5.8 | 5.1 |
+| 8 | I | 香港歷史博物館 (YT615) | 5.8 | 5.1 |
+| 8 | I | 香港科學館 (YT622) | 5.8 | 5.1 |
+| 8 | I | 尖沙咀麼地道 (YT624) | 5.8 | 5.1 |
+| 8 | I | 尖東站 K11 MUSEA (YT633) | 5.8 | 5.1 |
 | 80A | O | 世界花園 (TA606) | 7.4 | 8.4 |
 | 82X | O | 大老山隧道 (ST790) | 6.3 | 6.5 |
 | 84M (service type 3) | O | 黃大仙轉車站-黃大仙廟 (WT206) | 7.5 | 6.5 |
