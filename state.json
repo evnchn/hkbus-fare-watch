@@ -4,9 +4,9 @@
     "compared": 42,
     "failed": 0,
     "skipped": {
-      "no stop codes": 979,
+      "no stop codes": 978,
       "stop codes": 451,
-      "stop count": 13
+      "stop count": 14
     },
     "targets": 1485,
     "unobserved": [
@@ -164,8 +164,8 @@
       "213D+1+SAU MAU PING (CENTRAL)+MONG KOK (CIRCULAR)",
       "213E+1+ANDERSON+KOWLOON STATION",
       "213E+1+KOWLOON STATION+ANDERSON",
+      "213E+1+KOWLOON STATION, HIGH SPEED RAIL STATION+ON YING COURT",
       "213E+2+ANDERSON+KOWLOON STATION",
-      "213E+2+KOWLOON STATION+ANDERSON",
       "213M+1+ON TAI+LAM TIN STATION (CIRCULAR)",
       "213S+1+ON TAT+LAM TIN STATION (CIRCULAR)",
       "213X+1+ON TAI (SOUTH) (HANG TAI HOUSE)+TSIM SHA TSUI (CIRCULAR)",
@@ -3579,5 +3579,5 @@
     "N30+1+AIRPORT (CHEONG TAT ROAD)+YUEN LONG STATION|YL113",
     "T74+1+NG TUNG CHAI (PAK NGAU SHEK)+KWUN TONG FERRY|ST791"
   ],
-  "updated": "2026-11-13T07:33:47Z"
+  "updated": "2026-11-14T07:16:53Z"
 }
