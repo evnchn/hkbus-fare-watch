@@ -4,11 +4,11 @@
     "compared": 42,
     "failed": 0,
     "skipped": {
-      "no stop codes": 975,
+      "no stop codes": 974,
       "stop codes": 451,
       "stop count": 17
     },
-    "targets": 1485,
+    "targets": 1484,
     "unobserved": [
       "1+1+CHUK YUEN ESTATE+STAR FERRY",
       "1+1+STAR FERRY+CHUK YUEN ESTATE",
@@ -1111,7 +1111,6 @@
       "91M+2+H.K.U.S.T (NORTH)+PO LAM",
       "91P+1+DIAMOND HILL STATION+HONG KONG UNIVERSITY OF SCIENCE AND TEHNOLOGY",
       "91P+1+H.K.U.S.T. (SOUTH)+PING SHEK ／ CHOI HUNG STATION",
-      "91R+1+CLEAR WATER BAY+TSEUNG KWAN O (CHOI MING)",
       "91S+1+CLEAR WATER BAY+KWUN TONG",
       "92+1+DIAMOND HILL STATION+SAI KUNG",
       "92+1+SAI KUNG+DIAMOND HILL STATION",
@@ -3579,5 +3578,5 @@
     "N30+1+AIRPORT (CHEONG TAT ROAD)+YUEN LONG STATION|YL113",
     "T74+1+NG TUNG CHAI (PAK NGAU SHEK)+KWUN TONG FERRY|ST791"
   ],
-  "updated": "2026-11-16T07:34:21Z"
+  "updated": "2026-11-17T08:45:20Z"
 }
