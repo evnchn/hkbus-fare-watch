@@ -226,7 +226,7 @@ def a_route_that_leaves_the_feed_still_resolves():
 
 @case
 def a_route_whose_names_carry_no_stop_code_is_still_compared():
-    """From 2026-11-10 the feed's KMB stop names carry no "(KT460)" code. The
+    """From the 2026-11-11 run the feed's KMB stop names carry no "(KT460)" code. The
     code guard then skipped 1,425 of 1,484 routes and the watch went blind."""
     db = copy.deepcopy(DB)
     for c in CODES["106"]:

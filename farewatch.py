@@ -99,7 +99,7 @@ def sweep():
         stops = route["stops"]["kmb"]
         if not rows or len(rows) != len(stops):  # no stops: nothing to align
             return ("skipped", key, "stop count", set())
-        try:  # same stop at each index: names lost their codes on 2026-11-10
+        try:  # same stop at each index: names lost their codes 2026-11-10/11
             apart = [metres(wgs84(r["X"], r["Y"]), (stop_list[s]["location"]["lat"],
                                                     stop_list[s]["location"]["lng"]))
                      for r, s in zip(rows, stops)]
