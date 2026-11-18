@@ -48,6 +48,26 @@ def stop_code(name):
     return None
 
 
+# HK1980 Grid (KMB's X/Y) to WGS84. A flat projection about the grid origin
+# plus the published datum shift is within a few metres across Hong Kong.
+HK80 = {"lat": math.radians(22 + 18 / 60 + 43.68 / 3600), "e": 836694.05,
+        "lon": math.radians(114 + 10 / 60 + 42.80 / 3600), "n": 819069.80}
+_E2 = (2 - 1 / 297) / 297                     # International 1924 ellipsoid
+_S = 1 - _E2 * math.sin(HK80["lat"]) ** 2
+_M, _N = 6378388 * (1 - _E2) / _S ** 1.5, 6378388 / _S ** 0.5
+NEAR = 100  # metres; aligned stops sit ~2 m apart, misaligned ones kilometres
+
+
+def wgs84(x, y):
+    return (math.degrees(HK80["lat"] + (float(y) - HK80["n"]) / _M) - 5.5 / 3600,
+            math.degrees(HK80["lon"] + (float(x) - HK80["e"]) / (_N * math.cos(HK80["lat"])))
+            + 8.8 / 3600)
+
+
+def metres(a, b):
+    return 111320 * math.hypot(a[0] - b[0], (a[1] - b[1]) * math.cos(math.radians(a[0])))
+
+
 def stop_id(code, name):
     """What a finding is keyed on: the stop, not its index on the route."""
     return code or stop_code(name) or name
@@ -78,13 +98,15 @@ def sweep():
         stops = route["stops"]["kmb"]
         if len(rows) != len(stops):
             return ("skipped", key, "stop count", set())
+        try:  # same stop at each index: names lost their codes on 2026-11-10
+            apart = [metres(wgs84(r["X"], r["Y"]), (stop_list[s]["location"]["lat"],
+                                                    stop_list[s]["location"]["lng"]))
+                     for r, s in zip(rows, stops)]
+        except (KeyError, TypeError, ValueError):
+            return ("skipped", key, "no stop location", set())
+        if not all(d <= NEAR for d in apart):  # also false for NaN
+            return ("skipped", key, "stop location", set())
         theirs = [stop_code(r["CName"]) for r in rows]
-        ours = [stop_code(stop_list[s]["name"]["zh"]) for s in stops]
-        voted = [(a, b) for a, b in zip(theirs, ours) if a and b]
-        if not voted:  # nothing to check the stop order against
-            return ("skipped", key, "no stop codes", set())
-        if any(a != b for a, b in voted):
-            return ("skipped", key, "stop codes", set())
 
         idents = [stop_id(c, stop_list[s]["name"]["zh"]) for c, s in zip(theirs, stops)]
         # a stop the route serves again is told apart by visit, not by index
