@@ -238,6 +238,24 @@ def a_route_whose_names_carry_no_stop_code_is_still_compared():
 
 
 @case
+def a_route_with_no_stops_on_either_side_does_not_read_as_agreement():
+    """With no stops to align, the position guard checks nothing."""
+    db = with_stops(DB, KEY_106, [])
+    state, title = run(seeded(), db=db, codes={"106": []})
+    assert state["coverage"]["skipped"] == {"stop count": 1}, state["coverage"]
+    assert_no_false_resolution(title, state, "neither side listed a stop")
+
+
+@case
+def grid_coordinates_convert_to_wgs84():
+    """Lands Department's worked example (HK1980 Grid explanatory notes):
+    E 836055, N 832699 is 22°26'01.26"N 114°10'29.25"E in WGS84."""
+    got = farewatch.wgs84(836055, 832699)
+    want = (22 + 26 / 60 + 1.26 / 3600, 114 + 10 / 60 + 29.25 / 3600)
+    assert farewatch.metres(got, want) < 2, farewatch.metres(got, want)
+
+
+@case
 def a_route_with_no_stop_location_is_skipped_not_compared_blind():
     """Issue 3: a route whose stop order nothing checked must not count as verified."""
     db = copy.deepcopy(DB)

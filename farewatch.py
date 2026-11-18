@@ -48,8 +48,9 @@ def stop_code(name):
     return None
 
 
-# HK1980 Grid (KMB's X/Y) to WGS84. A flat projection about the grid origin
-# plus the published datum shift is within a few metres across Hong Kong.
+# HK1980 Grid (KMB's X/Y) to WGS84. ponytail: a flat projection about the grid
+# origin plus the published datum shift, under 1 m at Lands Department's worked
+# example 14 km out; use the full inverse Transverse Mercator if NEAR ever tightens.
 HK80 = {"lat": math.radians(22 + 18 / 60 + 43.68 / 3600), "e": 836694.05,
         "lon": math.radians(114 + 10 / 60 + 42.80 / 3600), "n": 819069.80}
 _E2 = (2 - 1 / 297) / 297                     # International 1924 ellipsoid
@@ -96,7 +97,7 @@ def sweep():
             return ("failed", key, repr(e)[:100], set())
 
         stops = route["stops"]["kmb"]
-        if len(rows) != len(stops):
+        if not rows or len(rows) != len(stops):  # no stops: nothing to align
             return ("skipped", key, "stop count", set())
         try:  # same stop at each index: names lost their codes on 2026-11-10
             apart = [metres(wgs84(r["X"], r["Y"]), (stop_list[s]["location"]["lat"],
