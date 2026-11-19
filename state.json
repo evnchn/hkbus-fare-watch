@@ -4,9 +4,9 @@
     "compared": 42,
     "failed": 0,
     "skipped": {
-      "no stop codes": 970,
+      "no stop codes": 974,
       "stop codes": 449,
-      "stop count": 17
+      "stop count": 13
     },
     "targets": 1478,
     "unobserved": [
@@ -3572,5 +3572,5 @@
     "N30+1+AIRPORT (CHEONG TAT ROAD)+YUEN LONG STATION|YL113",
     "T74+1+NG TUNG CHAI (PAK NGAU SHEK)+KWUN TONG FERRY|ST791"
   ],
-  "updated": "2026-11-18T08:08:26Z"
+  "updated": "2026-11-19T08:16:11Z"
 }
