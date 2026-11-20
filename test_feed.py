@@ -14,8 +14,11 @@ import farewatch
 N = 27                                   # enough stops to overflow the 25 cap
 KEY = "X1+1+A+B"
 CODES = ["S%d" % i for i in range(N)]
+XY = ("836694.05", "819069.80")         # every stop at the HK1980 grid origin
+LAT, LNG = farewatch.wgs84(*XY)
 DB = {
-    "stopList": {c: {"name": {"zh": "站 (%s)" % c}} for c in CODES},
+    "stopList": {c: {"name": {"zh": "站 (%s)" % c}, "location": {"lat": LAT, "lng": LNG}}
+                 for c in CODES},
     "routeList": {KEY: {"co": ["kmb"], "route": "X1", "bound": {"kmb": "O"},
                         "serviceType": 1, "stops": {"kmb": CODES},
                         "fares": ["5.0"] * (N - 1)}},
@@ -26,8 +29,8 @@ def fake_get(url, tries=3):
     if url == farewatch.DB_URL:
         return DB
     # KMB prices every stop at 6.0 where the feed says 5.0
-    return {"data": {"routeStops": [{"CName": "站 (%s)" % c, "AirFare": "6.0"}
-                                    for c in CODES]}}
+    return {"data": {"routeStops": [{"CName": "站 (%s)" % c, "AirFare": "6.0",
+                                     "X": XY[0], "Y": XY[1]} for c in CODES]}}
 
 
 class Clock:

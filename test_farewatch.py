@@ -21,14 +21,26 @@ KEY_1A = "1A+1+A+B"
 KEY_106 = "106+1+A+B"
 
 
+SPOT = {}
+
+
+def grid(code):
+    """KMB's X/Y for a stop: each code sits 500 m east of the one before."""
+    return 836694.05 + 500 * SPOT.setdefault(code, len(SPOT)), 819069.80
+
+
+def stop(code, zh=None):
+    lat, lng = farewatch.wgs84(*grid(code))
+    return {"name": {"zh": zh or "站 (%s)" % code}, "location": {"lat": lat, "lng": lng}}
+
+
 def route(co, name, bound, codes):
     return {"co": co, "route": name, "bound": {"kmb": bound}, "serviceType": 1,
             "stops": {"kmb": codes}, "fares": ["5.0"] * (len(codes) - 1)}
 
 
 DB = {
-    "stopList": {c: {"name": {"zh": "站 (%s)" % c}}
-                 for c in ("S1", "S2", "S3", "J1", "J2", "J3")},
+    "stopList": {c: stop(c) for c in ("S1", "S2", "S3", "J1", "J2", "J3")},
     "routeList": {
         KEY_1A: route(["kmb"], "1A", "O", ["S1", "S2", "S3"]),
         KEY_106: route(["kmb", "ctb"], "106", "I", ["J1", "J2", "J3"]),
@@ -42,7 +54,7 @@ UNPRICED = ("5.0", "0", "0")      # KMB stops publishing a fare for that stop
 CODES = {"106": ["J1", "J2", "J3"], "1A": ["S1", "S2", "S3"]}
 
 
-def stub(db, fail=(), short=(), recode=(), fares=None, bare=(), codes=None):
+def stub(db, fail=(), short=(), recode=(), fares=None, codes=None):
     fares = fares or {}
     stops = dict(CODES, **(codes or {}))
 
@@ -55,8 +67,8 @@ def stub(db, fail=(), short=(), recode=(), fares=None, bare=(), codes=None):
         names = stops[name]
         if name in recode:                      # KMB now names different stops
             names = ["X%d" % i for i in range(len(names))]
-        label = "站" if name in bare else "站 (%s)"     # bare: KMB names no code
-        got = [{"CName": label.replace("%s", c), "AirFare": f}
+        got = [{"CName": "站 (%s)" % c, "AirFare": f,
+                "X": "%.8f" % grid(c)[0], "Y": "%.8f" % grid(c)[1]}
                for f, c in zip(fares.get(name, DIVERGING), names)]
         if name in short:
             got = got[:-1]                      # stop count no longer matches
@@ -154,8 +166,8 @@ def a_stop_code_mismatch_does_not_read_as_agreement():
     left the compared set, and findings on them were published as resolved. Two
     came back two days later with identical values."""
     state, title = run(seeded(), recode=("106",))
-    assert state["coverage"]["skipped"] == {"stop codes": 1}, state["coverage"]
-    assert_no_false_resolution(title, state, "the stop codes disagreed")
+    assert state["coverage"]["skipped"] == {"stop location": 1}, state["coverage"]
+    assert_no_false_resolution(title, state, "the stops were elsewhere")
 
 
 @case
@@ -213,14 +225,43 @@ def a_route_that_leaves_the_feed_still_resolves():
 
 
 @case
-def a_route_with_no_stop_codes_is_skipped_not_compared_blind():
-    """Issue 3: if neither side names its stops with a code, the stop-code guard
-    has checked nothing, so the route must not count as verified."""
+def a_route_whose_names_carry_no_stop_code_is_still_compared():
+    """From the 2026-11-11 run the feed's KMB stop names carry no "(KT460)" code. The
+    code guard then skipped 1,425 of 1,484 routes and the watch went blind."""
     db = copy.deepcopy(DB)
     for c in CODES["106"]:
         db["stopList"][c]["name"]["zh"] = "站%s" % c
-    state, _ = run(db=db, bare=("106",))
-    assert state["coverage"]["skipped"] == {"no stop codes": 1}, state["coverage"]
+    state, _ = run(db=db)
+    assert state["coverage"]["skipped"] == {}, state["coverage"]
+    assert {d["route"] for d in state["divergences"].values()} == {"106", "1A"}, (
+        state["divergences"])
+
+
+@case
+def a_route_with_no_stops_on_either_side_does_not_read_as_agreement():
+    """With no stops to align, the position guard checks nothing."""
+    db = with_stops(DB, KEY_106, [])
+    state, title = run(seeded(), db=db, codes={"106": []})
+    assert state["coverage"]["skipped"] == {"stop count": 1}, state["coverage"]
+    assert_no_false_resolution(title, state, "neither side listed a stop")
+
+
+@case
+def grid_coordinates_convert_to_wgs84():
+    """Lands Department's worked example (HK1980 Grid explanatory notes):
+    E 836055, N 832699 is 22°26'01.26"N 114°10'29.25"E in WGS84."""
+    got = farewatch.wgs84(836055, 832699)
+    want = (22 + 26 / 60 + 1.26 / 3600, 114 + 10 / 60 + 29.25 / 3600)
+    assert farewatch.metres(got, want) < 2, farewatch.metres(got, want)
+
+
+@case
+def a_route_with_no_stop_location_is_skipped_not_compared_blind():
+    """Issue 3: a route whose stop order nothing checked must not count as verified."""
+    db = copy.deepcopy(DB)
+    del db["stopList"]["J2"]["location"]
+    state, _ = run(db=db)
+    assert state["coverage"]["skipped"] == {"no stop location": 1}, state["coverage"]
     assert {d["route"] for d in state["divergences"].values()} == {"1A"}, (
         state["divergences"])
 
@@ -236,7 +277,7 @@ def as_index_keyed(state):
 
 def with_stops(db, key, stops):
     db = copy.deepcopy(db)
-    db["stopList"].update({c: {"name": {"zh": "站 (%s)" % c}} for c in stops})
+    db["stopList"].update({c: stop(c) for c in stops})
     db["routeList"][key]["stops"]["kmb"] = stops
     return db
 
