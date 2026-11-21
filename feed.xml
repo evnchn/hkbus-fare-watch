@@ -4,7 +4,13 @@
   <link href="https://evnchn.github.io/hkbus-fare-watch/feed.xml" rel="self"/>
   <id>tag:evnchn.github.io,2026:hkbus-fare-watch</id>
   <author><name>hkbus fare divergence watch</name><uri>https://github.com/evnchn/hkbus-fare-watch</uri></author>
-  <updated>2026-11-11T07:27:40Z</updated>
+  <updated>2026-11-21T07:56:13Z</updated>
+  <entry>
+    <title>Fare divergence: 1 new</title>
+    <id>tag:evnchn.github.io,2026:hkbus-fare-watch/2026-11-21T07:56:13Z</id>
+    <updated>2026-11-21T07:56:13Z</updated>
+    <content type="html">&lt;h3&gt;Now diverging&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;73P inbound at 可風中學: app shows $0.0, KMB publishes $6.7&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;192 standing findings, across 1463 compared route directions.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Fare divergence: 191 not checked</title>
     <id>tag:evnchn.github.io,2026:hkbus-fare-watch/2026-11-11T07:27:40Z</id>
