@@ -77,30 +77,35 @@ def stop_id(code, name):
 def label(found, fares):
     """Name the shape of one route direction's divergences, without judging a side.
 
-    "section": the same gap at several stops, a fare section priced differently.
-    "earlier"/"later": a lone stop where KMB already (or still) charges the app's
-    fare for the next (previous) stop, so the two place one fare step differently.
+    "section": the same gap at the next or previous stop too, a fare section
+    priced differently.
+    "earlier"/"later": otherwise, a stop where KMB already (or still) charges the
+    app's fare for the next (previous) stop, so the two place a fare step differently.
     """
     def fare(i):
         try:
             return float(fares[i]) if i >= 0 else None
         except (IndexError, TypeError, ValueError):
             return None
-    gaps = [round(d["app"] - d["kmb"], 2) for d in found.values()]
+
+    def same(a, b):
+        return a is not None and b is not None and abs(a - b) < 0.001
+    gap = {d["seq"]: d["app"] - d["kmb"] for d in found.values()}
     for d in found.values():
         i, kmb = d["seq"], d["kmb"]
-        if gaps.count(round(d["app"] - kmb, 2)) > 1:
+        if same(gap.get(i - 1), gap[i]) or same(gap.get(i + 1), gap[i]):
             d["pattern"] = "section"
-        elif fare(i + 1) == kmb:
+        elif same(fare(i + 1), kmb):
             d["pattern"] = "earlier"
-        elif fare(i - 1) == kmb:
+        elif same(fare(i - 1), kmb):
             d["pattern"] = "later"
         else:
             d["pattern"] = "other"
 
 
-PATTERN = {"earlier": "KMB changes fare one stop earlier",
-           "later": "KMB changes fare one stop later"}
+PATTERN = {"earlier": "KMB changes fare one stop earlier than the app",
+           "later": "KMB changes fare one stop later than the app",
+           "section": "section: app $%.1f %s KMB", "other": "app $%.1f %s KMB"}
 
 
 def summary(divergences):
@@ -112,9 +117,10 @@ def summary(divergences):
     for ds in groups.values():
         bits = {}
         for d in ds:
-            p = d.get("pattern", "other")
+            text = PATTERN.get(d.get("pattern"), PATTERN["other"])
             gap = d["app"] - d["kmb"]
-            text = PATTERN.get(p) or "app $%.1f %s KMB" % (abs(gap), "above" if gap > 0 else "below")
+            if "%" in text:
+                text %= (abs(gap), "above" if gap > 0 else "below")
             bits[text] = bits.get(text, 0) + 1
         rows.append((len(ds), ds[0], "; ".join(
             "%s at %d stop%s" % (t, n, "" if n == 1 else "s")

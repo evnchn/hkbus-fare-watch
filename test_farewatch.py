@@ -439,8 +439,20 @@ def the_standing_list_groups_stops_by_pattern():
     assert "## By route direction" in report, report
     grouped = report.split("## By route direction")[1].split("## By stop")[0]
     rows = [r for r in grouped.splitlines() if r.startswith("| 1") and r[2] != "-"]
-    assert rows == ["| 1A | O | 2 | app $1.0 below KMB at 2 stops |",
-                    "| 106 | I | 1 | KMB changes fare one stop earlier at 1 stop |"], rows
+    assert rows == ["| 1A | O | 2 | section: app $1.0 below KMB at 2 stops |",
+                    "| 106 | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |"
+                    ], rows
+
+    def shapes(app, kmb):
+        found = {i: {"seq": i, "app": a, "kmb": k}
+                 for i, (a, k) in enumerate(zip(app, kmb)) if a != k}
+        farewatch.label(found, [str(a) for a in app])
+        return {i: d["pattern"] for i, d in found.items()}
+    # two separate steps with the same $2 gap are two steps, not one section
+    assert shapes([10, 10, 8, 8, 6, 6], [10, 8, 8, 6, 6, 6]) == {1: "earlier", 3: "earlier"}
+    assert shapes([10, 10, 8, 8], [10, 10, 10, 8]) == {2: "later"}
+    assert shapes([10, 10, 8, 8], [10, 10, 7, 7]) == {2: "section", 3: "section"}
+    assert shapes([10, 10, 8], [10, 13, 8]) == {1: "other"}
 
 
 def main():
