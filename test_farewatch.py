@@ -395,7 +395,8 @@ def the_standing_list_tells_service_types_apart():
             farewatch.HERE = d
             with contextlib.redirect_stdout(io.StringIO()):
                 farewatch.main()
-            rows = [r for r in open(os.path.join(d, "report.md"), encoding="utf-8")
+            report = open(os.path.join(d, "report.md"), encoding="utf-8").read()
+            rows = [r + "\n" for r in report.split("## By stop")[1].splitlines()
                     if r.startswith("| 1A")]
             feed = html.unescape(open(os.path.join(d, "feed.xml"), encoding="utf-8").read())
     finally:
@@ -407,6 +408,51 @@ def the_standing_list_tells_service_types_apart():
     assert listed == ["1A outbound at 站 (S1)", "1A outbound at 站 (S2)",
                       "1A outbound (service type 2) at 站 (S1)",
                       "1A outbound (service type 2) at 站 (S2)"], listed
+
+
+@case
+def the_standing_list_groups_stops_by_pattern():
+    """192 stop rows were 58 route directions; each gets one row naming its shape.
+
+    1A: two stops in one section, both $1 dearer at KMB. 106: one stop where KMB
+    already charges the next stop's fare (a fare step placed a stop earlier).
+    """
+    db = copy.deepcopy(DB)
+    db["stopList"].update({c: stop(c) for c in ("S4", "J4")})
+    db["routeList"][KEY_1A].update(stops={"kmb": ["S1", "S2", "S3", "S4"]},
+                                   fares=["5.0", "5.0", "5.0"])
+    db["routeList"][KEY_106].update(stops={"kmb": ["J1", "J2", "J3", "J4"]},
+                                    fares=["9.0", "9.0", "4.0"])
+    saved = (farewatch.get, farewatch.HERE)
+    farewatch.get = stub(db, codes={"1A": ["S1", "S2", "S3", "S4"],
+                                    "106": ["J1", "J2", "J3", "J4"]},
+                         fares={"1A": ("6.0", "6.0", "5.0", "0"),
+                                "106": ("9.0", "4.0", "4.0", "0")})
+    try:
+        with tempfile.TemporaryDirectory() as d:
+            farewatch.HERE = d
+            with contextlib.redirect_stdout(io.StringIO()):
+                farewatch.main()
+            report = open(os.path.join(d, "report.md"), encoding="utf-8").read()
+    finally:
+        farewatch.get, farewatch.HERE = saved
+    assert "## By route direction" in report, report
+    grouped = report.split("## By route direction")[1].split("## By stop")[0]
+    rows = [r for r in grouped.splitlines() if r.startswith("| 1") and r[2] != "-"]
+    assert rows == ["| 1A | O | 2 | section: app $1.0 below KMB at 2 stops |",
+                    "| 106 | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |"
+                    ], rows
+
+    def shapes(app, kmb):
+        found = {i: {"seq": i, "app": a, "kmb": k}
+                 for i, (a, k) in enumerate(zip(app, kmb)) if a != k}
+        farewatch.label(found, [str(a) for a in app])
+        return {i: d["pattern"] for i, d in found.items()}
+    # two separate steps with the same $2 gap are two steps, not one section
+    assert shapes([10, 10, 8, 8, 6, 6], [10, 8, 8, 6, 6, 6]) == {1: "earlier", 3: "earlier"}
+    assert shapes([10, 10, 8, 8], [10, 10, 10, 8]) == {2: "later"}
+    assert shapes([10, 10, 8, 8], [10, 10, 7, 7]) == {2: "section", 3: "section"}
+    assert shapes([10, 10, 8], [10, 13, 8]) == {1: "other"}
 
 
 def main():

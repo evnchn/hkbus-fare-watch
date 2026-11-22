@@ -74,6 +74,61 @@ def stop_id(code, name):
     return code or stop_code(name) or name
 
 
+def label(found, fares):
+    """Name the shape of one route direction's divergences, without judging a side.
+
+    "section": the same gap at the next or previous stop too, a fare section
+    priced differently.
+    "earlier"/"later": otherwise, a stop where KMB already (or still) charges the
+    app's fare for the next (previous) stop, so the two place a fare step differently.
+    """
+    def fare(i):
+        try:
+            return float(fares[i]) if i >= 0 else None
+        except (IndexError, TypeError, ValueError):
+            return None
+
+    def same(a, b):
+        return a is not None and b is not None and abs(a - b) < 0.001
+    gap = {d["seq"]: d["app"] - d["kmb"] for d in found.values()}
+    for d in found.values():
+        i, kmb = d["seq"], d["kmb"]
+        if same(gap.get(i - 1), gap[i]) or same(gap.get(i + 1), gap[i]):
+            d["pattern"] = "section"
+        elif same(fare(i + 1), kmb):
+            d["pattern"] = "earlier"
+        elif same(fare(i - 1), kmb):
+            d["pattern"] = "later"
+        else:
+            d["pattern"] = "other"
+
+
+PATTERN = {"earlier": "KMB changes fare one stop earlier than the app",
+           "later": "KMB changes fare one stop later than the app",
+           "section": "section: app $%.1f %s KMB", "other": "app $%.1f %s KMB"}
+
+
+def summary(divergences):
+    """One row per route direction: what an upstream fix would actually touch."""
+    groups = {}
+    for d in divergences.values():
+        groups.setdefault(order(d)[:3], []).append(d)
+    rows = []
+    for ds in groups.values():
+        bits = {}
+        for d in ds:
+            text = PATTERN.get(d.get("pattern"), PATTERN["other"])
+            gap = d["app"] - d["kmb"]
+            if "%" in text:
+                text %= (abs(gap), "above" if gap > 0 else "below")
+            bits[text] = bits.get(text, 0) + 1
+        rows.append((len(ds), ds[0], "; ".join(
+            "%s at %d stop%s" % (t, n, "" if n == 1 else "s")
+            for t, n in sorted(bits.items(), key=lambda b: -b[1]))))
+    rows.sort(key=lambda r: (-r[0], order(r[1])))
+    return rows
+
+
 def sweep():
     """Return {key: divergence} plus coverage counters."""
     db = get(DB_URL)
@@ -132,6 +187,7 @@ def sweep():
                     "stop": theirs[i], "stopName": stop_list[stops[i]]["name"]["zh"],
                     "app": mine, "kmb": kmb,
                 }
+        label(found, route["fares"])
         return ("ok", key, (found, idents), seen)
 
     divergences, skipped, failed, compared = {}, {}, [], 0
@@ -351,6 +407,12 @@ def main():
                 "(%d skipped, %d failed).\n\n"
                 % (stamp, len(divergences), coverage["compared"],
                    sum(coverage["skipped"].values()), coverage["failed"]))
+        rows = summary(divergences)
+        f.write("## By route direction\n\n%d route directions.\n\n"
+                "| route | dir | stops | pattern |\n|---|---|---:|---|\n" % len(rows))
+        for n, d, text in rows:
+            f.write("| %s%s | %s | %d | %s |\n" % (d["route"], variant(d), d["bound"], n, text))
+        f.write("\n## By stop\n\n")
         f.write("| route | dir | stop | app | KMB |\n|---|---|---|---:|---:|\n")
         for d in sorted(divergences.values(), key=order):
             f.write("| %s%s | %s | %s | %.1f | %.1f |\n"

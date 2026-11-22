@@ -7,7 +7,9 @@ fare, riders see the wrong price and nothing notices.
 This compares the two once a day and publishes the **changes** as an Atom feed.
 
 - **Feed:** [`feed.xml`](feed.xml) — subscribe in any reader
-- **Standing list:** [`report.md`](report.md) — everything currently diverging
+- **Standing list:** [`report.md`](report.md) — everything currently diverging, first
+  one row per route direction naming the shape (a fare section priced differently, or a
+  fare step one stop earlier or later at KMB), then every stop
 
 An entry is only published when something moves: a stop starts diverging, stops
 diverging, or the amount changes. A quiet day publishes nothing.
