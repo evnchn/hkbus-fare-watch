@@ -1,6 +1,73 @@
 # Standing fare divergences
 
-Updated 2026-11-22T07:43:39Z. 192 stops across 1460 compared route directions (18 skipped, 0 failed).
+Updated 2026-11-23T08:31:09Z. 192 stops across 1459 compared route directions (19 skipped, 0 failed).
+
+## By route direction
+
+58 route directions.
+
+| route | dir | stops | pattern |
+|---|---|---:|---|
+| 118 (service type 2) | O | 20 | section: app $1.6 above KMB at 14 stops; section: app $0.7 above KMB at 6 stops |
+| 264X | I | 19 | section: app $2.0 above KMB at 19 stops |
+| 118 (service type 3) | O | 15 | section: app $1.6 above KMB at 14 stops; app $0.7 above KMB at 1 stop |
+| 84M (service type 3) | O | 15 | section: app $1.1 above KMB at 11 stops; section: app $1.0 above KMB at 4 stops |
+| 85P | I | 12 | section: app $0.5 above KMB at 12 stops |
+| 23 | O | 9 | section: app $0.4 above KMB at 9 stops |
+| 5C (service type 2) | I | 9 | section: app $0.9 above KMB at 9 stops |
+| 93K | O | 8 | section: app $2.0 above KMB at 8 stops |
+| 263A | O | 7 | section: app $0.3 above KMB at 7 stops |
+| 264X | O | 6 | section: app $2.0 above KMB at 6 stops |
+| 73B (service type 4) | O | 6 | section: app $0.6 below KMB at 6 stops |
+| 272A (service type 3) | O | 5 | section: app $0.5 above KMB at 5 stops |
+| 65K | O | 5 | section: app $0.9 above KMB at 5 stops |
+| 88X (service type 2) | O | 4 | section: app $4.2 above KMB at 4 stops |
+| 215X | I | 3 | KMB changes fare one stop later than the app at 3 stops |
+| 31 | O | 3 | section: app $0.3 above KMB at 3 stops |
+| 603A | I | 2 | KMB changes fare one stop earlier than the app at 2 stops |
+| 63 | I | 2 | KMB changes fare one stop later than the app at 2 stops |
+| 87E | O | 2 | section: app $3.5 below KMB at 2 stops |
+| 91B | O | 2 | section: app $0.2 below KMB at 2 stops |
+| 106 | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 23M | O | 1 | KMB changes fare one stop later than the app at 1 stop |
+| 258D | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 259D | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 260X | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 263A | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 269C | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 269D | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 281A | I | 1 | KMB changes fare one stop later than the app at 1 stop |
+| 307P | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 43S | O | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 58M | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 58P | O | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 59X | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 606X | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 60X | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 61X | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 62X | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 63X | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 66X | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 67M | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 67X | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 73P | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 80A | O | 1 | KMB changes fare one stop later than the app at 1 stop |
+| 82X | O | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 85 | O | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 87C | O | 1 | KMB changes fare one stop later than the app at 1 stop |
+| 88X (service type 2) | I | 1 | app $2.2 above KMB at 1 stop |
+| 960B | O | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 961 | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 968 | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 98A | O | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 98C | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 98E | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| 98P | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| E33P | O | 1 | KMB changes fare one stop later than the app at 1 stop |
+| N30 | I | 1 | KMB changes fare one stop earlier than the app at 1 stop |
+| T74 | O | 1 | KMB changes fare one stop later than the app at 1 stop |
+
+## By stop
 
 | route | dir | stop | app | KMB |
 |---|---|---|---:|---:|
