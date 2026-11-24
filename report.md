@@ -1,6 +1,6 @@
 # Standing fare divergences
 
-Updated 2026-11-23T08:31:09Z. 192 stops across 1459 compared route directions (19 skipped, 0 failed).
+Updated 2026-11-24T10:38:04Z. 192 stops across 1459 compared route directions (19 skipped, 0 failed).
 
 ## By route direction
 
