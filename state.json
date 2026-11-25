@@ -1,13 +1,13 @@
 {
   "coverage": {
     "carried": 0,
-    "compared": 1459,
+    "compared": 1458,
     "failed": 0,
     "skipped": {
       "stop count": 17,
       "stop location": 2
     },
-    "targets": 1478,
+    "targets": 1477,
     "unobserved": [
       "102+2+CROSS HARBOUR TUNNEL BBI+SHAU KEI WAN BUS TERMINUS",
       "103+1+POKFIELD RD+CHUK YUEN ESTATE",
@@ -2165,5 +2165,5 @@
   ],
   "published": "2026-11-21T07:56:13Z",
   "unchecked": [],
-  "updated": "2026-11-24T10:38:04Z"
+  "updated": "2026-11-25T09:29:53Z"
 }
