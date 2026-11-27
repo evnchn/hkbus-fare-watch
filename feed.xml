@@ -4,7 +4,13 @@
   <link href="https://evnchn.github.io/hkbus-fare-watch/feed.xml" rel="self"/>
   <id>tag:evnchn.github.io,2026:hkbus-fare-watch</id>
   <author><name>hkbus fare divergence watch</name><uri>https://github.com/evnchn/hkbus-fare-watch</uri></author>
-  <updated>2026-11-21T07:56:13Z</updated>
+  <updated>2026-11-27T09:23:04Z</updated>
+  <entry>
+    <title>Fare divergence: 2 not checked</title>
+    <id>tag:evnchn.github.io,2026:hkbus-fare-watch/2026-11-27T09:23:04Z</id>
+    <updated>2026-11-27T09:23:04Z</updated>
+    <content type="html">&lt;h3&gt;Not checked this run&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;269C inbound at 大欖隧道轉車站: last seen at $20.8 against KMB's $11.5, not verified this run&lt;/li&gt;&lt;li&gt;61X inbound at 屯門公路轉車站: last seen at $15.8 against KMB's $9.6, not verified this run&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;192 standing findings, 2 of them not verified this run, across 1448 compared route directions.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Fare divergence: 1 new</title>
     <id>tag:evnchn.github.io,2026:hkbus-fare-watch/2026-11-21T07:56:13Z</id>
